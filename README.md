@@ -1,6 +1,9 @@
 <img src="assets/icon-128.png" alt="" width="72" align="left" hspace="16">
 
+
 # Formify Skills
+
+[![Formify MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/eu.formify.mcp/formify/badges/score.svg)](https://glama.ai/mcp/connectors/eu.formify.mcp/formify) [![Smithery](https://img.shields.io/badge/Smithery-formify--mcp-6b46c1?style=flat)](https://smithery.ai/server/formify-e-sign/formify-mcp)
 
 **Ask an AI assistant to get something signed, and it knows how.**
 
@@ -368,6 +371,21 @@ git commit -am "release 1.1.0" && git tag v1.1.0 && git push --follow-tags
 the build. `--audit` lists files carrying the version that `.version-bump.json` does
 not declare — a file added later that needs adding there. Publishing happens on the
 `v*` tag alone, and refuses if the tag and the manifests disagree.
+
+### Directory listings are not automatic
+
+Two directories carry this project as a live product surface rather than a passive index,
+and they are addressed per skill, so adding, renaming or materially changing a skill means
+updating them by hand:
+
+| Where | What is listed |
+|---|---|
+| [Smithery](https://smithery.ai/server/formify-e-sign/formify-mcp) | The MCP server, plus each skill separately at `smithery.ai/skills/formify-e-sign/<skill>` |
+| [Glama](https://glama.ai/mcp/connectors/eu.formify.mcp/formify) | The MCP server |
+
+The Anthropic plugin directory is the exception — it re-reads GitHub on every push, so it
+needs nothing. Everywhere else, a release that changes the skill set is only half shipped
+until the listings match it.
 
 ---
 
