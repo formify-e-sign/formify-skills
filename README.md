@@ -20,7 +20,7 @@ has to paste your contract into another chatbot to understand what they are sign
 You do not need to be technical, and you never learn a command. You describe what you want
 signed and by whom; everything below is what the assistant handles for you.
 
-Works with Claude Code, Claude Desktop, Codex, ChatGPT, Cursor, Gemini CLI and around twenty
+Works with Claude Code, Claude Desktop, Codex, ChatGPT, Cursor and around twenty
 other agents.
 
 ## Contents
@@ -31,7 +31,7 @@ other agents.
 - [What you can ask for](#what-you-can-ask-for)
 - [What the agent can actually do](#what-the-agent-can-actually-do)
 - [One of those, end to end](#one-of-those-end-to-end)
-- [Install](#install) — [Claude Code](#claude-code) · [Any agent, via the skills installer](#any-agent-via-the-skills-installer) · [Codex CLI](#codex-cli) · [Gemini CLI](#gemini-cli) · [Claude Desktop and claude.ai](#claude-desktop-and-claudeai) · [In a repository, with no install at all](#in-a-repository-with-no-install-at-all) · [Manually, anywhere](#manually-anywhere)
+- [Install](#install) — [Start here](#start-here--one-install-everywhere-in-claude) · [If plugins are unavailable](#if-plugins-are-unavailable-to-you) · [Try it](#try-it--paste-this-into-the-chat) · [ChatGPT](#chatgpt) · [Codex](#codex) · [Claude Code](#claude-code) · [Any agent](#any-agent-via-the-skills-installer) · [In a repository](#in-a-repository-with-no-install-at-all) · [Manually](#manually-anywhere)
 - [Connect the Formify MCP server](#connect-the-formify-mcp-server)
 - [Coming soon: skills for your niche](#coming-soon-skills-for-your-niche)
 - [What is in this repository](#what-is-in-this-repository)
@@ -193,6 +193,163 @@ Three days later:
 
 ## Install
 
+Pick the row that matches how you use Formify. Most people want the first one.
+
+| You work in… | Go to | Terminal? |
+|---|---|---|
+| **Claude** — Desktop, browser or Cowork | [Start here](#start-here--one-install-everywhere-in-claude) | no |
+| **ChatGPT** | [ChatGPT](#chatgpt) | no |
+| **Codex** | [Codex](#codex) | yes |
+| Claude Code, or another coding agent | [Claude Code](#claude-code) · [Any agent](#any-agent-via-the-skills-installer) | yes |
+
+### Start here — one install, everywhere in Claude
+
+Formify installs as a **plugin**: the four skills and the connection to your Formify account
+arrive together. This works in chat on the web, in the Chat tab of Claude Desktop, and in
+Cowork. You need a paid Claude plan. There is nothing to download, no file to unzip, and no
+GitHub account required.
+
+Three steps, about a minute. Each one is shown below exactly as it looks on screen.
+
+#### 1. Add Formify to your plugin list
+
+In Claude, open **Customize** in the sidebar and go to **Plugins**. Select **Add** in the top
+right, then **Add marketplace**, and type:
+
+```
+formify-e-sign/formify-skills
+```
+
+Claude finds the repository as you type and offers it — accept the suggestion, leave **Sync
+automatically** on so you get our updates, and select **Sync**. Formify now appears in your
+list with an **Add** button next to it. Select it.
+
+![Adding the Formify marketplace in Claude Desktop and installing the plugin](demo/claude-desktop/1-add-marketplace.gif)
+
+*A marketplace is just an address Claude reads plugins from. Ours is a public repository, so
+nothing is downloaded to your computer and every improvement we publish reaches you.*
+
+#### 2. Connect your Formify account
+
+The plugin is installed, but Claude still needs permission to act on your account. Open the
+Formify plugin, go to the **Connectors** tab, and select **Connect**.
+
+Your browser opens, you confirm the connection, and you choose which Formify account to use.
+Claude never sees your password — you sign in to Formify, and Formify tells Claude what that
+account is allowed to do. When it says **Connected**, return to the app.
+
+![Connecting a Formify account to the plugin through the Connectors tab](demo/claude-desktop/2-connect-account.gif)
+
+*If you have several Formify accounts, the one you pick here is the one Claude will send
+documents from. You can change it later from the same screen.*
+
+#### 3. Check what you have
+
+Open the plugin once and you can see everything it brought: the description, the categories it
+is filed under, its four skills, and the Formify connector listed under **Connectors & tools**.
+
+![The installed Formify plugin showing its four skills and the connector](demo/claude-desktop/3-what-you-get.gif)
+
+**What each of the four does.** The connector lets Claude act on your account — create
+documents, send them, collect signatures. The skills are what make it good at the job:
+
+| Skill | What it knows |
+|---|---|
+| `formify-pdf-forms` | how to build a contract or form with fillable fields and signature boxes in the right places |
+| `formify-send-contract` | how to send it — from a template, an uploaded PDF, or something drafted in the conversation |
+| `formify-verify-identity` | when a signature needs proof of identity, and which check to use: BankID, ID scan, face liveness |
+| `formify-track-signatures` | what to do afterwards — who has not signed, reminders, a wrong email address, cancelling |
+
+You never name a skill. Describe the job and Claude picks the right one.
+
+**Updating.** Select **Update** on the plugin whenever you want the newest version. With
+**Sync automatically** left on, Claude checks for you.
+
+<sub>The recordings above are the real setup, with personal details blurred.</sub>
+
+### If plugins are unavailable to you
+
+Some plans and some organisations do not allow plugins. In that case the skills install one at
+a time, by hand, and the connector separately.
+
+**1.** **Settings → Capabilities**, and enable code execution and file creation.
+
+**2.** Go to the [Releases page](https://github.com/formify-e-sign/formify-skills/releases) and,
+on the newest release, download the four ZIP files:
+
+| File | What it adds |
+|---|---|
+| `formify-pdf-forms.zip` | building forms and contracts with fillable fields |
+| `formify-send-contract.zip` | sending a document for signature |
+| `formify-verify-identity.zip` | BankID, ID scan, face liveness, company lookup |
+| `formify-track-signatures.zip` | chasing, correcting and cancelling what you sent |
+
+Do not unzip them — they are already in the shape Claude expects.
+
+**3.** Open **Customize** in the sidebar, go to **Skills**, then **Create skill → Upload a
+skill**, and choose one ZIP. Repeat for the other three.
+
+**4.** Add the connector by hand: **Settings → Connectors → Add Connector**, and paste
+`https://mcp.formify.eu/mcp`.
+
+On this path nothing updates itself: when we release a new version, download the ZIPs again
+and upload them over the old ones.
+
+### Try it — paste this into the chat
+
+You do not need to learn any commands. Describe the job and Claude picks the right skill on
+its own. Copy any of these:
+
+```
+What can you do for me with Formify?
+```
+
+```
+I'm letting out my flat in Palma to a Dutch tenant. Draft the tenancy agreement,
+put signature fields on it, and show me what it looks like before anything is sent.
+```
+
+```
+Send the contract in this PDF to anna@example.com for signature, and check her ID
+with BankID before she signs.
+```
+
+```
+Who still hasn't signed the contract I sent last week? Remind them.
+```
+
+### ChatGPT
+
+**What works today:** the connector. In ChatGPT's settings, add a connector and paste:
+
+```
+https://mcp.formify.eu/mcp
+```
+
+ChatGPT can then create documents, send them for signature and check who has signed.
+
+**What does not, yet:** the four skills. ChatGPT installs skills only from its own reviewed
+directory, and Formify is not in it. So you get the actions but not the judgement — ChatGPT
+will do what you ask, without knowing what a good contract looks like or where a signature
+field has to sit. Claude Desktop is where you get both halves today.
+
+### Codex
+
+Two steps, run one after the other. Add the marketplace:
+
+```bash
+codex plugin marketplace add formify-e-sign/formify-skills
+```
+
+Then install the plugin:
+
+```bash
+codex plugin add formify@formify
+```
+
+This brings the skills and the MCP connection together. The Codex desktop app and the CLI
+share the same configuration, so installing in either one covers both.
+
 ### Claude Code
 
 Two steps, run one after the other — not pasted together.
@@ -208,6 +365,8 @@ Then install the plugin:
 ```
 /plugin install formify@formify
 ```
+
+Unlike the Desktop app's marketplace dialog, this takes any public repository.
 
 ### Any agent, via the skills installer
 
@@ -228,38 +387,10 @@ npx skills add formify-e-sign/formify-skills -g              # global, across pr
 nothing that runs. A skill is instructions an agent reads, and the usual advice to inspect
 `scripts/` before installing has nothing to inspect here.
 
-### Codex CLI
-
-Also two steps. Add the marketplace:
-
-```bash
-codex plugin marketplace add formify-e-sign/formify-skills
-```
-
-Then install the plugin:
-
-```bash
-codex plugin add formify@formify
-```
-
-### Gemini CLI
-
-```bash
-gemini extensions install https://github.com/formify-e-sign/formify-skills
-```
-
-Installs the skills and the MCP connection together.
-
-### Claude Desktop and claude.ai
-
-Skills are uploaded as a ZIP: **Settings → Capabilities** (enable code execution), then
-**Customize → Skills → Create skill → Upload a skill**. Zip a single skill folder from
-`skills/`. Connect the MCP server separately, as above.
-
 ### In a repository, with no install at all
 
 Clone the repo and the skills are already where most agents look — `.agents/skills` is a
-symlink to `skills/`, which Codex, Cursor, Gemini CLI, Amp, opencode and Zed scan
+symlink to `skills/`, which Codex, Cursor, Amp, opencode and Zed scan
 automatically.
 
 ### Manually, anywhere
@@ -270,6 +401,10 @@ self-contained: a `SKILL.md` and, where it needs one, a `references/` folder.
 ---
 
 ## Connect the Formify MCP server
+
+Already covered in [Start here](#start-here--claude-desktop-and-claudeai) and in the Codex
+and Claude Code steps — this section is the reference, and the place to look if you install
+by hand.
 
 The skills describe *how* to work with Formify. The MCP server is what actually does it —
 creating documents, sending them, collecting signatures.
@@ -308,9 +443,8 @@ plugin.json  mcp.json          Agent Plugins 1.0.0
 .claude-plugin/                Claude Code plugin and marketplace entry
 .codex-plugin/                 Codex CLI plugin, with the marketplace listing block
 .agents/plugins/               Codex and ChatGPT marketplace catalogue
-gemini-extension.json          Gemini CLI
 package.json  skills.sh.json   npm, npx, and the skills.sh gallery
-scripts/check-manifests.mjs    keeps eight manifests from drifting apart
+scripts/check-manifests.mjs    keeps the manifests from drifting apart
 tests/release/                 what the skills do, not just what they say
 ```
 
