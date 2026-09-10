@@ -9,6 +9,11 @@ identity verification. Install them once, and your assistant can build a contrac
 fillable form, place the signature fields where they belong, send it to the right people,
 verify who signed with BankID or an ID scan, and chase the ones who have not.
 
+You can also send an AI assistant along **inside the document itself**. The person receiving
+your contract can ask it what a clause means and it highlights the passage it is answering
+about, reads it aloud if they prefer, and answers in English, Swedish or Spanish — so nobody
+has to paste your contract into another chatbot to understand what they are signing.
+
 You do not need to be technical, and you never learn a command. You describe what you want
 signed and by whom; everything below is what the assistant handles for you.
 
@@ -84,11 +89,12 @@ skills can run all of it:
 4. **Decide what must be proven** — BankID, ID document scan, live face check, company lookup, or a one-time code before the document even opens
 5. **Route it** — several signers, in a set order or all at once, by email or SMS
 6. **Preview** — see exactly where every field landed, before a single person is contacted
-7. **Follow up** — who signed, who only opened it, who never looked; remind the ones who have not, never the ones who have
-8. **Repair** — correct a mistyped address, hand someone a link in person, revoke the whole thing
-9. **Hand off** — download the signed copy, or fire a webhook so the next system in your business picks it up
+7. **Explain it, on the recipient's side** — attach an AI assistant that lives in the document, highlights the clause it is answering about, and speaks if asked
+8. **Follow up** — who signed, who only opened it, who never looked; remind the ones who have not, never the ones who have
+9. **Repair** — correct a mistyped address, hand someone a link in person, revoke the whole thing
+10. **Hand off** — download the signed copy, or fire a webhook so the next system in your business picks it up
 
-Nine steps. The assistant runs them because the skills describe how each one works — not
+Ten steps. The assistant runs them because the skills describe how each one works — not
 because you learned a tool name.
 
 ---
@@ -123,6 +129,11 @@ it, and you never name a tool.
 > This consent form goes to forty parents. I need to know who has returned it and chase only
 > the ones who have not.
 
+**Every client emails you the same three questions before they sign**
+
+> Send the tenancy agreement to both tenants, and turn on the in-document assistant in
+> Swedish so they can ask it about the notice period instead of ringing me.
+
 **You need the ID details but you must not keep the picture**
 
 > Patient intake form, signed on the tablet at reception, with an ID document scanned but
@@ -143,6 +154,7 @@ Connected to your Formify account, through the MCP server:
 | **Documents** | Create from a template, from an uploaded PDF, or from something drafted in the conversation. Preview before anyone is contacted. Send, revoke, download the signed copy. |
 | **Recipients** | Several signers, in a set order or all at once. Email or SMS. Correct a mistyped address. Hand someone a link in person. |
 | **Identity** | Swedish BankID, ID document scan, live face check, company registration lookup, KYC. A one-time code before the document even opens. |
+| **Inside the document** | An AI assistant that travels with the contract. The recipient asks it a question, it highlights the clause it is answering about, reads it aloud on request, and speaks English, Swedish or Spanish. |
 | **Following up** | Who has signed, who has only opened it, who has not looked. Remind the ones who have not — never the ones who have. |
 | **Files and templates** | Upload, merge several PDFs into one, read the fields a template expects, fill them. |
 | **Automation** | Webhooks, so something else happens when a document completes. |
