@@ -278,37 +278,6 @@ action runs with exactly the permissions that account already has.
 
 ---
 
-## Coming soon: skills for your niche
-
-The four above are horizontal — they work for any business that signs anything. On top of
-them we are building **vertical skills**: one trade, one country, already fluent in the
-documents that trade signs, the law behind them, and the terms of art nobody outside it uses.
-
-The difference is who does the explaining. Today you describe your own industry to an
-assistant before it can help. With a vertical skill installed, it already knows the document
-you mean, what has to be in it, and who has to sign it in what order.
-
-The niches, in roughly the order we expect to reach them:
-
-- **Property and letting** — listings, reservations, deposits, handover
-- **NDAs and contractor agreements** — agencies, studios, freelance-heavy teams
-- **KYC and AML onboarding** — accountancy, legal, financial services
-- **Construction and trades** — quote to contract, deposit terms, variation orders
-- **Clinics and care** — patient intake, consent, ID checks that keep no image
-- **Schools and course providers** — consent forms and permissions at class scale
-
-Each ships as its own plugin, installed on its own. A carpenter never carries property law,
-and an estate agent never carries clinical consent — the four capability skills stay the
-shared foundation underneath.
-
-**Watch this repository.** Every release adds coverage, and a niche shipping here means one
-more business process that stops being a folder of documents and starts being something you
-can simply ask for.
-
-**Want your niche next?** Open an issue saying which documents you sign most and in which
-country. That is how the order gets decided.
-
----
 
 ## What is in this repository
 
