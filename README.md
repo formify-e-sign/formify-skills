@@ -31,6 +31,7 @@ other agents.
 - [What you can ask for](#what-you-can-ask-for)
 - [What the agent can actually do](#what-the-agent-can-actually-do)
 - [One of those, end to end](#one-of-those-end-to-end)
+- [Install it in a minute](#install-it-in-a-minute) — the one-minute version for Claude
 - [Install](#install) — [Start here](#start-here--one-install-everywhere-in-claude) · [If plugins are unavailable](#if-plugins-are-unavailable-to-you) · [Try it](#try-it--paste-this-into-the-chat) · [ChatGPT](#chatgpt) · [Codex](#codex) · [Grok](#grok) · [Manus](#manus) · [Claude Code](#claude-code) · [Any agent](#any-agent-via-the-skills-installer) · [In a repository](#in-a-repository-with-no-install-at-all) · [Manually](#manually-anywhere)
 - [Connect the Formify MCP server](#connect-the-formify-mcp-server)
 - [Coming soon: skills for your niche](#coming-soon-skills-for-your-niche)
@@ -77,6 +78,34 @@ identity checks run through your Formify account.
 
 The `tink-*` markers a document carries are read by Formify's signing client. In any other
 PDF viewer they are ordinary empty fields, so the document stays valid and usable on its own.
+
+---
+
+## Install it in a minute
+
+In Claude — the desktop app, the browser, or Cowork — Formify installs as one plugin: the four
+skills above and the connection to your Formify account, together.
+
+Open **Customize → Plugins**, select **Add marketplace**, and enter:
+
+```
+formify-e-sign/formify-skills
+```
+
+Select **Sync**, then **Install** when Formify appears, and sign in to your Formify account
+when it asks.
+
+![Adding the Formify marketplace in Claude Desktop and installing the plugin](demo/claude-desktop/1-add-marketplace.gif)
+
+Then just describe the job — you never name a skill:
+
+```
+I'm letting out my flat in Palma to a Dutch tenant. Draft the tenancy agreement,
+put signature fields on it, and show me what it looks like before anything is sent.
+```
+
+Using ChatGPT, Codex, Grok, Manus, a terminal, or a plan that blocks plugins? Every one of
+those is covered under [Install](#install) further down.
 
 ---
 
