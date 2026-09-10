@@ -20,7 +20,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-          registry-url: "https://registry.npmjs.org"
 
       - name: The tag matches the version in every manifest and skill
         run: |
@@ -35,11 +34,6 @@ jobs:
 
       - name: Same checks as every push
         run: npm run check
-
-      - name: Publish to npm
-        run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # One ZIP per skill, attached to the release. This is the only install path
       # for a Claude Desktop or claude.ai user who has no GitHub account: the
