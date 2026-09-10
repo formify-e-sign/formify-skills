@@ -41,7 +41,22 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      # One ZIP per skill, attached to the release. This is the only install path
+      # for a Claude Desktop or claude.ai user who has no GitHub account: the
+      # marketplace dialog there is a picker over their own repositories, not a
+      # free-text field, so they cannot reach a public repo that way. They download
+      # a ZIP from the release page and upload it. claude.ai requires the skill
+      # folder itself to be the top of the archive, which is what `cd skills` gives.
+      - name: One uploadable ZIP per skill
+        run: |
+          mkdir -p dist
+          for dir in skills/*/; do
+            name=$(basename "$dir")
+            (cd skills && zip -qr "../dist/$name.zip" "$name")
+          done
+          ls -l dist
+
       - name: GitHub release
-        run: gh release create "$GITHUB_REF_NAME" --generate-notes
+        run: gh release create "$GITHUB_REF_NAME" --generate-notes dist/*.zip
         env:
           GH_TOKEN: ${{ github.token }}
