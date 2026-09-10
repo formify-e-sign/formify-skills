@@ -6,7 +6,7 @@ here if it demonstrates a path `README.md` actually tells someone to take.
 | Directory | Channel | State |
 |---|---|---|
 | `claude-desktop/` | Claude Desktop, claude.ai chat and Cowork — the plugin path | recorded 2026-09-10 |
-| `codex/` | Codex CLI and the Codex desktop app | not recorded yet |
+| `codex/` | Codex CLI and the Codex desktop app | recorded 2026-09-10 |
 
 ## What is in `claude-desktop/`
 
@@ -18,6 +18,18 @@ each one shows:
 | `1-add-marketplace.gif` | Customize → Plugins → Add marketplace → `formify-e-sign/formify-skills` → Sync → Add |
 | `2-connect-account.gif` | Connectors tab → Connect → sign in → Connected |
 | `3-what-you-get.gif` | the installed plugin: description, categories, four skills, connector |
+
+## What is in `codex/`
+
+One GIF. The Codex recording covers a single action — adding the marketplace — because from
+there the flow is the same as Claude's and the CLI covers the rest in two commands.
+
+| File | Step |
+|---|---|
+| `1-add-marketplace.gif` | Plugins → Add → Add plugin marketplace → `formify-e-sign/formify-skills` → Add marketplace |
+
+Nothing is blurred in it: the recording carries no conversation list, no browser, and no
+account names. Only the local home-directory path appears, in the marketplace list.
 
 ## Rules for anything added here
 

@@ -20,7 +20,7 @@ has to paste your contract into another chatbot to understand what they are sign
 You do not need to be technical, and you never learn a command. You describe what you want
 signed and by whom; everything below is what the assistant handles for you.
 
-Works with Claude Code, Claude Desktop, Codex, ChatGPT, Cursor and around twenty
+Works with Claude Code, Claude Desktop, Codex, ChatGPT, Grok, Manus, Cursor and around twenty
 other agents.
 
 ## Contents
@@ -31,7 +31,7 @@ other agents.
 - [What you can ask for](#what-you-can-ask-for)
 - [What the agent can actually do](#what-the-agent-can-actually-do)
 - [One of those, end to end](#one-of-those-end-to-end)
-- [Install](#install) — [Start here](#start-here--one-install-everywhere-in-claude) · [If plugins are unavailable](#if-plugins-are-unavailable-to-you) · [Try it](#try-it--paste-this-into-the-chat) · [ChatGPT](#chatgpt) · [Codex](#codex) · [Claude Code](#claude-code) · [Any agent](#any-agent-via-the-skills-installer) · [In a repository](#in-a-repository-with-no-install-at-all) · [Manually](#manually-anywhere)
+- [Install](#install) — [Start here](#start-here--one-install-everywhere-in-claude) · [If plugins are unavailable](#if-plugins-are-unavailable-to-you) · [Try it](#try-it--paste-this-into-the-chat) · [ChatGPT](#chatgpt) · [Codex](#codex) · [Grok](#grok) · [Manus](#manus) · [Claude Code](#claude-code) · [Any agent](#any-agent-via-the-skills-installer) · [In a repository](#in-a-repository-with-no-install-at-all) · [Manually](#manually-anywhere)
 - [Connect the Formify MCP server](#connect-the-formify-mcp-server)
 - [Coming soon: skills for your niche](#coming-soon-skills-for-your-niche)
 - [What is in this repository](#what-is-in-this-repository)
@@ -200,6 +200,8 @@ Pick the row that matches how you use Formify. Most people want the first one.
 | **Claude** — Desktop, browser or Cowork | [Start here](#start-here--one-install-everywhere-in-claude) | no |
 | **ChatGPT** | [ChatGPT](#chatgpt) | no |
 | **Codex** | [Codex](#codex) | yes |
+| **Grok** | [Grok](#grok) | no |
+| **Manus** | [Manus](#manus) | no |
 | Claude Code, or another coding agent | [Claude Code](#claude-code) · [Any agent](#any-agent-via-the-skills-installer) | yes |
 
 ### Start here — one install, everywhere in Claude
@@ -335,20 +337,88 @@ field has to sit. Claude Desktop is where you get both halves today.
 
 ### Codex
 
-Two steps, run one after the other. Add the marketplace:
+Codex has the same shape as Claude: add our repository as a marketplace, then install the
+plugin. The desktop app and the CLI share one configuration, so doing it in either covers both.
+
+**In the Codex desktop app.** Open **Plugins**, select **Add**, then **Add plugin
+marketplace**, and put this in **Source**:
+
+```
+formify-e-sign/formify-skills
+```
+
+Leave **Git ref** and **Sparse paths** empty — the defaults are right for us. Select **Add
+marketplace**. Formify appears in your marketplace list; install the plugin from there, and
+use **Upgrade** on that row whenever you want the newest version.
+
+![Adding the Formify marketplace in the Codex desktop app](demo/codex/1-add-marketplace.gif)
+
+**From the terminal**, the same two steps:
 
 ```bash
 codex plugin marketplace add formify-e-sign/formify-skills
-```
-
-Then install the plugin:
-
-```bash
 codex plugin add formify@formify
 ```
 
-This brings the skills and the MCP connection together. The Codex desktop app and the CLI
-share the same configuration, so installing in either one covers both.
+This brings the four skills and the MCP connection together. `codex plugin list` shows the
+result, and `codex plugin marketplace upgrade` pulls a newer version.
+
+### Grok
+
+Grok takes the Formify connector directly, on every plan.
+
+Go to **grok.com/connectors**, select **New Connector**, then **Custom**, and enter:
+
+```
+https://mcp.formify.eu/mcp
+```
+
+Complete the sign-in when it asks. Grok can then create documents, send them for signature
+and tell you who has signed — on web, iOS and Android.
+
+On a Business or Enterprise workspace a team admin has to provision the connector first.
+
+**What you do not get this way:** the four skills. Grok's consumer app has its own skills
+system that does not read a GitHub repository, so the connector gives Grok the actions
+without the judgement — how a contract should read, where a signature field belongs, which
+identity check a document calls for.
+
+**Grok Build**, the CLI, is different: xAI documents that it *"automatically reads Claude
+Code marketplaces, plugins, skills, MCPs, agents, hooks, and instruction files… alongside
+`.grok/`."* The `.claude-plugin/` manifests in this repository are the ones it reads, so
+nothing extra is needed on our side. xAI does not document the command that adds a
+marketplace, so follow their instructions for that step.
+
+### Manus
+
+Two things, added separately.
+
+**1. The connector.** **Settings → Integrations → Custom MCP Servers → Add Server**. Give it
+a name, and for the server URL:
+
+```
+https://mcp.formify.eu/mcp
+```
+
+Complete the sign-in it asks for. Manus can now act on your Formify account.
+
+**2. The skills.** Manus imports a skill from a GitHub repository only when `SKILL.md` sits at
+the repository root, and ours live in `skills/`. So use the upload route instead: download the
+four ZIPs from our [Releases page](https://github.com/formify-e-sign/formify-skills/releases),
+then **Skills → + Add → Upload a Skill** and choose one. Repeat for the other three.
+
+These are the same ZIPs described under [If plugins are unavailable to you](#if-plugins-are-unavailable-to-you)
+— one skill per archive, with the skill folder as the top of the ZIP, which is the shape both
+Manus and claude.ai expect.
+
+---
+
+**Everything above is a desktop or browser app.** If you would rather work in a terminal, or
+you already use a coding agent, the same plugin installs there — and in Claude Code and Codex
+CLI it is two commands rather than a dialog. The sections below are for that.
+
+They install exactly the same four skills and the same connector. Nothing is different about
+what Formify can do; only how you get it.
 
 ### Claude Code
 
