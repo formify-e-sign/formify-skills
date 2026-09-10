@@ -1,7 +1,7 @@
 {
   "name": "formify-skills",
   "version": "1.0.0",
-  "description": "AI agent skills for Formify — build fillable PDF forms and contracts, send them for e-signature, verify signers with BankID or an ID scan, and track what happens after sending. Works with Claude Code, Codex, Cursor, Gemini CLI and other agents.",
+  "description": "AI agent skills for Formify — build fillable PDF forms and contracts, send them for e-signature, verify signers with BankID or an ID scan, and track what happens after sending. Works with Claude Code, Claude Desktop, Codex, Cursor and other agents.",
   "license": "MIT",
   "homepage": "https://formify.eu",
   "repository": {
@@ -37,7 +37,6 @@
     "LICENSE",
     ".agents",
     ".mcp.json",
-    "gemini-extension.json",
     "skills.sh.json"
   ],
   "scripts": {

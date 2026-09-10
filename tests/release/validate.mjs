@@ -64,8 +64,8 @@ export function checkRoot(root) {
     for (const ref of localReferences(text)) if (!confined(base, ref)) fail(file, `missing or escaping reference: ${ref}`);
     if (existsSync(join(base, 'commands'))) fail(file, 'commands/ is forbidden by the Formify authoring standard');
   }
-  // Check actual path targets, including storefront assets and extension context files.
-  for (const manifest of ['.claude-plugin/plugin.json', '.codex-plugin/plugin.json', 'gemini-extension.json']) {
+  // Check actual path targets, including storefront assets.
+  for (const manifest of ['.claude-plugin/plugin.json', '.codex-plugin/plugin.json']) {
     try {
       const data = json(manifest);
       const declared = Array.isArray(data.skills) ? data.skills : data.skills ? [data.skills] : [];

@@ -29,7 +29,7 @@ Reports include model usage, native skill invocations, tool arguments, fixture r
 
 - Native positive, negative and overlap activation across all claimed languages, repeated trials, and comparison with a no-skill baseline. Current native fixtures primarily exercise send/track/identity; PDF activation and visual PDF output need separate evidence.
 - Complete signature-method and delivery combinations, authentication failure, preview failure, signee ID changes, reminder cooldown execution, upload routes and recipient correction. Current fixtures cover a selected first-release risk set, not this entire list.
-- Fresh-install tests in Claude Code, Codex, Gemini CLI, OpenCode and Cursor. A manifest passing validation is not an installation test.
+- Fresh-install tests in Claude Code, Codex, OpenCode and Cursor. A manifest passing validation is not an installation test.
 - Controlled real-account send/sign/retrieve checks using explicitly approved test recipients and spending. No such sends are performed by this suite.
 
 Release status must remain unverified where those checks have not run. Do not turn a passing fixture trace into a claim that all harnesses or the live Formify service pass.

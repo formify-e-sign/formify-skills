@@ -5,7 +5,6 @@
     { "path": ".claude-plugin/plugin.json", "field": "version" },
     { "path": ".claude-plugin/marketplace.json", "field": "plugins.0.version" },
     { "path": ".codex-plugin/plugin.json", "field": "version" },
-    { "path": "gemini-extension.json", "field": "version" },
     { "path": "package.json", "field": "version" }
   ],
   "//skills": "Frontmatter version in every skill. A glob, not a list, so adding a skill needs no edit here.",

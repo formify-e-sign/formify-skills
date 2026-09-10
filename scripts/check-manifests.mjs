@@ -24,7 +24,6 @@ const named = [
   ["plugin.json", root],
   [".claude-plugin/plugin.json", read(".claude-plugin/plugin.json")],
   [".codex-plugin/plugin.json", read(".codex-plugin/plugin.json")],
-  ["gemini-extension.json", read("gemini-extension.json")],
 ];
 for (const [file, m] of named) {
   if (m.name !== NAME) fail(`${file}: name ${m.name} != ${NAME}`);
@@ -114,7 +113,6 @@ const URL = "https://mcp.formify.eu/mcp";
 const urls = [
   ["mcp.json", read("mcp.json").mcpServers.formify.url],
   [".mcp.json", read(".mcp.json").mcpServers.formify.url],
-  ["gemini-extension.json", read("gemini-extension.json").mcpServers.formify.httpUrl],
 ];
 for (const [file, u] of urls) if (u !== URL) fail(`${file}: MCP url ${u} != ${URL}`);
 
@@ -126,7 +124,6 @@ const packed = (rel) => allow.some((a) => rel === a || rel.startsWith(a.replace(
 const pointed = [
   [".codex-plugin/plugin.json", read(".codex-plugin/plugin.json").interface?.iconSmall],
   [".codex-plugin/plugin.json", read(".codex-plugin/plugin.json").interface?.iconLarge],
-  ["gemini-extension.json", read("gemini-extension.json").contextFileName],
 ];
 for (const [file, ref] of pointed) {
   if (!ref) continue;

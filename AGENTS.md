@@ -100,7 +100,7 @@ formify-skills/
 ├── .agents/               # universal skill path and plugin marketplace
 ├── .claude-plugin/        # Claude Code plugin manifest
 ├── .codex-plugin/         # Codex plugin manifest
-└── plugin.json, mcp.json, gemini-extension.json, skills.sh.json
+└── plugin.json, mcp.json, skills.sh.json
 ```
 
 Every manifest above claims the same MCP URL, the same skill list, and the same icons. They
