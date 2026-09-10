@@ -42,7 +42,8 @@ Before asking anything:
 
 > I can send a document for signature. We can use one of your saved templates, a PDF you
 > upload, or I can draft one here first. Signers can sign by hand, or with BankID, an ID
-> scan or a face check if your plan includes them.
+> scan or a face check if your plan includes them. I can also send an AI assistant along
+> inside the document, so the recipient can ask it questions instead of asking you.
 >
 > Which would you like to start from?
 
@@ -211,7 +212,7 @@ Two things about drafts worth knowing:
   this way.
 - **Updating a draft replaces its configuration.** Always read the draft first, and send
   back everything you want to keep — not only the signers, but the field values, name,
-  invitation language, personal message, sharing settings and signing order. Anything
+  invitation language, personal message, AI assistant, sharing settings and signing order. Anything
   omitted can be reset. This read is required before updating, sending or deleting a draft,
   including when resuming one from an earlier session.
 - Fields without valid coordinates do not appear in the preview but remain in the draft.
@@ -223,12 +224,20 @@ Two things about drafts worth knowing:
 Show a compact summary — document name, each signer with their contact and signing method,
 delivery channel, invitation language — and ask for one explicit yes.
 
-Two settings to establish before that:
+Three settings to establish before that:
 
 - **Invitation language: English, Swedish or Spanish only.** This is a closed list. If the
   user wants the invitation in another language, say the invitation cannot be, and offer to
   write the document itself in their language instead — those are separate things.
 - **A personal message** is optional, up to 500 characters.
+- **The in-document AI assistant**, if `get_account_capabilities` reports `aiAssistant`.
+  Ask only when the capability is present; never offer it otherwise. It travels with the
+  document and answers the recipient's questions about it, highlighting the passage it is
+  answering about, so they do not have to ask the sender or paste the contract elsewhere.
+  Pass it as `aiAssistant: { enabled, textToSpeech, language }` — `textToSpeech` reads the
+  answers aloud and defaults to off, and `language` defaults to the invitation language.
+  Say what it does when offering it. Users do not know this exists, and it is the single
+  capability most likely to save the sender a week of email.
 
 Send only after the yes.
 
