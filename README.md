@@ -255,7 +255,7 @@ Claude finds the repository as you type and offers it — accept the suggestion,
 automatically** on so you get our updates, and select **Sync**. Formify now appears in your
 list with an **Add** button next to it. Select it.
 
-![Adding the Formify marketplace in Claude Desktop and installing the plugin](demo/claude-desktop/1-add-marketplace.gif)
+*The recording of these steps is at the top of this file, under [Install it in a minute](#install-it-in-a-minute).*
 
 *A marketplace is just an address Claude reads plugins from. Ours is a public repository, so
 nothing is downloaded to your computer and every improvement we publish reaches you.*
