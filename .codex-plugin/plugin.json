@@ -1,0 +1,45 @@
+{
+  "name": "formify",
+  "version": "1.0.0",
+  "description": "Build fillable PDF forms and contracts, send them for e-signature, verify signers with BankID or an ID scan, and track what happens after sending.",
+  "author": {
+    "name": "Formify",
+    "url": "https://formify.eu"
+  },
+  "homepage": "https://formify.eu",
+  "repository": "https://github.com/formify-e-sign/formify-skills",
+  "license": "MIT",
+  "keywords": [
+    "esignature",
+    "contracts",
+    "pdf-forms",
+    "identity-verification",
+    "kyc",
+    "bankid"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Formify",
+    "shortDescription": "AI-assisted e-signing",
+    "longDescription": "Formify turns an assistant into someone who can prepare a contract, place the signature fields correctly, send it for electronic signature, and verify the person on the other end with BankID, an ID document scan, a live face check or a company lookup. Building the document is free and works without an account; sending and signing use your Formify account.",
+    "developerName": "Formify",
+    "category": "productivity",
+    "iconSmall": "./assets/icon-128.png",
+    "iconLarge": "./assets/icon-512.png",
+    "websiteURL": "https://formify.eu",
+    "supportURL": "https://app.formify.eu/",
+    "privacyPolicyURL": "https://formify.eu/privacy/policy",
+    "termsOfServiceURL": "https://formify.eu/privacy/terms",
+    "brandColor": "#3775BB",
+    "defaultPrompt": [
+      "Turn this PDF into a fillable form",
+      "Send this contract for signature",
+      "Who still needs to sign?"
+    ],
+    "capabilities": [
+      "Read",
+      "Write"
+    ]
+  }
+}

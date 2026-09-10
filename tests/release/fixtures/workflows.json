@@ -1,0 +1,885 @@
+[
+  {
+    "id": "prepare-only",
+    "prompt": "Prepare a draft named Rental agreement from uploaded file file-test for Maria Example, maria@example.com, handwritten signature on a new page. English invitation. Leave fields blank, no message, private sharing, no signing order. Do not send anything; just save the draft.",
+    "skill": "formify-send-contract",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_account_capabilities",
+        "create_draft"
+      ],
+      "forbidden": [
+        "create_document",
+        "send_draft"
+      ],
+      "arguments": {
+        "create_draft": {
+          "fileId": "file-test",
+          "name": "Rental agreement"
+        }
+      }
+    },
+    "evidence": [
+      "skills/formify-send-contract/SKILL.md:168-188",
+      "MCP/src/tools.ts:542-567"
+    ]
+  },
+  {
+    "id": "resume-preserve",
+    "prompt": "Resume draft draft-test. Change only its personal message to exactly \"Thank you\" (without a final period). Preserve every other setting, save it, and do not send it.",
+    "skill": "formify-send-contract",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_draft",
+        "update_draft"
+      ],
+      "before": [
+        [
+          "get_draft",
+          "update_draft"
+        ]
+      ],
+      "forbidden": [
+        "send_draft",
+        "create_document"
+      ],
+      "preserve": true,
+      "arguments": {
+        "update_draft": {
+          "draftId": "draft-test",
+          "personalMessage": "Thank you"
+        }
+      }
+    },
+    "evidence": [
+      "skills/formify-send-contract/SKILL.md:184-188",
+      "docs/api-truth.md:171",
+      "MCP/src/tools.ts:582-614"
+    ]
+  },
+  {
+    "id": "phone-only",
+    "prompt": "Prepare only a draft named Service agreement from uploaded file file-test for Ana Example at +34600000000, WhatsApp only, no email. Handwritten signature, new page, Spanish invitation, private, no order, no prefill or message. Save without sending.",
+    "skill": "formify-send-contract",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_account_capabilities",
+        "create_draft"
+      ],
+      "forbidden": [
+        "send_draft",
+        "create_document"
+      ],
+      "arguments": {
+        "create_draft": {
+          "signeeDetails.0.phoneNumber": "+34600000000",
+          "signeeDetails.0.phoneNumberDeliveryMethod": "whatsapp",
+          "language": "es"
+        }
+      },
+      "absent": {
+        "create_draft": [
+          "signeeDetails.0.emailAddress"
+        ]
+      }
+    },
+    "evidence": [
+      "skills/formify-send-contract/SKILL.md:106-120",
+      "MCP/src/tools.ts:247-266"
+    ]
+  },
+  {
+    "id": "prefill-lock",
+    "prompt": "Prepare only a draft named Order from uploaded file file-test. Set checkbox Consent to Yes, dropdown Plan to Basic, and leave Notes blank. Lock these filled values for signers. Maria Example, maria@example.com, handwritten on a new page, English, private, no order or message. Save without sending.",
+    "skill": "formify-send-contract",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": [
+          {
+            "name": "Consent",
+            "type": "checkbox",
+            "editable": true,
+            "readOnly": false,
+            "options": [
+              "Yes"
+            ]
+          },
+          {
+            "name": "Plan",
+            "type": "combobox",
+            "editable": true,
+            "readOnly": false,
+            "options": [
+              "Basic",
+              "Plus"
+            ]
+          },
+          {
+            "name": "Notes",
+            "type": "textField",
+            "editable": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_file_fields",
+        "create_draft"
+      ],
+      "before": [
+        [
+          "get_file_fields",
+          "create_draft"
+        ]
+      ],
+      "forbidden": [
+        "send_draft",
+        "create_document"
+      ],
+      "prefill": true,
+      "arguments": {
+        "create_draft": {
+          "fieldsReadonlyMode": "filled"
+        }
+      }
+    },
+    "evidence": [
+      "skills/formify-send-contract/SKILL.md:85-102",
+      "MCP/src/tools.ts:59-71,277-298"
+    ]
+  },
+  {
+    "id": "capability-off",
+    "prompt": "I need BankID for this signer. Check whether my account supports it. If not, explain; do not choose or configure another method for me.",
+    "skill": "formify-verify-identity",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": false,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_account_capabilities"
+      ],
+      "forbidden": [
+        "create_draft",
+        "update_draft",
+        "create_document",
+        "send_draft"
+      ]
+    },
+    "evidence": [
+      "skills/formify-verify-identity/SKILL.md:33-48",
+      "MCP/src/tools.ts:258-261"
+    ]
+  },
+  {
+    "id": "remind-review",
+    "prompt": "Review document doc-test and tell me which outstanding signers can be reminded right now and who has to wait. Do not send reminders yet.",
+    "skill": "formify-track-signatures",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_document"
+      ],
+      "forbidden": [
+        "send_reminder",
+        "update_signee",
+        "revoke_document",
+        "delete_document"
+      ],
+      "answer_contains": [
+        "Johan",
+        "Anna"
+      ]
+    },
+    "evidence": [
+      "skills/formify-track-signatures/SKILL.md:40-85",
+      "MCP/src/tools.ts:384-393"
+    ]
+  },
+  {
+    "id": "signed-field-lock",
+    "prompt": "On document doc-test, change Amount to 250 if it is still editable. Check fresh status first; if anyone has signed, do not change anything.",
+    "skill": "formify-track-signatures",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      },
+      "get_document_fields": {
+        "fields": [
+          {
+            "name": "Amount",
+            "type": "textField",
+            "editable": true
+          }
+        ]
+      },
+      "get_document_field_values": {
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_document"
+      ],
+      "forbidden": [
+        "set_document_field_values",
+        "revoke_document",
+        "create_document"
+      ]
+    },
+    "evidence": [
+      "skills/formify-track-signatures/SKILL.md:123-132",
+      "MCP/src/tools.ts:482-495"
+    ]
+  },
+  {
+    "id": "template-preview",
+    "prompt": "Use saved template template-test and show me its rendered signing preview before I decide whether to send. I have no separate uploaded PDF. Do not send it.",
+    "skill": "formify-send-contract",
+    "responses": {
+      "get_account_capabilities": {
+        "deliverySms": true,
+        "deliveryWhatsapp": true,
+        "signatureBankId": true,
+        "signatureIdScan": true,
+        "signatureFaceLiveness": true,
+        "signingOrder": true
+      },
+      "get_draft": {
+        "draftId": "draft-test",
+        "status": "draft",
+        "fileId": "file-test",
+        "name": "Rental agreement",
+        "userId": "owner-test",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ],
+        "fields": [
+          {
+            "name": "Amount",
+            "value": "100"
+          }
+        ],
+        "fieldsReadonlyMode": "filled",
+        "language": "sv",
+        "sharingSetting": "private",
+        "personalMessage": "Please review",
+        "enableSigningOrder": true,
+        "aiAssistant": {
+          "enabled": true,
+          "language": "sv",
+          "textToSpeech": false
+        }
+      },
+      "get_file_fields": {
+        "fields": []
+      },
+      "get_document": {
+        "documentId": "doc-test",
+        "status": "awaiting_signatures",
+        "signeeDetails": [
+          {
+            "signeeId": "signed-test",
+            "fullName": "Maria Example",
+            "signatureStatus": "signed",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "waiting-test",
+            "fullName": "Johan Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 0
+            }
+          },
+          {
+            "signeeId": "cooldown-test",
+            "fullName": "Anna Example",
+            "signatureStatus": "awaiting_signature",
+            "reminders": {
+              "reminderCooldown": 900
+            }
+          }
+        ]
+      },
+      "get_template": {
+        "templateId": "template-test",
+        "name": "Rental template",
+        "signeeDetails": [
+          {
+            "fullName": "Maria Example",
+            "emailAddress": "maria@example.com",
+            "signatureType": "digital_ink",
+            "signaturePlacement": "new_page"
+          }
+        ]
+      },
+      "get_template_fields": {
+        "fields": []
+      },
+      "list_templates": {
+        "templates": [
+          {
+            "templateId": "template-test",
+            "name": "Rental template"
+          }
+        ]
+      }
+    },
+    "expect": {
+      "required": [
+        "get_template"
+      ],
+      "forbidden": [
+        "create_draft",
+        "get_draft_file_url",
+        "get_draft_file",
+        "create_document",
+        "send_draft"
+      ]
+    },
+    "evidence": [
+      "skills/formify-send-contract/SKILL.md:182-183",
+      "MCP/src/tools.ts:542-548"
+    ]
+  },
+  {
+    "id": "pdf-no-tools",
+    "prompt": "I need a fillable PDF intake form for a small cleaning business: customer name, address and a consent checkbox. I have no Formify account. This chat cannot render or attach PDFs. Give me the document text and complete field specification as the useful fallback. Do not send anything or contact an account.",
+    "skill": "formify-pdf-forms",
+    "responses": {},
+    "expect": {
+      "required": [],
+      "forbidden": [
+        "get_account_capabilities",
+        "create_draft",
+        "create_document",
+        "send_draft"
+      ],
+      "answer_contains": [
+        "consent"
+      ]
+    },
+    "evidence": [
+      "skills/formify-pdf-forms/SKILL.md:36-45,104-120"
+    ]
+  }
+]

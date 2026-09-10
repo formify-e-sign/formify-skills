@@ -1,0 +1,36 @@
+{
+  "skill_name": "formify-track-signatures",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "That consent form went to forty parents last week. Who still hasn't returned it, and can you chase just those?",
+      "expected_output": "Per-person signing status read before any reminder, and a reminder sent only to those still awaiting signature.",
+      "assertions": [
+        "The document is read before any reminder is sent",
+        "Per-person signing status is used, not the document status alone",
+        "Only recipients still awaiting signature are included in the reminder",
+        "Nobody who has already signed is included"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I typed Maria's email wrong - it went to maria@exmaple.com. Fix it.",
+      "expected_output": "The existing recipient corrected in place rather than a second document created.",
+      "assertions": [
+        "The existing signee's contact detail is corrected rather than a new document being created",
+        "The reply does not propose revoking and resending as the first option",
+        "The reply says what happens to the invitation after the correction"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "The download link you gave me this morning doesn't work any more.",
+      "expected_output": "The ten-minute window named as the cause and a fresh link fetched, without claiming the link was single-use.",
+      "assertions": [
+        "The reply attributes the failure to the ten-minute window elapsing",
+        "The reply does not claim the signed-document link was consumed by being used once",
+        "A fresh link is fetched rather than the user being told to wait"
+      ]
+    }
+  ]
+}

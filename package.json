@@ -1,0 +1,48 @@
+{
+  "name": "formify-skills",
+  "version": "1.0.0",
+  "description": "AI agent skills for Formify — build fillable PDF forms and contracts, send them for e-signature, verify signers with BankID or an ID scan, and track what happens after sending. Works with Claude Code, Codex, Cursor, Gemini CLI and other agents.",
+  "license": "MIT",
+  "homepage": "https://formify.eu",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formify-e-sign/formify-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/formify-e-sign/formify-skills/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "mcp",
+    "esignature",
+    "e-sign",
+    "contracts",
+    "pdf-forms",
+    "identity-verification",
+    "kyc",
+    "bankid",
+    "eidas"
+  ],
+  "files": [
+    "skills",
+    "plugin.json",
+    "mcp.json",
+    ".claude-plugin",
+    ".codex-plugin",
+    "assets",
+    "demo",
+    "README.md",
+    "LICENSE",
+    ".agents",
+    ".mcp.json",
+    "gemini-extension.json",
+    "skills.sh.json"
+  ],
+  "scripts": {
+    "build": "node scripts/build-skills.mjs",
+    "check": "node scripts/build-skills.mjs --check && node scripts/release.mjs --check && node scripts/check-manifests.mjs",
+    "release": "node scripts/release.mjs"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "skill_name": "formify-send-contract",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Send this NDA to the three freelancers on this list - Maria Alvarez, Jonas Berg, Priya Nair. Same document, one each, not a group signing.",
+      "expected_output": "Three separate documents, each with exactly one signee, each named so the recipient is identifiable. The count of outbound invitations is stated before anything is created.",
+      "assertions": [
+        "Three documents are created, not one document with three signees",
+        "Each document carries exactly one signee",
+        "Each document has a name that distinguishes its recipient rather than three identically named documents",
+        "The reply states that three separate invitations will go out before creating them",
+        "The reply does not treat one approval as covering all three sends"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Send this rental agreement to Maria for signature. She needs to show ID first.",
+      "expected_output": "A document configured for the ID-scan signing method with both required boxes placed, and a preview offered before anyone is contacted.",
+      "assertions": [
+        "Account capabilities are checked before the ID-scan method is offered",
+        "Both a signature box and a separate ID-scan box are configured, not only the signature box",
+        "A preview is offered before the document is sent",
+        "The reply describes what the signer will experience, in the signer's terms"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Send the quote to the customer by SMS - I only have their mobile, no email.",
+      "expected_output": "A signee accepted with a phone number and no email address, on a delivery channel checked against the account first.",
+      "assertions": [
+        "The signee is accepted with only a phone number; no email address is demanded",
+        "The SMS delivery capability is checked before SMS is offered",
+        "If the capability is unavailable the reply says which one and offers the best available alternative rather than downgrading silently"
+      ]
+    }
+  ]
+}

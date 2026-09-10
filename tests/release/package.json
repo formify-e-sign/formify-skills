@@ -1,0 +1,11 @@
+{
+  "name": "formify-release-checks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test *.test.mjs",
+    "check": "node check.mjs",
+    "eval": "node evaluate.mjs"
+  },
+  "dependencies": { "yaml": "2.8.1" }
+}

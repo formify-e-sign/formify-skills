@@ -1,0 +1,51 @@
+# Machine-specific Claude Code settings (absolute paths, personal permissions)
+.claude/settings.local.json
+
+# Codex local state
+.codex/state/
+.codex/*.local.*
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Scratch
+tmp/
+*.log
+
+# Graft index cache
+graft/.cache/
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+graft/
+
+# Playwright MCP session snapshots — scratch output, never part of the release
+.playwright-mcp/
+
+# Internal working documents — the whole directory. Kept on disk and mirrored to
+# ../formify-skills-private, never published.
+#
+# These are the working, not the product. No skill depends on any of them: each
+# skill carries its own references/. Publishing them would expose the go-to-market
+# plan, a list of what we cannot yet verify about our own API, a list of what the
+# platform cannot do, and a ranked gap list that reads as a roadmap.
+#
+# The verification they record is claimed in the README, where it belongs.
+docs/
+
+# Live agent coordination. The protocol is documented in AGENTS.md §6.4; the file
+# itself is working state that names the internal documents above, so it stays local
+# and mirrored to ../formify-skills-private alongside them.
+tasks/
+
+
+# Agent working files — local only, not part of the published payload
+.claude/
+.codex/
+CLAUDE.md
+
+# Local record of what shipped — not part of the published payload
+CHANGELOG.md

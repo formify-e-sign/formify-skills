@@ -1,0 +1,39 @@
+{
+  "skill_name": "formify-pdf-forms",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Make me a one-page photo consent form as a fillable PDF - full name, email, date and a signature.",
+      "expected_output": "A one-page fillable PDF. Full name, email and date are real form widgets. The signature area is labelled but carries no widget and no printed line - it is left as empty space.",
+      "assertions": [
+        "The output is a single-page PDF file",
+        "Full name, email and date are interactive form fields, not printed labels alone",
+        "The signature area contains no form widget of any kind",
+        "The signature area contains no drawn line, underscore run, or box border",
+        "The consent text names what is being consented to rather than using placeholder text"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Patient intake form. I need the ID document scanned but we must not keep the picture - only the name and document number.",
+      "expected_output": "A fillable PDF whose identity section uses the machine-readable-zone attributes so no image is stored, with the named fields receiving the scanned values as text.",
+      "assertions": [
+        "The identity trigger is combined with machine-readable-zone attributes rather than used alone",
+        "No field is configured to receive the front-side image of the document",
+        "Each field that receives a verified value is paired in the same field name as the trigger",
+        "The reply states explicitly that no image of the document will be stored"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Same tenancy form but there are two tenants and both need to be identity-checked.",
+      "expected_output": "One document with two independent identity groups, indexed per person, and one signature area each.",
+      "assertions": [
+        "Identity attributes are indexed per person, so the two tenants do not share a group",
+        "Each tenant has exactly one identity trigger, not two in the same group",
+        "There is one signature area per tenant",
+        "No signature area is a form widget"
+      ]
+    }
+  ]
+}

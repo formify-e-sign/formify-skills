@@ -1,0 +1,31 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Shared references are in sync
+        run: node scripts/build-skills.mjs --check
+
+      - name: Version agrees everywhere
+        run: node scripts/release.mjs --check
+
+      - name: Manifest consistency
+        run: node scripts/check-manifests.mjs
+
+      - name: Agent Plugins 1.0.0 schema
+        run: |
+          curl -sfL https://agent-plugins.org/schemas/1.0.0/plugin.schema.json -o /tmp/plugin.schema.json
+          curl -sfL https://agent-plugins.org/schemas/1.0.0/mcp.schema.json -o /tmp/mcp.schema.json
+          npx -y ajv-cli@5 validate --spec=draft2020 -s /tmp/plugin.schema.json -d plugin.json
+          npx -y ajv-cli@5 validate --spec=draft2020 -s /tmp/mcp.schema.json -d mcp.json

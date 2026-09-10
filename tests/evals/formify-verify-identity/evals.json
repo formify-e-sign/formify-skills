@@ -1,0 +1,38 @@
+{
+  "skill_name": "formify-verify-identity",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We need the passport details on file for our records, but legal told us not to store copies of passports.",
+      "expected_output": "The data-minimisation pattern offered explicitly: the document is scanned, its data captured as text, and no image retained.",
+      "assertions": [
+        "The reply offers capturing the data without storing the image, as a named option",
+        "The reply explains why that matters - keeping a copy needs its own legal basis",
+        "The configuration combines the identity trigger with machine-readable-zone attributes",
+        "The reply does not present storing the image as the only way to capture the details"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "New client, a limited company. Our anti-money-laundering rules apply. What do we need?",
+      "expected_output": "Company verification plus retained identification, distinguished from a face check, with each trigger paired to the field that receives the verified value.",
+      "assertions": [
+        "The reply translates the regulation into company verification rather than proposing a face check",
+        "Beneficial owner and board member are treated as distinct triggers",
+        "Every verification trigger is paired, in the same field name, with a field that receives the verified value",
+        "The reply does not describe the resulting document as compliant with the regulation"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Which signing method is the strongest legally - BankID or a face check?",
+      "expected_output": "A statement of what each method proves, without ranking them by legal assurance.",
+      "assertions": [
+        "The reply does not rank the methods by legal assurance",
+        "The reply states what each method actually proves",
+        "The reply says that selecting a method does not by itself establish a legal signature class",
+        "The reply refers the legal question to the user's own adviser"
+      ]
+    }
+  ]
+}

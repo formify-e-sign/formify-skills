@@ -1,0 +1,16 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Prepare a document",
+      "description": "Works without a Formify account.",
+      "skills": ["formify-pdf-forms"]
+    },
+    {
+      "title": "Get it signed",
+      "description": "Sending, identity verification, and everything that follows.",
+      "skills": ["formify-send-contract", "formify-verify-identity", "formify-track-signatures"]
+    }
+  ]
+}

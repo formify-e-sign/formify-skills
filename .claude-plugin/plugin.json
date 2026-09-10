@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "formify",
+  "displayName": "Formify",
+  "version": "1.0.0",
+  "description": "Build fillable PDF forms and contracts, send them for e-signature, verify signers with BankID or an ID scan, and track what happens after sending.",
+  "author": {
+    "name": "Formify",
+    "url": "https://formify.eu"
+  },
+  "homepage": "https://formify.eu",
+  "repository": "https://github.com/formify-e-sign/formify-skills",
+  "license": "MIT",
+  "keywords": [
+    "esignature",
+    "contracts",
+    "pdf-forms",
+    "identity-verification",
+    "kyc",
+    "bankid"
+  ],
+  "skills": [
+    "./skills/formify-pdf-forms",
+    "./skills/formify-send-contract",
+    "./skills/formify-verify-identity",
+    "./skills/formify-track-signatures"
+  ],
+  "mcpServers": "./.mcp.json"
+}

@@ -1,0 +1,172 @@
+[
+  {
+    "id": "pdf-en",
+    "prompt": "Turn this intake sheet into a fillable PDF.",
+    "accepted_sets": [
+      [
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "pdf-sv",
+    "prompt": "Skapa ett fyllbart PDF-formulär för nya kunder.",
+    "accepted_sets": [
+      [
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "pdf-es",
+    "prompt": "Necesito un formulario PDF que el cliente pueda rellenar.",
+    "accepted_sets": [
+      [
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "send-en",
+    "prompt": "Send this contract to Maria for signature.",
+    "accepted_sets": [
+      [
+        "formify-send-contract"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "send-sv",
+    "prompt": "Skicka kontraktet till Johan för signering.",
+    "accepted_sets": [
+      [
+        "formify-send-contract"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "send-es",
+    "prompt": "Envía este contrato para firmar.",
+    "accepted_sets": [
+      [
+        "formify-send-contract"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "track-en",
+    "prompt": "Who has signed the rental agreement already?",
+    "accepted_sets": [
+      [
+        "formify-track-signatures"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "track-sv",
+    "prompt": "Vem har signerat? Skicka en påminnelse till dem som saknas.",
+    "accepted_sets": [
+      [
+        "formify-track-signatures"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "track-es",
+    "prompt": "¿Quién ha firmado? Necesito la copia firmada.",
+    "accepted_sets": [
+      [
+        "formify-track-signatures"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "identity-en",
+    "prompt": "Verify the signer with BankID.",
+    "accepted_sets": [
+      [
+        "formify-verify-identity"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "identity-sv",
+    "prompt": "Jag behöver identitetskontroll med BankID innan underskrift.",
+    "accepted_sets": [
+      [
+        "formify-verify-identity"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "identity-es",
+    "prompt": "Necesito verificar la identidad del firmante.",
+    "accepted_sets": [
+      [
+        "formify-verify-identity"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "send-identity",
+    "prompt": "Send this agreement and require BankID for Maria.",
+    "accepted_sets": [
+      [
+        "formify-send-contract",
+        "formify-verify-identity"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "pdf-identity",
+    "prompt": "Build a fillable intake PDF that captures passport details by scanning an ID.",
+    "accepted_sets": [
+      [
+        "formify-pdf-forms",
+        "formify-verify-identity"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "unrelated",
+    "prompt": "Explain how to roast vegetables.",
+    "accepted_sets": [
+      []
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "ambiguous",
+    "prompt": "Can you help with this document?",
+    "accepted_sets": [
+      [],
+      [
+        "formify-pdf-forms"
+      ],
+      [
+        "formify-send-contract"
+      ],
+      [
+        "formify-track-signatures"
+      ],
+      [
+        "formify-verify-identity"
+      ]
+    ],
+    "clarification_required": true
+  }
+]
