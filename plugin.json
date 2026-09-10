@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "formify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Build documents, get them signed, and verify who signed them — Formify e-signature and identity verification for AI agents.",
   "license": "MIT",
   "homepage": "https://formify.eu",

@@ -3,7 +3,7 @@ name: formify-verify-identity
 description: 'Verify a signer with BankID, ID scan, face liveness or company lookup. Use when a signature needs proof of who signed, for KYC or anti-money-laundering, when scanning an ID document, or when verifying a company registration number. Triggers on "BankID", "ID scan", "verify identity", "KYC", "AML", "face liveness", "legitimering", "identitetskontroll", "verificar identidad". Not for ordinary signing without identity checks: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Verify who is signing

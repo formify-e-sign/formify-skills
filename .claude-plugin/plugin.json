@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "formify",
   "displayName": "Formify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Build fillable PDF forms and contracts, send them for e-signature, verify signers with BankID or an ID scan, and track what happens after sending.",
   "author": {
     "name": "Formify",
