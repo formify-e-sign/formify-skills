@@ -907,5 +907,31 @@
       "skills/formify-real-estate/references/es-documents.md (arras: regional variants)",
       "skills/formify-real-estate/SKILL.md (step 3: read the region row before drafting)"
     ]
+  },
+  {
+    "id": "estate-intake-shape",
+    "prompt": "I'm an estate agent in Barcelona. I've got a flat sale in the Eixample, 320,000 EUR, and the buyer wants to sign the deposit contract this week. I need the arras contract. Ask me whatever you need before drafting. Do not send anything and do not create a document or a draft.",
+    "skill": "formify-real-estate",
+    "responses": {},
+    "expect": {
+      "required": [],
+      "forbidden": [
+        "create_draft",
+        "create_document",
+        "send_draft",
+        "update_draft"
+      ],
+      "answer_excludes": [
+        "5.",
+        "DNI/NIE and address",
+        "cadastral reference if you have"
+      ]
+    },
+    "evidence": [
+      "skills/formify-real-estate/SKILL.md step 2 (at most four questions, each a pick from two to four named options; names, DNI/NIE, addresses and cadastral references are fields, never questions)",
+      "skills/formify-pdf-forms/SKILL.md step 1b (four is a ceiling; ask for a choice, not for data)",
+      "AskUserQuestion schema: questions 1-4, options 2-4 per question — https://code.claude.com/docs/en/agent-sdk/python#askuserquestion"
+    ],
+    "note": "Regression for the 2026-09-11 Desktop Chat intake: five prose bullets carrying twelve sub-questions. A fifth numbered item, or an open request for identity or registry data, is the failure."
   }
 ]

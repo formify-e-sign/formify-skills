@@ -69,9 +69,31 @@ If they already said what they need, skip this and draft.
 ### 2. Ask once, in one message
 
 Follow the intake rule in `formify-pdf-forms`: a specific request gets no questions, a generic
-one gets a single message with three to five numbered questions. The per-document list in
-`references/es-documents.md` is ordered by what actually changes the document — take the top
-items from it, not the whole list. Never spread the same questions over several turns.
+one gets a single message with **at most four**, each a pick from two to four named options
+with the usual answer marked. The per-document list in `references/es-documents.md` is ordered
+by what actually changes the document — take the top items from it, not the whole list. Never
+spread the same questions over several turns.
+
+This sector makes the rule easy to break, because an estate agent's file is mostly data:
+names, DNI and NIE numbers, an address, a finca and a cadastral reference, a CIF, a register
+number. **None of those are questions.** They are fields, or assumptions stated out loud, and
+asking for them is how a four-question intake becomes a twelve-line interrogation that the
+agent answers by going to look things up.
+
+What is worth one of the four is a choice the region or the deal actually turns on — and the
+answers are already in `references/es-regions.md` and `es-documents.md`:
+
+| Question | The options |
+|---|---|
+| The second column's language | Catalan · English · another |
+| Who holds the deposit | the seller · the agency |
+| Deadline for the deed | 30 · 60 · 90 days |
+| Included in the sale | parking · trastero · furniture *(pick any)* |
+| Which arras | penitenciales · confirmatorias *(only where the region leaves it open)* |
+
+Offer the region's own default as the marked option rather than asking an open question about
+it. In Cataluña the deposit is confirmatoria unless the document says otherwise, so that is the
+option to mark — not a blank asking the agent to know CCCat 621-8.
 
 Reuse everything already said. One property, one seller, one buyer feed all six documents; a
 fact given for the encargo is not asked again for the arras.
