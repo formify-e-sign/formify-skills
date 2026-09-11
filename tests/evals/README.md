@@ -1,6 +1,6 @@
 # Output-quality evals
 
-Twelve cases, forty-seven assertions, four skills. These measure **what a skill produces**.
+Seventeen cases, seventy-two assertions, five skills. These measure **what a skill produces**.
 `tests/release/` measures **which skill fires and which tool it calls**. Neither replaces the
 other, and the distinction matters when reading a result: a skill can route perfectly and
 still write a bad document.

@@ -27,6 +27,9 @@ export function gradeWorkflow(fixture, calls, answer) {
     if (fields.some(f => f.name === 'Notes' || f.value === '')) errors.push('blank field was sent instead of omitted');
   }
   for (const word of expected.answer_contains ?? []) if (!answer.toLowerCase().includes(word.toLowerCase())) errors.push(`answer omits ${word}`);
+  // A regional variant is only proved by what the answer does NOT say. Citing the default
+  // Codigo Civil article in Catalonia or Navarra is the exact failure this catches.
+  for (const word of expected.answer_excludes ?? []) if (answer.toLowerCase().includes(word.toLowerCase())) errors.push(`answer wrongly cites ${word}`);
   for (const call of calls) if (call.result?.isError) errors.push(`fixture rejected ${call.tool}`);
   return errors;
 }

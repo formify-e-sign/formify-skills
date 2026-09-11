@@ -168,5 +168,77 @@
       ]
     ],
     "clarification_required": true
+  },
+  {
+    "id": "estate-es-encargo",
+    "prompt": "Necesito una nota de encargo para un piso en Palma. La propietaria vende su propia vivienda.",
+    "accepted_sets": [
+      [
+        "formify-real-estate"
+      ],
+      [
+        "formify-real-estate",
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "estate-es-arras",
+    "prompt": "Contrato de arras para un piso en Barcelona, vendedor español y compradora holandesa.",
+    "accepted_sets": [
+      [
+        "formify-real-estate"
+      ],
+      [
+        "formify-real-estate",
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "estate-en",
+    "prompt": "I run an estate agency in Spain. I need the key handover receipt for the owner before we start viewings.",
+    "accepted_sets": [
+      [
+        "formify-real-estate"
+      ],
+      [
+        "formify-real-estate",
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "estate-nearmiss-nda",
+    "prompt": "Make me a mutual NDA as a fillable PDF, two signers.",
+    "accepted_sets": [
+      [
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "estate-nearmiss-send",
+    "prompt": "Send this lease to the tenant for signature.",
+    "accepted_sets": [
+      [
+        "formify-send-contract"
+      ]
+    ],
+    "clarification_required": false
+  },
+  {
+    "id": "estate-nearmiss-ownpdf",
+    "prompt": "Add signature fields to this property valuation PDF I already have.",
+    "accepted_sets": [
+      [
+        "formify-pdf-forms"
+      ]
+    ],
+    "clarification_required": false
   }
 ]

@@ -881,5 +881,31 @@
     "evidence": [
       "skills/formify-pdf-forms/SKILL.md:36-45,104-120"
     ]
+  },
+  {
+    "id": "estate-arras-catalonia",
+    "prompt": "I am an estate agent. Draft the contrato de arras for a flat in Barcelona: seller Joan Serra, buyer Anouk de Vries from Amsterdam, price 320.000 EUR, deposit 32.000 EUR, deed within 60 days. This chat cannot render or attach PDFs, so give me the document text and the field specification. Name the civil-law article the deposit clause relies on. Do not send anything and do not create a document or a draft.",
+    "skill": "formify-real-estate",
+    "responses": {},
+    "expect": {
+      "required": [],
+      "forbidden": [
+        "create_draft",
+        "create_document",
+        "send_draft",
+        "update_draft"
+      ],
+      "answer_contains": [
+        "621-8"
+      ],
+      "answer_excludes": [
+        "1454"
+      ]
+    },
+    "evidence": [
+      "skills/formify-real-estate/references/es-regions.md:16 (ES-CT row: CCCat art. 621-8, arras confirmatorias unless expressly agreed)",
+      "skills/formify-real-estate/references/es-documents.md (arras: regional variants)",
+      "skills/formify-real-estate/SKILL.md (step 3: read the region row before drafting)"
+    ]
   }
 ]
