@@ -2,7 +2,7 @@
 // The version lives in several manifests and in every skill's frontmatter.
 // This is the only thing that writes them, so they cannot drift.
 //
-//   node scripts/release.mjs 1.1.0   bump every declared place
+//   node scripts/release.mjs 1.2.0   bump every declared place
 //   node scripts/release.mjs --check every declared place agrees (runs in CI)
 //   node scripts/release.mjs --audit find files carrying the version that are not declared
 //

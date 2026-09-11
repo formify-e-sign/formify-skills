@@ -632,7 +632,7 @@ places the version lives:
 ```bash
 npm run release 1.2.0       # every manifest and every skill frontmatter
 npm run check
-git commit -am "release 1.1.0" && git tag v1.1.0 && git push --follow-tags
+git commit -am "release 1.2.0" && git tag v1.2.0 && git push --follow-tags
 ```
 
 `npm run release --check` is part of `npm run check` and runs in CI, so drift fails
