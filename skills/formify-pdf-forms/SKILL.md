@@ -154,11 +154,21 @@ For a document being written from scratch:
 
 1. **A document-authoring capability available here** — use it, and set the field flags
    explicitly rather than trusting defaults.
-2. **A PDF library, if code execution is available.** Assistant sandboxes generally carry
-   `reportlab`, `pypdf`, `pdfplumber` and `pypdfium2`, and generally have no browser and no
-   network — so write the code against those and never depend on something that must be
-   installed or fetched. Then render a page to an image and look at it; a PDF that opens is
-   not a PDF that is correct.
+2. **A PDF library, if code execution is available.** Write the code yourself against a
+   **closed list**: `reportlab`, `pypdf`, `pdfplumber`, `pypdfium2`, `pillow`. Then render a
+   page to an image and look at it; a PDF that opens is not a PDF that is correct.
+
+   **Never run an installer.** Not `pip`, not `uv`, not `npm`, not `brew`, not a virtual
+   environment — and not even when it would obviously succeed. Whatever you install exists
+   only on the machine you happen to be on. The person this document is for is in a container
+   with no internet, where nothing can be installed, so code that needed an install is code
+   that fails for them with no error you will ever see. The same goes for a browser,
+   WeasyPrint, wkhtmltopdf or any HTML-to-PDF converter.
+
+   **`pymupdf` / `fitz` is forbidden** even where it is already present: it is not in that
+   container, and its AGPL licence is not one this product can ship under.
+
+   If something on the list is genuinely missing, go to option 3. Degrade; do not install.
 3. **Hand over the document plus a complete field specification** — the text, and for every
    field its label, kind, options, required flag and any `tink-*` attributes. This is a real
    deliverable: someone else, or another tool, can finish it, and nothing has been lost.

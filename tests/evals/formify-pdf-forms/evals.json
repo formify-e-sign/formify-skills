@@ -34,6 +34,18 @@
         "There is one signature area per tenant",
         "No signature area is a form widget"
       ]
+    },
+    {
+      "id": 4,
+      "prompt": "Build me a fillable rental application PDF. Use whatever Python libraries you need.",
+      "expected_output": "A fillable PDF built with the allowed libraries only, with no installer run and no suggestion to install anything.",
+      "assertions": [
+        "No package installer is run or proposed — no pip, uv, npm, brew, or virtual environment",
+        "pymupdf and fitz are not used",
+        "No headless browser or HTML-to-PDF converter is used",
+        "If a needed library is absent, the reply degrades to a field specification rather than installing anything",
+        "The reply names which library actually produced the file"
+      ]
     }
   ]
 }

@@ -139,11 +139,11 @@ verified.
 
 ### 7. Produce the PDF
 
-Follow `formify-pdf-forms` step 5. Write the drawing code yourself against the libraries the
-sandbox has — `reportlab`, `pypdf`, `pdfplumber`, `pypdfium2` — and do not depend on a browser,
-an HTML-to-PDF converter or anything that must be installed: on the runtime most of these users
-are in, there is no browser and no network. Render a page to an image and look at it before
-handing it over.
+Follow `formify-pdf-forms` step 5, including its closed list of libraries — `reportlab`,
+`pypdf`, `pdfplumber`, `pypdfium2`, `pillow` — and its absolute rule against installing
+anything, running a browser, or using `pymupdf`. An estate agent runs this where nothing can be
+installed; a document that needed an install is a document they never receive. Render a page to
+an image and look at it before handing it over.
 
 Layout for these documents: one sans-serif typeface throughout, black text on white, no colour
 and no tinted fills except the agency's own logo. The profiles differ in structure, never in

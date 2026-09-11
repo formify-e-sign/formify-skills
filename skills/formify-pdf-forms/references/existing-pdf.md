@@ -19,14 +19,17 @@ what they sent is a scan with no text layer and they agree to a rebuild.
 
 ## What the environment gives you
 
-Assistant sandboxes generally carry `reportlab`, `pypdf`, `pdfplumber` and `pypdfium2`, and
-generally have **no browser and no network**. So:
+A closed list: `reportlab`, `pypdf`, `pdfplumber`, `pypdfium2`, `pillow`. Assume **no browser
+and no network**. So:
 
 - **Write the code yourself.** These libraries are enough to do everything below; you do not
   need a recipe to copy, you need to know which traps are there.
-- **Do not reach for a headless browser, an HTML-to-PDF converter, or anything that must be
-  installed.** If it is not already present it cannot be fetched, and the attempt ends in a
-  failure the user cannot fix.
+- **Never run an installer** — no `pip`, `uv`, `npm`, `brew` or virtual environment, and not
+  even where it would succeed. What you install exists only on the machine you are on; the
+  person receiving this document is in a container where nothing can be installed.
+- **`pymupdf` / `fitz` is forbidden** even when already present: absent from that container,
+  and AGPL.
+- **No headless browser and no HTML-to-PDF converter.**
 - Verify by **rendering a page to an image and looking at it**. A PDF that opens is not a PDF
   that is correct.
 
