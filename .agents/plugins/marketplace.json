@@ -14,7 +14,13 @@
         "installation": "AVAILABLE",
         "authentication": "ON_USE"
       },
-      "category": "Productivity"
+      "category": "Productivity",
+      "skills": [
+        "./skills/formify-pdf-forms",
+        "./skills/formify-send-contract",
+        "./skills/formify-verify-identity",
+        "./skills/formify-track-signatures"
+      ]
     },
     {
       "name": "formify-real-estate",

@@ -84,6 +84,15 @@ for (const p of market.plugins) {
     }
   }
 
+  // An entry whose source is the marketplace root MUST list its own subdirectories.
+  // Documented: "Adds to the default: skills. The default skills/ directory is always
+  // scanned ... Exception: for a marketplace entry whose source resolves to the marketplace
+  // root, declaring specific subdirectories replaces the default skills/ scan." Without the
+  // entry's own list the exception never fires, the default scan runs, and the plugin loads
+  // every skill in the tree — including every sector.
+  if (rootDir === "." && !(p.skills ?? []).length) {
+    fail(`.claude-plugin/marketplace.json: entry "${p.name}" has source "./" and declares no skills[] — the default skills/ scan then loads every skill in the tree, sectors included`);
+  }
   const declared = [...(p.skills ?? []), ...(p.strict === false ? [] : manifest?.skills ?? [])];
   if (declared.length === 0) fail(`.claude-plugin/marketplace.json: entry "${p.name}" resolves to no skills at all`);
 

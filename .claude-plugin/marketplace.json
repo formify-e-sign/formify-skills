@@ -25,6 +25,12 @@
         "identity-verification",
         "kyc",
         "bankid"
+      ],
+      "skills": [
+        "./skills/formify-pdf-forms",
+        "./skills/formify-send-contract",
+        "./skills/formify-verify-identity",
+        "./skills/formify-track-signatures"
       ]
     },
     {
