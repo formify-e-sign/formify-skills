@@ -2,6 +2,7 @@
   "//": "Files written once here and copied into each skill that needs them at build time. The Agent Skills specification has no skill-to-skill references and every upload surface takes one self-contained skill per zip, so a shared file must be duplicated on disk — but authored once.",
   "references/tink-attributes.md": [
     "formify-pdf-forms",
+    "formify-real-estate",
     "formify-verify-identity"
   ]
 }

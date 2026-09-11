@@ -71,7 +71,10 @@ Try them in this order and say which one you used:
    **Requesting a new staged upload replaces any active one for that user.** Stage and
    consume one file completely before starting the next, or the earlier one is lost.
 3. **Base64**, when the complete untruncated bytes are available here. This is supported.
-   It needs the filename alongside it.
+   It needs the filename alongside it. **Verify the bytes are complete before sending them.**
+   Assistants routinely truncate long strings, and a truncated base64 payload uploads a
+   corrupt PDF that fails silently rather than erroring — prefer route 1 or 2 whenever either
+   is available.
 
 The ceiling is 50 MB per file.
 
@@ -94,6 +97,12 @@ If there are editable fields, ask the one question that matters:
 
 A value you fill is locked for the signer. Blanks are left for them.
 
+**Locking is not automatic — you have to ask for it.** The read-only mode for fields defaults
+to keeping whatever the original PDF had, which leaves your pre-filled values editable. Set the
+mode to the one that locks filled fields **whenever you supply any field value**; otherwise a
+signer can quietly change the price you just wrote. The third mode, which locks every field
+including the blanks, is for a document nobody is meant to complete.
+
 **Use the exact field names the API returned.** Never construct or guess one.
 
 **Value format — two rules, and breaking either fails the send:**
@@ -113,6 +122,13 @@ platform supports.
 
 Delivery channel, gated on capabilities: email is always available; SMS needs `deliverySms`;
 WhatsApp needs `deliveryWhatsapp`.
+
+**A document takes at most 18 signees.** A larger signing — a board resolution, a residents'
+association — is several documents, and it is better to say so while collecting names than to
+fail at the send.
+
+A personal message may run to 500 characters, but **keep it under about 250 for SMS and
+WhatsApp**, where the rest is what gets cut off on the recipient's phone.
 
 If the user wants to distribute the links themselves rather than have Formify invite anyone,
 suppress the invitation when creating the document, then hand over the personal links with
@@ -206,6 +222,34 @@ PDF. Two ways to present it; pick by what this environment can do:
 If neither works, say so plainly and offer to send without a preview — but say what is being
 skipped.
 
+**Check what came back before showing it.** This is the most common bug in this flow, and it
+is invisible: the user confirms a document that is not the one being sent.
+
+- The file must begin with the bytes `%PDF`. An expired or blocked link returns an HTML error
+  page, which saves happily under a `.pdf` name.
+- It must be larger than about a kilobyte. A near-empty file is a failed download.
+- Give the preview its own filename, distinct from the uploaded source — something like
+  `<title>-formify-preview.pdf`. Showing the source PDF back instead of the rendered draft
+  produces a confident "looks right" about a document whose signature boxes are elsewhere.
+
+**A preview link is spent once.** After any update to the draft, the previous link no longer
+works: fetch a new one before showing the document again.
+
+**A field with no valid coordinates does not appear in the preview, but is still in the
+draft.** So an incompletely placed signature field is invisible in exactly the step meant to
+catch it. If a field you configured is missing from the rendered page, do not assume it was
+dropped — check its page, x and y before re-adding it.
+
+### The user does not have to send
+
+When the preview comes back, the honest menu has more than two entries. Offer what is
+actually reachable: send it now, **save it as a draft and stop**, move a signature, change the
+signers, regenerate the document, or discard it.
+
+"Save as draft" is a real product state, not a soft no — the draft survives, and the user
+keeps its identifier to come back to. Do not send it, and do not delete it. A user who says
+"not now" has chosen that state, and modelling it as "discard" throws away their work.
+
 Two things about drafts worth knowing:
 
 - **Drafts work from an uploaded file, not from a template.** A template cannot be previewed
@@ -234,8 +278,17 @@ Three settings to establish before that:
   Ask only when the capability is present; never offer it otherwise. It travels with the
   document and answers the recipient's questions about it, highlighting the passage it is
   answering about, so they do not have to ask the sender or paste the contract elsewhere.
-  Pass it as `aiAssistant: { enabled, textToSpeech, language }` — `textToSpeech` reads the
-  answers aloud and defaults to off, and `language` defaults to the invitation language.
+
+  Three settings, and **it is off unless you switch it on**: whether it is enabled at all,
+  whether it reads its answers aloud (off unless asked — worth offering to anyone signing on
+  a phone, or to a signer who finds long documents hard to read), and the language it speaks.
+
+  **The assistant's language is not the invitation's.** The invitation is a closed list of
+  three; the assistant takes any language and simply defaults to English if you say nothing.
+  So a Croatian, Dutch or German signer can be talked through the contract in their own
+  language even though their invitation email cannot be written in it. Set it deliberately —
+  the default is English, not the signer's language and not the document's.
+
   Say what it does when offering it. Users do not know this exists, and it is the single
   capability most likely to save the sender a week of email.
 
@@ -255,7 +308,10 @@ job ended at the send.
 
 | What you see | What it means | What to do |
 |---|---|---|
-| Upload command blocked by network or allowlist | The environment blocks outbound requests to the upload host | Do not retry. Say what blocked it, then use the URL route or base64. |
+| Upload command blocked by network or allowlist | The environment blocks outbound requests to the upload host | Do not retry. Name the wall **and the door** — see below. Then use the URL route or base64. |
+| A preview downloaded, but does not open | An HTML error page was saved under a `.pdf` name | Check for the `%PDF` header before showing anything. Fetch a fresh link and retry once. |
+| The preview link stopped working | It was consumed, or the draft was updated | Request a new one. Links are single-use and expire in ten minutes. |
+| More than 18 signers rejected | A document takes at most 18 signees | Split the signing across several documents. |
 | Send rejected, 400 on fields | A checkbox, dropdown or list box was sent as a string, or a field was sent as `""` | Wrap in an array; omit empty values. |
 | Signature landed in the corner of the page | A decimal coordinate was discarded | Send whole numbers. |
 | Signature covers the text | The field is opaque | Move it to clear space. Where there is none, shrink it with a scale factor between 0.25 and 1.5 — never leave it overlapping. |
@@ -264,6 +320,24 @@ job ended at the send.
 | A template will not preview | Drafts require an uploaded file | Send it directly, or upload the PDF separately to preview. |
 | An invitation language was refused | Only English, Swedish and Spanish exist | Offer the document in their language instead. |
 | The account lacks a channel or method | Capability off | Name it, say what it does, offer the best available alternative. |
+
+### When the environment blocks the upload, name the door
+
+A sandbox that refuses outbound requests is the single most likely hard stop a first-time user
+hits, and it kills both halves of this flow — the staged upload on the way in, the preview
+download on the way out. Telling them "something blocked it" leaves a non-technical person
+with nowhere to go.
+
+Say instead, in their language, that this assistant is not yet allowed to reach Formify's
+document host, and that they can allow it themselves in the app's settings: the code-execution
+or connector settings carry a **domain allowlist**, and either adding the document host shown
+in the error or choosing the "all domains" option opens it. The host is entered as a bare
+hostname — no `https://`, no path, no trailing slash. After saving, the send can be retried
+from where it stopped; nothing already done is lost.
+
+Offer the URL route in the same breath, because it needs no allowlist at all. Never paste the
+raw document-host download URL as a clickable link — it is machinery, not something a user
+should be asked to click.
 
 ## References
 

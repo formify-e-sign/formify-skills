@@ -136,6 +136,23 @@ uploaded file's name appears nowhere in the document.
 `tink-format-mobile` (Swedish mobile format) · `tink-format-email` ·
 `tink-style-transparent` (draws no chrome). None take an index.
 
+### Formatting is not verification — and they are usually wanted together
+
+These two pairs look alike, sit next to each other in this catalogue, and do completely
+different things. Confusing them is the most common way a "verified" field turns out not to be.
+
+| The user asks for | Checks the value **looks** right | Checks the person **holds** it |
+|---|---|---|
+| A phone number | `tink-format-mobile` | `tink-sms-verification` |
+| An email address | `tink-format-email` | `tink-email-verification` |
+
+The formatting attribute shapes what is typed. The verification attribute sends a one-time code
+to that address or number and requires it back before signing — proving the signer can actually
+receive there.
+
+When someone says "a verified phone number", ask which they mean, and offer both: they are
+routinely combined on the same field, and each is useless as a substitute for the other.
+
 Do not put `tink-style-transparent` on a field that nothing fills. It draws nothing and
 stays empty, which is a blank space no one can explain.
 
@@ -144,12 +161,12 @@ stays empty, which is a blank space no one can explain.
 | Attribute | What it does |
 |---|---|
 | `tink-date-now` | Auto-fills the signing date, ISO 8601 |
-| `tink-input-fullname` | The signer's full name |
-| `tink-email-recipient` | The recipient's email |
-| `tink-sign-and-pay-email[index]` | The only indexed attribute that is not part of a scan group |
-| `tink-search-{label}` / `tink-search-firstname` / `tink-search-lastname` | Lookup field; `{label}` is the one customisable part of this entire catalogue |
+| `tink-input-fullname` | The name the signer types, which becomes the **visible signature name** on the document — not an ordinary name box |
+| `tink-email-recipient` | The address that **receives the completed document** once everyone has signed. It is a delivery instruction, not a contact detail. |
+| `tink-sign-and-pay-email[index]` | Prefills the email used for the Sign & Pay flow. The only indexed attribute that is not part of a scan group. |
+| `tink-search-{label}` / `tink-search-firstname` / `tink-search-lastname` | Makes the value **findable in Formify's document overview**, so this document can later be located by what was typed here. `{label}` is the one customisable part of this entire catalogue. |
 | `tink-share-sms-phonenumber` / `tink-share-email-emailaddress` | Prefills a public-sharing recipient. **This does not send an invitation** — invitations are configured when the document is sent, not in a field. |
-| `tink-access-document` | Document access action |
+| `tink-access-document` | Grants access to the document **before it is finalised**, and only through public links. It must be paired with `tink-email-verification` or `tink-sms-verification`; alone it opens the document to anyone holding the link. |
 
 ---
 
@@ -162,9 +179,30 @@ or only when a signer reaches it.
 2. **Two fields with the same name are one field to Formify.** Two boxes both named `Date`
    fill from a single keystroke. Every field name must be unique across the document.
 3. **Set the read-only flag on the widget itself** for every trigger and every captured
-   value. Sixteen attributes in this catalogue are marked as forbidding manual entry. A
-   scan trigger without the flag is an ordinary text box with a long name: the signer
-   clicks in and types, and what should have been a scan button never reads as a control.
+   value. A scan trigger without the flag is an ordinary text box with a long name: the
+   signer clicks in and types, and what should have been a scan button never reads as a
+   control.
+
+   **Exactly sixteen attributes forbid manual entry.** These, and no others:
+
+   - the three company-verification triggers — `tink-orgnumber-verification[i]`,
+     `-boardmember[i]`, `-kyc[i]`;
+   - the four scan triggers — `tink-scan-id[i]`, `-basic[i]`, `-passport[i]`,
+     `-passport-basic[i]`;
+   - the five scanned **image** fields — `tink-scanned-id-portrait[i]`, `-signature[i]`,
+     `-ghostportrait[i]`, `-documentrear[i]`, `-barcode[i]`;
+   - the attachment pair — `tink-upload-attachment[i]`, `tink-uploaded-attachmentname[i]`;
+   - the two one-time-code triggers — `tink-email-verification`, `tink-sms-verification`.
+
+   Two groups that look like they belong here and do not: the **MRZ text fields**
+   (`tink-scanned-id-mrz-*`) and the **`tink-verified-orgnumber-*` fields**. They are
+   auto-populated, not manual-entry-forbidden. Marking them read-only is still the sensible
+   default, but it is a choice, not a catalogue rule.
+
+   Everything the signer types must stay writable: `tink-input-fullname`,
+   `tink-email-recipient`, `tink-sign-and-pay-email[i]`, `tink-search-*`, both `tink-share-*`
+   attributes and the two `tink-format-*` attributes. Read-only on one of those produces a
+   field nobody can complete.
 4. **A signature is never a form field.** Formify's signing overlay is painted in that
    zone; a widget or a printed line collides with it. Leave the space empty and let the
    signing configuration place the signature.

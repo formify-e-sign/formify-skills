@@ -1,11 +1,31 @@
 {
   "name": "formify",
-  "interface": { "displayName": "Formify" },
+  "interface": {
+    "displayName": "Formify"
+  },
   "plugins": [
     {
       "name": "formify",
-      "source": { "source": "local", "path": "./" },
-      "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    },
+    {
+      "name": "formify-real-estate",
+      "source": {
+        "source": "local",
+        "path": "./plugins/formify-real-estate"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
       "category": "Productivity"
     }
   ]

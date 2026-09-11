@@ -1,6 +1,6 @@
 ---
 name: formify-track-signatures
-description: 'Track who has signed, remind them, fix a recipient or cancel a send. Use after a document went out for signature and has not come back, when contact details were wrong, or when the signed copy is needed. Triggers on "who has signed", "send a reminder", "wrong email address", "cancel the signing", "revoke a document", "download the signed copy", "vem har signerat", "påminnelse", "återkalla", "quién ha firmado". Not for sending in the first place: see formify-send-contract.'
+description: 'Track who has signed, remind them, get notified automatically when they do, fix a wrong recipient, or cancel a send. Use after a document went out for signature, when contact details were wrong, or when the signed copy is needed. Triggers on "who has signed", "send a reminder", "notify me when signed", "wrong email address", "cancel the signing", "download the signed copy", "vem har signerat", "påminnelse", "återkalla", "quién ha firmado". Not for sending: see formify-send-contract.'
 license: MIT
 metadata:
   version: "1.1.0"
@@ -27,6 +27,7 @@ following week.
 - "The amount is wrong and nobody has signed yet."
 - "The deal is off, cancel it."
 - "Send me the signed copy."
+- "Just tell me when it's signed — I don't want to keep checking."
 
 ## When it does not
 
@@ -149,6 +150,38 @@ minutes**, so fetch it when the user is ready to use it, not earlier in the conv
 
 Offer it before it is asked for. A completed signature that nobody downloaded is a job left
 half done.
+
+### 8. Stop checking — have Formify say when it happens
+
+Everything above is the user asking. Formify can tell them instead, and nothing in this skill
+is more worth offering, because it is the difference between a person remembering to check and
+a person being told.
+
+Formify can call a web address of the user's whenever something happens to a document. Six
+things can be reported: the document was **created**, **opened** by a signer, **signed** by
+someone, **completed** by everyone, **revoked**, or **deleted**. A subscription can ask for
+any combination of them.
+
+Offer this the moment someone says any version of *"let me know when it's signed"*, *"I keep
+having to check"*, or *"can this land in our system automatically"*. Three questions settle it:
+
+1. **Where should it go?** It must be a public web address reachable over HTTPS — their own
+   system, their site, or an automation service they already use. A private network address
+   or a plain HTTP one will not be accepted. If they have none of these, say so plainly and
+   leave it; do not send them off to build one.
+2. **Which events?** Most people want completion only. Offer per-signer events when several
+   people sign and they want progress, not just the end.
+3. **Do they want a reminder set up too?** The two work together: one tells them, the other
+   chases the signer.
+
+Each subscription is created with a signing secret, which is how the receiving system knows a
+message really came from Formify. Give the secret to the user once, tell them their system
+must check it, and say that it can be rotated if it is ever exposed. Existing subscriptions can
+be listed and removed the same way — worth checking before adding a second one that duplicates
+the first.
+
+**Say what this replaces.** After it is set up, tell the user they no longer need to ask you
+whether it has been signed. That sentence is the whole value of the step.
 
 ## Failure modes
 

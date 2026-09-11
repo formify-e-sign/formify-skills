@@ -56,7 +56,45 @@ three sentences, in their language — and offer concrete openings:
 >
 > Shall we start from a document you already have, or build one from scratch?
 
-Do not open with a questionnaire. One question at a time, throughout.
+### 1b. Ask once, in one message — or not at all
+
+How much to ask is decided by how specific the request was, and there are only two answers.
+
+**The request is already specific** — *"mutual NDA, English, Swedish law, two signers"*. Ask
+nothing. Draft it. A confident draft the user corrects beats an interview they have to sit
+through.
+
+**The request is generic** — *"make an NDA"*, *"I need a contract"*. Reply with **one message
+carrying three to five numbered questions**, answered once, and then draft. Never spread the
+same questions over several turns: each round trip is a chance for the user to give up, and
+five questions asked one at a time is five chances. Three to five is the range because a
+sixth question is a form, and nobody fills in a form to get a form.
+
+Pin down only what changes the document: who the parties are, what it must contain that a
+standard version would not, which fields the recipient fills and which are mandatory, anything
+legally required. If the user answers only some of them or says "just go ahead", draft with
+what you have and say which assumptions you made.
+
+**An ID scan is a control, never a text field.** When someone asks to scan an ID or a
+passport, that is settled — do not turn it into a box to type a number into. But two things
+are usually left open, and both belong in the same intake message: should the scan
+automatically fill the identity details the form needs, and should the finished PDF show the
+person's **portrait**, the **document front**, or **no image at all**. Explain in one line
+that these are scan-powered fields rather than ordinary inputs; most people do not know such
+a thing exists.
+
+**Offer the extra that fits this form, and only that one.** One tailored question in the same
+message — not a catalogue:
+
+| The form is about | Offer |
+|---|---|
+| Damage, repair, a claim, an inspection | An upload for supporting photos or evidence |
+| Recruitment, employment, an application | An upload for a CV or certificates |
+| Anything else, only when it clearly fits | An ID or passport scan, an attachment upload, or email/phone confirmation |
+
+Add only what the answer asks for. And when labelling an upload, you may name the file you
+expect — *"Upload your CV"* — but **never promise that Formify restricts the file type**. The
+control accepts an attachment; it does not enforce what kind.
 
 ### 2. Establish the document
 
@@ -107,9 +145,20 @@ The three rules that most often produce a document that looks perfect and does n
 Use whatever this environment actually offers, in descending order of quality. Say which
 one you used.
 
+**If the user brought their own PDF, do not rebuild it.** Add fields to their file and change
+nothing else — their wording was approved by someone, their letterhead is theirs, and a redrawn
+lookalike is not the document they asked to sign. That path has traps that produce a file which
+looks finished and carries no fields at all: open `references/existing-pdf.md` before starting.
+
+For a document being written from scratch:
+
 1. **A document-authoring capability available here** — use it, and set the field flags
    explicitly rather than trusting defaults.
-2. **A local PDF library or renderer**, if code execution is available.
+2. **A PDF library, if code execution is available.** Assistant sandboxes generally carry
+   `reportlab`, `pypdf`, `pdfplumber` and `pypdfium2`, and generally have no browser and no
+   network — so write the code against those and never depend on something that must be
+   installed or fetched. Then render a page to an image and look at it; a PDF that opens is
+   not a PDF that is correct.
 3. **Hand over the document plus a complete field specification** — the text, and for every
    field its label, kind, options, required flag and any `tink-*` attributes. This is a real
    deliverable: someone else, or another tool, can finish it, and nothing has been lost.
@@ -142,6 +191,17 @@ A finished form is not the end of the job the user came for. Close on the offer:
 > Do you want me to send this for signature? I can collect the signers and, if you need it,
 > require BankID or an ID scan before they sign.
 
+**Mention the assistant that can travel with the document.** On accounts that have it, Formify
+can attach an AI assistant to the document itself: it answers the recipient's questions while
+they read, highlights the passage it is answering about, will read its answers aloud if asked,
+and speaks whatever language the signer does — not only the three the invitation is limited to.
+
+Name it here, while the user is still thinking about the document, because this is the moment
+they understand what it would be for. Most people have never heard of such a thing and will
+not ask for it. It is what stops a confused signer from either stalling or pasting the contract
+into some other chatbot. Whether the account has it is checked at sending time, in
+`formify-send-contract` — so offer it as something worth asking for, not as a promise.
+
 ## Failure modes
 
 | What you see | What it means | What to do |
@@ -162,3 +222,8 @@ A finished form is not the end of the job the user came for. Close on the offer:
   an attribute from memory.
 - **`references/signature-space.md`** — how much room a signature needs and how placement is
   chosen at sending time. Open it when the user wants the signature in a specific position.
+- **`references/existing-pdf.md`** — adding fields to a PDF the user already has: the merging
+  trap that silently drops every field, page-pointer repair, appearance streams, embedding a
+  font that can hold Croatian or Polish characters, finding coordinates from the text, covering
+  printed placeholders, and the field-behaviour flags. Open it whenever the input is the user's
+  own file rather than a document being written here.

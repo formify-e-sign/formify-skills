@@ -18,6 +18,16 @@ const fail = (m) => problems.push(m);
 const root = read("plugin.json");
 const NAME = root.name;
 
+// A sector skill is one whose frontmatter declares the countries it covers. The core
+// plugin must never list one: a construction engineer installs the construction plugin
+// and pays no context for real estate. Sector plugins bundle the capability skills so
+// they still work on their own.
+const isSector = (skill) => {
+  const t = readFileSync(join("skills", skill, "SKILL.md"), "utf8");
+  const fm = t.match(/^---\n([\s\S]*?)\n---\n/);
+  return fm ? /^\s{2}countries:\s*\S/m.test(fm[1]) : false;
+};
+
 // 1. Every manifest agrees on the plugin name. Version agreement is checked by
 // scripts/release.mjs --check, which owns every place a version is written.
 const named = [
@@ -39,7 +49,8 @@ for (const k of Object.keys(root)) {
   if (!ALLOWED.has(k)) fail(`plugin.json: "${k}" is not part of Agent Plugins 1.0.0 — skills and mcpServers belong in the per-harness manifests`);
 }
 
-// 3. Every skill on disk is listed everywhere a list exists, and vice versa.
+// 3. Every skill on disk is reachable through some plugin, no plugin points at a skill
+// that is not there, and the core plugin stays scoped to the capability layer.
 const onDisk = readdirSync("skills", { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .map((d) => d.name)
@@ -47,20 +58,36 @@ const onDisk = readdirSync("skills", { withFileTypes: true })
 
 // Components are declared in exactly one place. Claude Code refuses to load a plugin
 // whose plugin.json and marketplace entry both specify them.
-for (const k of ["skills", "mcpServers", "commands", "agents", "hooks"]) {
-  if (entry && k in entry) {
-    fail(`.claude-plugin/marketplace.json: entry declares "${k}" — components belong in .claude-plugin/plugin.json alone, or the plugin fails to load with "conflicting manifests"`);
+for (const p of market.plugins) {
+  for (const k of ["skills", "mcpServers", "commands", "agents", "hooks"]) {
+    if (k in p) {
+      fail(`.claude-plugin/marketplace.json: entry "${p.name}" declares "${k}" — components belong in the plugin's own .claude-plugin/plugin.json alone, or the plugin fails to load with "conflicting manifests"`);
+    }
   }
 }
 
-const listed = (arr) => (arr ?? []).map((p) => p.replace(/^\.\/skills\//, "").replace(/\/$/, "")).sort();
-for (const [file, arr] of [
-  [".claude-plugin/plugin.json", read(".claude-plugin/plugin.json").skills],
-]) {
-  const got = listed(arr);
-  if (got.join(",") !== onDisk.join(",")) {
-    fail(`${file}: skill list ${JSON.stringify(got)} does not match skills/ ${JSON.stringify(onDisk)}`);
+const skillName = (p) => p.replace(/\/$/, "").split("/").pop();
+const reachable = new Set();
+
+for (const p of market.plugins) {
+  const src = typeof p.source === "string" ? p.source : p.source?.path;
+  if (!src) { fail(`.claude-plugin/marketplace.json: entry "${p.name}" has no usable source`); continue; }
+  const manifestPath = join(src.replace(/^\.\//, "") || ".", ".claude-plugin", "plugin.json");
+  if (!existsSync(manifestPath)) { fail(`${p.name}: ${manifestPath} does not exist`); continue; }
+  const m = read(manifestPath);
+  if (m.name !== p.name) fail(`${manifestPath}: name ${m.name} != marketplace entry ${p.name}`);
+  for (const rel of m.skills ?? []) {
+    const s = skillName(rel);
+    if (!onDisk.includes(s)) { fail(`${manifestPath}: lists ${rel}, which is not a directory under skills/`); continue; }
+    reachable.add(s);
+    if (p.name === NAME && isSector(s)) {
+      fail(`${manifestPath}: the core plugin lists the sector skill "${s}" — sector skills belong to their own plugin, or every user carries every vertical`);
+    }
   }
+}
+
+for (const s of onDisk) {
+  if (!reachable.has(s)) fail(`skills/${s} is listed by no plugin in .claude-plugin/marketplace.json — it would never be installed`);
 }
 
 // 4. Every skill has the files it promises.
@@ -114,6 +141,11 @@ const urls = [
   ["mcp.json", read("mcp.json").mcpServers.formify.url],
   [".mcp.json", read(".mcp.json").mcpServers.formify.url],
 ];
+for (const p of market.plugins) {
+  const src = typeof p.source === "string" ? p.source : p.source?.path;
+  const f = join((src ?? ".").replace(/^\.\//, "") || ".", ".mcp.json");
+  if (f !== ".mcp.json" && existsSync(f)) urls.push([f, read(f).mcpServers.formify.url]);
+}
 for (const [file, u] of urls) if (u !== URL) fail(`${file}: MCP url ${u} != ${URL}`);
 
 // 6. Every file a manifest points at is inside the npm allowlist. A path that
@@ -136,4 +168,4 @@ if (problems.length) {
   console.error("Manifest check failed:\n" + problems.map((p) => "  - " + p).join("\n"));
   process.exit(1);
 }
-console.log(`Manifests consistent: ${NAME}, ${onDisk.length} skills (${onDisk.join(", ")})`);
+console.log(`Manifests consistent: ${market.plugins.length} plugins (${market.plugins.map((p) => p.name).join(", ")}), ${onDisk.length} skills (${onDisk.join(", ")})`);

@@ -3,14 +3,27 @@
   "notGrouped": "bottom",
   "groupings": [
     {
+      "title": "Estate agency",
+      "description": "The documents a property agency signs, correct for the country.",
+      "skills": [
+        "formify-real-estate"
+      ]
+    },
+    {
       "title": "Prepare a document",
       "description": "Works without a Formify account.",
-      "skills": ["formify-pdf-forms"]
+      "skills": [
+        "formify-pdf-forms"
+      ]
     },
     {
       "title": "Get it signed",
       "description": "Sending, identity verification, and everything that follows.",
-      "skills": ["formify-send-contract", "formify-verify-identity", "formify-track-signatures"]
+      "skills": [
+        "formify-send-contract",
+        "formify-verify-identity",
+        "formify-track-signatures"
+      ]
     }
   ]
 }
