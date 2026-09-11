@@ -1,14 +1,32 @@
 {
   "//": "Every place a version lives. scripts/release.mjs is the only thing that writes them.",
   "files": [
-    { "path": "plugin.json", "field": "version" },
-    { "path": ".claude-plugin/plugin.json", "field": "version" },
-    { "path": ".claude-plugin/marketplace.json", "field": "plugins.0.version" },
-    { "path": ".codex-plugin/plugin.json", "field": "version" },
-    { "path": "package.json", "field": "version" }
+    {
+      "path": "plugin.json",
+      "field": "version"
+    },
+    {
+      "path": ".claude-plugin/plugin.json",
+      "field": "version"
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "field": "version"
+    },
+    {
+      "path": "package.json",
+      "field": "version"
+    },
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "field": "plugins.*.version"
+    }
   ],
   "//skills": "Frontmatter version in every skill. A glob, not a list, so adding a skill needs no edit here.",
-  "skills": { "glob": "skills/*/SKILL.md", "field": "metadata.version" },
+  "skills": {
+    "glob": "skills/*/SKILL.md",
+    "field": "metadata.version"
+  },
   "audit": {
     "//": "--audit greps the repo for the previous version string. Anything matched here is expected to carry it.",
     "exclude": [

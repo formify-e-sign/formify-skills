@@ -1,0 +1,7 @@
+interface:
+  display_name: "Formify for Estate Agents"
+  short_description: "Estate-agency documents, correct for the country"
+  default_prompt: "Use $formify-real-estate to prepare a contrato de arras for a flat in Palma with a Dutch buyer."
+
+policy:
+  allow_implicit_invocation: true

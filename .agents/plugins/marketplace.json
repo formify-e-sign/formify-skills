@@ -20,13 +20,20 @@
       "name": "formify-real-estate",
       "source": {
         "source": "local",
-        "path": "./plugins/formify-real-estate"
+        "path": "./"
       },
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_USE"
       },
-      "category": "Productivity"
+      "category": "Productivity",
+      "skills": [
+        "./skills/formify-real-estate",
+        "./skills/formify-pdf-forms",
+        "./skills/formify-send-contract",
+        "./skills/formify-verify-identity",
+        "./skills/formify-track-signatures"
+      ]
     }
   ]
 }

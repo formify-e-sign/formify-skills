@@ -63,8 +63,19 @@ const skillPlace = (path, field) => {
   };
 };
 
+// A field may carry one `*` segment, which fans out over an array. Every marketplace entry
+// has its own version, and a list would silently miss the next one added.
+function expand(entry) {
+  if (!entry.field.includes("*")) return [entry];
+  if (!existsSync(entry.path)) return [entry];
+  const [before] = entry.field.split(".*.");
+  const arr = dig(JSON.parse(readFileSync(entry.path, "utf8")), before);
+  if (!Array.isArray(arr)) return [entry];
+  return arr.map((_, i) => ({ ...entry, field: entry.field.replace(".*.", `.${i}.`) }));
+}
+
 function places() {
-  const out = cfg.files.map(jsonPlace);
+  const out = cfg.files.flatMap(expand).map(jsonPlace);
   if (cfg.skills) {
     const [dir, , file] = cfg.skills.glob.split("/");
     for (const d of readdirSync(dir, { withFileTypes: true })) {

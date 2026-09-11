@@ -51,20 +51,16 @@ for (const k of Object.keys(root)) {
 
 // 3. Every skill on disk is reachable through some plugin, no plugin points at a skill
 // that is not there, and the core plugin stays scoped to the capability layer.
+//
+// The shape is the one Anthropic's own `anthropics/skills` uses and the plugin-marketplace
+// documentation describes: several entries share `"source": "./"`, and each entry lists the
+// subdirectories it owns — "the listed paths are the complete set for that entry, and other
+// directories in the shared skills/ folder don't load". An entry that lists nothing falls
+// through to its plugin.json.
 const onDisk = readdirSync("skills", { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .map((d) => d.name)
   .sort();
-
-// Components are declared in exactly one place. Claude Code refuses to load a plugin
-// whose plugin.json and marketplace entry both specify them.
-for (const p of market.plugins) {
-  for (const k of ["skills", "mcpServers", "commands", "agents", "hooks"]) {
-    if (k in p) {
-      fail(`.claude-plugin/marketplace.json: entry "${p.name}" declares "${k}" — components belong in the plugin's own .claude-plugin/plugin.json alone, or the plugin fails to load with "conflicting manifests"`);
-    }
-  }
-}
 
 const skillName = (p) => p.replace(/\/$/, "").split("/").pop();
 const reachable = new Set();
@@ -72,22 +68,49 @@ const reachable = new Set();
 for (const p of market.plugins) {
   const src = typeof p.source === "string" ? p.source : p.source?.path;
   if (!src) { fail(`.claude-plugin/marketplace.json: entry "${p.name}" has no usable source`); continue; }
-  const manifestPath = join(src.replace(/^\.\//, "") || ".", ".claude-plugin", "plugin.json");
-  if (!existsSync(manifestPath)) { fail(`${p.name}: ${manifestPath} does not exist`); continue; }
-  const m = read(manifestPath);
-  if (m.name !== p.name) fail(`${manifestPath}: name ${m.name} != marketplace entry ${p.name}`);
-  for (const rel of m.skills ?? []) {
+  const rootDir = (src.replace(/^\.\//, "") || ".");
+  const manifestPath = join(rootDir, ".claude-plugin", "plugin.json");
+  const manifest = existsSync(manifestPath) ? read(manifestPath) : null;
+
+  // Strict mode, per the documentation: with `strict: false` the entry is the whole
+  // definition, and a plugin.json that also declares components is a conflict that stops
+  // the plugin loading. With the default `strict: true` the two are merged, so an entry
+  // may legitimately add skills on top.
+  if (p.strict === false && manifest) {
+    for (const k of ["skills", "mcpServers", "commands", "agents", "hooks"]) {
+      if (k in manifest) {
+        fail(`.claude-plugin/marketplace.json: entry "${p.name}" sets "strict": false while ${manifestPath} declares "${k}" — that is a conflict and the plugin fails to load`);
+      }
+    }
+  }
+
+  const declared = [...(p.skills ?? []), ...(p.strict === false ? [] : manifest?.skills ?? [])];
+  if (declared.length === 0) fail(`.claude-plugin/marketplace.json: entry "${p.name}" resolves to no skills at all`);
+
+  for (const rel of declared) {
     const s = skillName(rel);
-    if (!onDisk.includes(s)) { fail(`${manifestPath}: lists ${rel}, which is not a directory under skills/`); continue; }
+    if (!onDisk.includes(s)) { fail(`entry "${p.name}": lists ${rel}, which is not a directory under skills/`); continue; }
     reachable.add(s);
     if (p.name === NAME && isSector(s)) {
-      fail(`${manifestPath}: the core plugin lists the sector skill "${s}" — sector skills belong to their own plugin, or every user carries every vertical`);
+      fail(`entry "${p.name}": the core plugin resolves the sector skill "${s}" — sector skills belong to their own entry, or every user carries every vertical`);
     }
   }
 }
 
 for (const s of onDisk) {
   if (!reachable.has(s)) fail(`skills/${s} is listed by no plugin in .claude-plugin/marketplace.json — it would never be installed`);
+  // A vertical must be opt-in on the npx channel: `npx skills add owner/repo` collects every
+  // plugin's skills/ directory regardless of what the manifests scope, and metadata.internal
+  // is the only switch (vercel-labs/skills, src/skills.ts).
+  const t = readFileSync(join("skills", s, "SKILL.md"), "utf8");
+  const fm = t.match(/^---\n([\s\S]*?)\n---\n/);
+  const internal = fm ? /^\s{2}internal:\s*true\s*$/m.test(fm[1]) : false;
+  if (isSector(s) && !internal) {
+    fail(`${s}: a sector skill must carry "internal: true" in its frontmatter metadata, or a bare \`npx skills add\` installs it for every user of every other vertical`);
+  }
+  if (!isSector(s) && internal) {
+    fail(`${s}: a capability skill must not be internal — it is what a bare \`npx skills add\` is meant to deliver`);
+  }
 }
 
 // 4. Every skill has the files it promises.
@@ -135,6 +158,18 @@ for (const s of onDisk) {
   }
 }
 
+// 4b. Every skill carries the per-harness files the others carry. A skill added without
+// them is not broken, it is quietly less installable than its siblings — which is exactly
+// the kind of drift nobody notices until a listing looks wrong.
+for (const s of onDisk) {
+  if (!existsSync(join("skills", s, "agents", "openai.yaml"))) {
+    fail(`${s}: no agents/openai.yaml — every other skill has one, and it is what names the skill on OpenAI surfaces`);
+  }
+  if (!existsSync(join("tests", "evals", s, "evals.json"))) {
+    fail(`${s}: no tests/evals/${s}/evals.json — a skill ships with its trigger and behaviour evals or it ships unverified`);
+  }
+}
+
 // 5. One MCP endpoint, spelled per-harness, never two different URLs.
 const URL = "https://mcp.formify.eu/mcp";
 const urls = [
@@ -162,6 +197,26 @@ for (const [file, ref] of pointed) {
   const rel = ref.replace(/^\.\//, "");
   if (!existsSync(rel)) fail(`${file}: points at ${ref}, which does not exist`);
   else if (!packed(rel)) fail(`${file}: points at ${ref}, which package.json "files" does not publish — it would dangle for anyone installing from npm`);
+}
+
+// 7. No manifest may resolve a path through a symlink. npm silently drops symlinks when it
+// packs, so anything reached through one works from a git clone and is simply absent for
+// every npm and npx install — with no error on either side. Verified by packing the tarball.
+//
+// `.agents/skills` is the one deliberate exception and is allowlisted below: nothing in any
+// manifest resolves through it. It exists so that a cloned checkout already has its skills
+// where the ~22 agents that scan `.agents/skills` will find them, which is a git-clone
+// affordance by definition.
+const SYMLINK_OK = new Set([join(".agents", "skills")]);
+for (const dir of ["skills", ".claude-plugin", ".codex-plugin", ".agents", "assets"]) {
+  const walk = (d) => {
+    for (const e of readdirSync(d, { withFileTypes: true })) {
+      const full = join(d, e.name);
+      if (e.isSymbolicLink() && !SYMLINK_OK.has(full)) fail(`${full} is a symbolic link — npm drops symlinks when packing, so it would be missing for every npm and npx install`);
+      else if (e.isDirectory()) walk(full);
+    }
+  };
+  if (existsSync(dir)) walk(dir);
 }
 
 if (problems.length) {

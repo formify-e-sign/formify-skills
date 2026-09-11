@@ -5,6 +5,7 @@ license: MIT
 metadata:
   version: "1.1.0"
   countries: es
+  internal: true
 ---
 
 # Estate-agency documents

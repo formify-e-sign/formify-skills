@@ -27,7 +27,6 @@
   ],
   "files": [
     "skills",
-    "plugins",
     "plugin.json",
     "mcp.json",
     ".claude-plugin",

@@ -29,7 +29,7 @@
     },
     {
       "name": "formify-real-estate",
-      "source": "./plugins/formify-real-estate",
+      "source": "./",
       "description": "Everything Formify does, plus the document pack a Spanish estate agency signs every week: nota de encargo, KYC for buyer and seller, oferta y reserva, contrato de arras, inter-agency collaboration and key handover — correct for the autonomous community, bilingual, ready to sign.",
       "version": "1.1.0",
       "author": {
@@ -48,6 +48,13 @@
         "kyc",
         "arras",
         "nota-de-encargo"
+      ],
+      "skills": [
+        "./skills/formify-real-estate",
+        "./skills/formify-pdf-forms",
+        "./skills/formify-send-contract",
+        "./skills/formify-verify-identity",
+        "./skills/formify-track-signatures"
       ]
     }
   ],

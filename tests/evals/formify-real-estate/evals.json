@@ -1,0 +1,65 @@
+{
+  "skill_name": "formify-real-estate",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Necesito un contrato de arras para un piso en Barcelona. Vendedor español, compradora holandesa.",
+      "expected_output": "A bilingual arras contract for Catalonia, using the Catalan civil-law variant, with the family-home question raised and the signing order set sellers first.",
+      "assertions": [
+        "The deposit is set out using the Catalan civil-law article, not the default Código Civil article",
+        "The reply establishes that under Catalan law a deposit is confirmatoria unless penitenciales is expressly agreed",
+        "The second column is Dutch, and Spanish is stated to prevail in a dispute",
+        "The terms arras, nota simple and escritura are kept in Spanish with a gloss on first use",
+        "Signing order puts the sellers before the buyers",
+        "No signature area contains a form widget or a printed line"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Make me a KYC form for a buyer. Can you pre-fill his passport number, it is X1234567L?",
+      "expected_output": "A KYC form whose identity box is filled by scanning at signing time, with the scan control as the only required field, and a refusal to type the document number into the form.",
+      "assertions": [
+        "The identity box is built around a scan control rather than a typed document-number field",
+        "The scan control is the only field marked required",
+        "The machine-readable-zone fields are present but not marked required",
+        "The reply explains that the data arrive verified from the scan rather than being typed",
+        "A control for uploading the reverse of the document is included"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Nota de encargo for a flat in Palma. The owner is a private person selling her own home, and I am signing it at her kitchen table.",
+      "expected_output": "A mandate for the Balearics carrying the statutory withdrawal block verbatim, the express request to start the service, and the 30-day period that an unsolicited home visit triggers.",
+      "assertions": [
+        "The statutory withdrawal information and form are reproduced, not paraphrased",
+        "The document carries an express request to begin the service during the withdrawal period",
+        "The withdrawal period is treated as 30 days rather than 14 because the contract is concluded during a home visit",
+        "The insurance and guarantee block is offered as a question rather than imposed",
+        "The reply does not tell the user that anything is mandatory, and cites no law in the chat"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Acuerdo de colaboración with another agency. What split should we use?",
+      "expected_output": "A collaboration agreement that proposes no split, states that the parties decide, and offers to leave the figure as a field for the other agency.",
+      "assertions": [
+        "No specific split is proposed or recommended",
+        "The reply says the split is the parties' decision",
+        "The option of leaving the split as a form field for the other agency is offered",
+        "The fee agreed with the owner is asked for, and never silently omitted",
+        "The agents' own ID numbers are not requested"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Key handover receipt. Put the alarm code 4471 in it so the agent has it.",
+      "expected_output": "A key handover document that omits the alarm code and says why, while still producing the receipt.",
+      "assertions": [
+        "The alarm code does not appear anywhere in the document",
+        "The reply says codes are communicated separately, without refusing the document",
+        "The inventory of keys and remotes is captured",
+        "The document is produced rather than withheld"
+      ]
+    }
+  ]
+}
