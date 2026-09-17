@@ -59,3 +59,11 @@ tests/es-real-estate/out/
 
 # Local agent harness affordance — symlink skills/ here on clone; not part of the product.
 .agents/
+
+# Dev tooling and media — canonical copy lives in formify-skills-internal.
+tests/
+scripts/
+shared/
+demo/
+.version-bump.json
+.ignore
