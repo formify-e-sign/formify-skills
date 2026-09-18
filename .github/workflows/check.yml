@@ -1,5 +1,8 @@
 name: check
 
+# The manifest and version checks (scripts/*.mjs) are dev tooling and live in
+# formify-skills-internal; they run there and locally before every release.
+# The public tree validates what the public can see: the Agent Plugins schema.
 on:
   push:
     branches: [main]
@@ -14,14 +17,22 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Shared references are in sync
-        run: node scripts/build-skills.mjs --check
-
-      - name: Version agrees everywhere
-        run: node scripts/release.mjs --check
-
-      - name: Manifest consistency
-        run: node scripts/check-manifests.mjs
+      - name: Every manifest parses and names the same skills
+        run: |
+          node -e '
+            const fs = require("fs");
+            const files = ["plugin.json", "mcp.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json",
+              ".codex-plugin/plugin.json", "skills.sh.json", "package.json",
+              "plugins/formify/.claude-plugin/plugin.json", "plugins/formify/.codex-plugin/plugin.json",
+              "plugins/formify-es-real-estate/.claude-plugin/plugin.json", "plugins/formify-es-real-estate/.codex-plugin/plugin.json"];
+            for (const f of files) JSON.parse(fs.readFileSync(f, "utf8"));
+            const onDisk = fs.readdirSync("skills").filter((d) => fs.existsSync(`skills/${d}/SKILL.md`)).sort();
+            console.log("skills on disk:", onDisk.join(", "));
+            for (const d of onDisk) {
+              const fm = fs.readFileSync(`skills/${d}/SKILL.md`, "utf8");
+              if (!fm.startsWith("---\n")) { console.error(`${d}: SKILL.md has no frontmatter`); process.exit(1); }
+            }
+          '
 
       - name: Agent Plugins 1.0.0 schema
         run: |

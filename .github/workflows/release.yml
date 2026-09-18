@@ -1,7 +1,7 @@
 name: release
 
 # Tag-driven, so an ordinary push to main can never publish a version.
-# Cut a release with:
+# Cut a release with (scripts/ is dev tooling, kept in formify-skills-internal):
 #   npm run release <version> && npm run check
 #   git commit -am "release <version>" && git tag v<version>
 #   git push && git push origin v<version>
@@ -26,19 +26,32 @@ jobs:
         with:
           node-version: "22"
 
-      - name: The tag matches the version in every manifest and skill
+      # The public tree carries no scripts/, so the version check is inline: the
+      # tag must equal the core version in every core manifest. Sector plugins
+      # (formify-es-real-estate) version independently and are not checked here.
+      - name: The tag matches the core version in every manifest
         run: |
           tagged="${GITHUB_REF_NAME#v}"
-          declared=$(node -p "require('./plugin.json').version")
-          if [ "$tagged" != "$declared" ]; then
-            echo "tag $GITHUB_REF_NAME does not match declared version $declared" >&2
-            echo "run: npm run release $tagged" >&2
-            exit 1
-          fi
-          node scripts/release.mjs --check
-
-      - name: Same checks as every push
-        run: npm run check
+          node -e '
+            const fs = require("fs");
+            const tagged = process.argv[1];
+            const places = [
+              ["plugin.json", "version"],
+              [".claude-plugin/plugin.json", "version"],
+              [".codex-plugin/plugin.json", "version"],
+              ["package.json", "version"],
+              ["plugins/formify/.claude-plugin/plugin.json", "version"],
+              ["plugins/formify/.codex-plugin/plugin.json", "version"],
+            ];
+            const mp = JSON.parse(fs.readFileSync(".claude-plugin/marketplace.json", "utf8"));
+            const core = mp.plugins.find((p) => p.name === "formify");
+            const found = places.map(([f, k]) => [f, JSON.parse(fs.readFileSync(f, "utf8"))[k]]);
+            found.push([".claude-plugin/marketplace.json#formify", core && core.version]);
+            const bad = found.filter(([, v]) => v !== tagged);
+            for (const [f, v] of bad) console.error(`${f}: ${v} != tag ${tagged}`);
+            if (bad.length) { console.error("run: npm run release " + tagged); process.exit(1); }
+            console.log(`version ${tagged} agrees across ${found.length} places`);
+          ' "$tagged"
 
       # One ZIP per skill, attached to the release. This is the only install path
       # for a Claude Desktop or claude.ai user who has no GitHub account: the
