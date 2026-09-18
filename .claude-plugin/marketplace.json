@@ -35,7 +35,7 @@
       "name": "formify-es-real-estate",
       "source": "./plugins/formify-es-real-estate",
       "description": "Formify for Real Estate Agencies (Spain) — Formify Core plus the Spanish estate-agency niche: nota de encargo, buyer/seller KYC, oferta y reserva, contrato de arras, inter-agency collaboration and key handover. Bilingual, region-correct, ready to sign. Includes the full Core skill set — do not install Formify Core as well.",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "author": {
         "name": "Formify",
         "url": "https://formify.eu"

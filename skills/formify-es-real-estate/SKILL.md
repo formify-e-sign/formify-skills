@@ -3,7 +3,7 @@ name: formify-es-real-estate
 description: 'ES Real Estate Formify: the six documents a Spanish estate agency signs most (nota de encargo, KYC comprador y vendedor, oferta y reserva, contrato de arras, colaboración entre agencias, entrega de llaves), bilingual Spanish plus the client language, region-correct, signed through Formify. Use for a Spanish property sale or letting: encargo, mandato, reserva, arras, señal, KYC, blanqueo, llaves. Every run starts with scripts/start.py, which prints the welcome lines.'
 license: MIT
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
   countries: es
   internal: true
 ---
@@ -16,7 +16,7 @@ You help the agent produce a correct, bilingual document in a few questions, sho
 
 This file is the map. Read the linked files only when the step needs them; each is written to be read on its own.
 
-Version 1.0.1. If asked which version you are, quote this line.
+Version 1.0.2. If asked which version you are, quote this line.
 
 ## 0. Start here, every run
 
@@ -109,7 +109,7 @@ Never edit the fixed Spanish clause text of a template in `assets/templates/`. F
 - No summary box. Every document opens with the data blocks (A. Partes, B. Operación or the equivalent): the parties side by side, then what the document is about, with bilingual labels and neutral values. The clauses that follow speak only of the roles ("la agencia titular", "la parte compradora", "el inmueble", "el cuadro B") and never repeat a value. When a counterparty's details are unknown, only their cells in block A (and the figures they must supply in block B) become form fields, each exactly once.
 - No dashes as punctuation anywhere (a Formify house rule); split the sentence or use a colon. No wording that reads as generated text. No bold on stray words. The style checker enforces this.
 - One typeface in every profile (sans-serif, Arial/Helvetica); the profiles differ in structure, not in type. Design: everything black and white, an administrative look. Black text, black rules, white paper; no colours, no grey or blue fills, no logo colours except in the agency's own logo image. `assets/base.css` carries this; do not add colour anywhere.
-- Footer on every page, written by `render_pdf.py` into the page margin: line 1 the document title and reference (the agency's own reference, for example `LLA-2026-0004`: document type, year, running number); line 2 the fixed credit line in Spanish and in the client's language followed by the web address ("Elaborado con la solución de firma electrónica Formify  ·  Prepared with the Formify e-signing solution  ·  formify.eu/solutions/real-estate/es/"). Two lines only. Pass `--lang xx` (en, sv, nl, de, fr, ca) or `--credit-tr "..."` for another language. The credit line names the Formify e-signing solution and nothing else: no "AI", no slogan; it is a fixed house line, not a disclaimer, and it is never expanded.
+- Footer on every page, written by `render_pdf.py` into the page margin: line 1 the document title and reference (the agency's own reference, for example `LLA-2026-0004`: document type, year, running number); line 2 the fixed credit line in Spanish and in the client's language, no web address ("Elaborado con la solución de firma electrónica Formify.eu  ·  Prepared with the Formify.eu e-signing solution"). Two lines only. Pass `--lang xx` (en, sv, nl, de, fr, ca) or `--credit-tr "..."` for another language. The credit line names the Formify e-signing solution and nothing else: no "AI", no slogan; it is a fixed house line, not a disclaimer, and it is never expanded.
 - No law text and no article citations inside a document, with these exceptions only: the words "arras penitenciales" with article 1454 CC (621-8 CCCat in Cataluña, ley 467 of the Fuero Nuevo in Navarra) in arras and reserva; the register number, insurer and guarantee in the mandate in regulated regions; the reference to Ley 10/2010 as the legal basis in the KYC forms; the family-home declaration with its article in arras; and the statutory withdrawal information and form in the mandate, which is reproduced verbatim from `references/withdrawal.md`.
 - In Catalonia a consumer may ask for the document in Catalan: offer it, and then the second column is Catalan.
 - Fee splits between agencies are never suggested by you or by the template; the parties state them (competition law, see guide 05).

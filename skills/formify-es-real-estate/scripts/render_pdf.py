@@ -28,7 +28,7 @@ field (AcroForm, per Formify's pdf-forms recipe) at the measured position; the s
 field with two widgets. Needs pypdf; pdfplumber gives the most reliable positions.
 
 Footer on every page (CSS margin box): line 1 the title and reference; line 2 the credit line in the master
-language and in the client's language plus the web address, both from segment.json ("footer").
+language and in the client's language, from segment.json ("footer"). No web address: addresses do not outlive documents.
 
 PDF engines, in order: Chromium/Chrome headless, WeasyPrint, wkhtmltopdf. Without any of them the full
 HTML is left next to the target and the script exits with code 2. Standard library only; pypdf optional.
@@ -57,7 +57,7 @@ DEFAULT_CSS = os.path.join(HERE, "..", "assets", "base.css")
 
 
 def load_config(path):
-    cfg = {"master_language": "en", "footer": {"credit": {"en": "Prepared with the Formify e-signing solution"}, "url": "formify.eu/solutions/"}}
+    cfg = {"master_language": "en", "footer": {"credit": {"en": "Prepared with the Formify.eu e-signing solution"}}}
     if path and os.path.exists(path):
         try:
             cfg.update(json.load(open(path, encoding="utf-8")))
@@ -466,8 +466,6 @@ def main():
         tr = a.credit_tr or (credits.get(a.lang.lower()[:2], "") if a.lang else "")
         if tr and tr != parts[0]:
             parts.append(tr)
-        if footer.get("url"):
-            parts.append(footer["url"])
         lines.append("  ·  ".join(p for p in parts if p))
     def css_str(t):
         return t.replace("\\", "\\\\").replace('"', '\\"')
@@ -498,7 +496,7 @@ def main():
             print("  " + line, file=sys.stderr)
         spec_path = os.path.splitext(os.path.abspath(a.out))[0] + "-spec.md"
         here = os.path.dirname(os.path.abspath(__file__))
-        credit_line = "  \u00b7  ".join(p for p in ([credits.get(master, "")] + ([a.credit_tr or credits.get(a.lang.lower()[:2], "")] if a.lang or a.credit_tr else []) + [footer.get("url", "")]) if p) if not a.no_credit else ""
+        credit_line = "  \u00b7  ".join(p for p in ([credits.get(master, "")] + ([a.credit_tr or credits.get(a.lang.lower()[:2], "")] if a.lang or a.credit_tr else [])) if p) if not a.no_credit else ""
         cmd = [sys.executable, os.path.join(here, "stdlib_pdf.py"), "--html", a.html, "--signers", a.signers, "--out", a.out,
                "--title", a.title, "--ref", a.ref, "--footer", credit_line, "--labels", json.dumps(labels, ensure_ascii=False)]
         if a.no_signatures:

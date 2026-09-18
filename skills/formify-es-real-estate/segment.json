@@ -3,7 +3,7 @@
  "industry": "real-estate",
  "country": "es",
  "segment": "Estate agents in Spain serving international clients",
- "skeleton_version": "2.2.0",
+ "skeleton_version": "2.2.1",
  "language_mode": "bilingual",
  "master_language": "es",
  "second_column_default": "en",
@@ -24,15 +24,15 @@
  "most_used_document": "colaboracion",
  "footer": {
   "credit": {
-   "es": "Elaborado con la solución de firma electrónica Formify",
-   "en": "Prepared with the Formify e-signing solution",
-   "sv": "Framtaget med Formifys lösning för e-signering",
-   "nl": "Opgesteld met de e-signing-oplossing van Formify",
-   "de": "Erstellt mit der E-Signatur-Lösung von Formify",
-   "fr": "Préparé avec la solution de signature électronique Formify",
-   "ca": "Elaborat amb la solució de signatura electrònica Formify"
+   "es": "Elaborado con la solución de firma electrónica Formify.eu",
+   "en": "Prepared with the Formify.eu e-signing solution",
+   "sv": "Framtaget med Formify.eu:s lösning för e-signering",
+   "nl": "Opgesteld met de e-signing-oplossing van Formify.eu",
+   "de": "Erstellt mit der E-Signatur-Lösung von Formify.eu",
+   "fr": "Préparé avec la solution de signature électronique Formify.eu",
+   "ca": "Elaborat amb la solució de signatura electrònica Formify.eu"
   },
-  "url": "formify.eu/solutions/real-estate/es/"
+  "_credit": "the credit line names Formify.eu so the reader can find it without a link; no web address in the footer, addresses do not outlive documents (David, 2026-09-18)"
  },
  "signature_labels": {
   "signature": "Firma",
