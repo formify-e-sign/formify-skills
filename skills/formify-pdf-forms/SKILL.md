@@ -3,12 +3,12 @@ name: formify-pdf-forms
 description: 'Build fillable PDF forms and contract templates with signature fields. Use when creating a form or template, adding fillable fields to an existing PDF, replacing static text with fields, or preparing a document for e-signing. Triggers on "PDF form", "fillable PDF", "add fields to a PDF", "contract template", "skapa PDF-formulär", "PDF-mall", "fyllbart PDF", "formulario PDF". Not for sending a finished document: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.6.0"
+  version: "1.6.1"
 ---
 
 # Build a PDF form
 
-Version 1.6.0. If asked which version you are, quote this line.
+Version 1.6.1. If asked which version you are, quote this line.
 
 ## Purpose
 

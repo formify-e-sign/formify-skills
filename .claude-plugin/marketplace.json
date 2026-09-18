@@ -14,7 +14,7 @@
       "name": "formify",
       "source": "./plugins/formify",
       "description": "Formify Core — for any business that needs e-signature. Build fillable PDF forms and contracts, send them for signature or publish one signing link, verify signers with BankID or an ID scan, and track what happens after sending. Not industry-specific. Spanish estate agencies should install Formify for Real Estate Agencies instead (that pack already includes Core — do not install both).",
-      "version": "1.6.0",
+      "version": "1.6.1",
       "author": {
         "name": "Formify",
         "url": "https://formify.eu"
