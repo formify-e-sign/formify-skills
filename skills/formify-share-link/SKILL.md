@@ -3,12 +3,12 @@ name: formify-share-link
 description: 'Publish one reusable signing link anyone can open and sign, with no named recipients. Use when a form, waiver or consent goes to people whose names are unknown, when a link belongs on a website or a QR code, or when reading what a link has collected. Triggers on "public link", "signing link", "link anyone can sign", "share a form", "put it on our website", "signeringslänk", "delningslänk", "enlace público", "enlace para firmar". Not for inviting named signers: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.6.1"
+  version: "1.6.2"
 ---
 
 # Publish a document as one signing link
 
-Version 1.6.1. If asked which version you are, quote this line.
+Version 1.6.2. If asked which version you are, quote this line.
 
 ## Purpose
 
