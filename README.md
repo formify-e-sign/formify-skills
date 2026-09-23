@@ -102,7 +102,7 @@ on screen.
 
 ![Adding the Formify marketplace in Claude Desktop and installing the plugin](demo/claude-desktop/1-add-marketplace.gif)
 
-![Formify Core and Formify for Real Estate Agencies in the plugin Discover list](demo/codex/2-discover-plugins.jpg)
+![Formify Core and Formify for Real Estate Agencies in the plugin Discover list](demo/claude-desktop/2-discover-plugins.jpg)
 
 *A marketplace is just an address Claude reads plugins from. Ours is a public repository, so
 nothing is downloaded to your computer and every improvement we publish reaches you.*
@@ -167,7 +167,7 @@ at a time, by hand, and the connector separately.
    | `formify-send-contract.zip` | sending a document for signature |
    | `formify-verify-identity.zip` | BankID, ID scan, face liveness, company lookup |
    | `formify-track-signatures.zip` | chasing, correcting and cancelling what you sent |
-| `formify-share-link.zip` | one public link anyone can open and sign |
+   | `formify-share-link.zip` | one public link anyone can open and sign |
 
    Do not unzip them — they are already in the shape Claude expects.
 3. Open **Customize → Skills**, then **Create skill → Upload a skill**, and choose one ZIP.
@@ -212,11 +212,6 @@ Open **Discover**. The **formify-skills** marketplace lists two plugins:
 
 Pick **Add** on one row only. Real Estate already includes Core — installing both duplicates
 skills and the Formify connection.
-
-![Formify Core and Formify for Real Estate Agencies in the plugin Discover list](demo/codex/2-discover-plugins.jpg)
-
-*As shown: **Formify Core** (New, Legal) and **Formify for Real Estate Agencies** (New,
-Sales). Your tags may differ slightly by surface.*
 
 Use **Upgrade** on that row whenever you want the newest version. That brings the skills
 and the Formify connection together, exactly as in Claude.
@@ -356,9 +351,21 @@ npx skills add formify-e-sign/formify-skills --skill formify-es-real-estate   # 
 npx skills add formify-e-sign/formify-skills -g              # global, across projects
 ```
 
-**Capability skills contain no executable code** (Markdown and YAML only). The sector skill
-`formify-es-real-estate` also ships helper scripts under `scripts/` for PDF rendering when
-the runtime can run them — inspect those before a global install if your policy requires it.
+**What runs on your machine.** The two plugins differ here, and it is worth knowing which one
+you install:
+
+- **Formify Core** (the five capability skills) contains **no executable code** — Markdown,
+  YAML and JSON only. Everything it does, it does through the Formify MCP server.
+- **Formify for Real Estate Agencies** adds `formify-es-real-estate`, which ships nine
+  **Python 3 scripts** in [`skills/formify-es-real-estate/scripts/`](skills/formify-es-real-estate/scripts/)
+  (`start.py`, `fill.py`, `translate.py`, `check_style.py`, `check_law.py`, `render_pdf.py`,
+  `stdlib_pdf.py`, `handover.py`, `sample_pack.py`). They fill the document templates, run
+  style checks and render the signed-ready PDF. They run only where the agent can already
+  execute code, install nothing, and need no network except `check_law.py`, which fetches
+  the official legal sources it checks against. `pypdf`, WeasyPrint, wkhtmltopdf and a Chromium browser
+  are used when present; without them, `stdlib_pdf.py` produces the PDF with the Python standard
+  library alone. Where no code can run at all, the skill hands over the document text and a
+  field specification instead. Read the scripts before installing if your policy requires it.
 
 #### In a repository, with no install at all
 
@@ -601,12 +608,12 @@ plugin.json  mcp.json          Agent Plugins 1.0.0
 .claude-plugin/                Claude marketplace (formify) — two plugin entries
 .codex-plugin/                 Codex CLI root overlay
 package.json  skills.sh.json   npm, npx, and the skills.sh gallery
-scripts/check-manifests.mjs    keeps the manifests from drifting apart
-tests/release/                 what the skills do, not just what they say
+.github/workflows/             manifest checks on every push, release on every tag
 ```
 
 Every manifest describes the same `skills/` directory. Nothing is copied, so no adapter can
-drift from the source — and `npm run check` proves it, in CI on every push.
+drift from the source. CI parses every manifest on every push, and a release refuses to
+publish unless the tag matches the version in every Core manifest.
 
 Every statement these skills make about the Formify API was checked against the server
 before it shipped. Four hundred and fifty-one claims inherited from the previous generation
@@ -614,8 +621,10 @@ of these skills were re-verified one at a time; the ones that turned out to be w
 corrected here rather than carried forward, and the ones that could not be settled were
 removed rather than repeated.
 
-`tests/release/` checks behaviour rather than structure, and two details are the reason
-it exists. References are re-checked **inside an actually extracted npm tarball** rather
+Build, release and test tooling lives in our development repository rather than in this
+published tree, so what you install is only what the skills need. Every release passes its
+verification suite first, and that suite checks behaviour rather than structure. Two details
+are the reason it exists. References are re-checked **inside an actually extracted npm tarball** rather
 than in the working tree, because a path that resolves in the repository and is missing
 from the published package is a defect nobody sees until a stranger installs it. And the
 routing cases score an **accepted set** of skills per request rather than one correct
@@ -649,20 +658,14 @@ Issues and pull requests are welcome. Two rules keep the skills trustworthy:
 
 Clients decide whether to update by comparing version numbers, not content. A
 changed skill with an unchanged version reaches nobody except people who cloned the
-repo. So every change that ships is a version bump, and one script writes every declared
-place the version lives:
+repo. So every change that ships is a version bump.
 
-```bash
-npm run release 1.2.0       # every manifest and every skill frontmatter
-npm run check
-git commit -am "release 1.2.0" && git tag v1.2.0
-git push && git push origin v1.2.0
-```
-
-`npm run release --check` is part of `npm run check` and runs in CI, so drift fails
-the build. `--audit` lists files carrying the version that `.version-bump.json` does
-not declare — a file added later that needs adding there. Publishing happens on the
-`v*` tag alone, and refuses if the tag and the manifests disagree.
+Maintainers cut releases from the development repository, where one script writes every
+place a version lives (each manifest and each Core skill's frontmatter) and the
+verification suite runs before anything is tagged. In this tree, publishing happens on a
+`v*` tag alone, and [`release.yml`](.github/workflows/release.yml) refuses to publish if the
+tag and the Core manifests disagree. A pull request here does not need to bump anything;
+the release that includes it does.
 
 ### Adding a recording
 

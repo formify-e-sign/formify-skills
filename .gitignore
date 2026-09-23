@@ -64,6 +64,5 @@ tests/es-real-estate/out/
 tests/
 scripts/
 shared/
-demo/
 .version-bump.json
 .ignore

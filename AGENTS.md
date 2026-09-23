@@ -92,20 +92,21 @@ formify-skills/
 ├── AGENTS.md              # this file — the contract
 ├── README.md              # for people installing and using the skills
 ├── skills/                # the deliverable
-├── shared/                # reference material authored once, copied at build
-├── scripts/               # build, release, and manifest checks
-├── tests/                 # eval suites and the release verification layer
+├── plugins/               # two installable plugins: formify (Core), formify-es-real-estate
 ├── assets/                # icons and brand artwork
-├── demo/                  # recorded demonstrations
-├── .agents/               # universal skill path and plugin marketplace
-├── .claude-plugin/        # Claude Code plugin manifest
+├── demo/                  # recorded demonstrations used in README.md
+├── .github/workflows/     # manifest checks on push, release on tag
+├── .claude-plugin/        # Claude marketplace (two plugins) and root plugin manifest
 ├── .codex-plugin/         # Codex plugin manifest
-└── plugin.json, mcp.json, skills.sh.json
+└── plugin.json, mcp.json, skills.sh.json, package.json
 ```
 
 Every manifest above claims the same MCP URL, the same skill list, and the same icons. They
-drift silently, so `scripts/check-manifests.mjs` asserts they agree and that no manifest
-points at a file the npm tarball does not publish. Run it before opening a pull request.
+drift silently, so the maintainers' manifest check asserts they agree and that no manifest
+points at a file the npm tarball does not publish, and CI parses every manifest on each push.
+
+Build, release and test tooling (`scripts/`, `tests/`, `shared/`) lives in the development
+repository, not in this published tree. Only the skills and what installs them ship here.
 
 Two directories exist on disk and are deliberately not committed: `tasks/`, the agents' live
 coordination file, and `docs/`, the working analysis behind the skills. Both name what could
@@ -122,8 +123,8 @@ against the MCP server's own source before it ships; a claim that contradicts th
 bug, not a difference of opinion. The previous generation of these skills is a source of
 questions worth re-asking, never of answers to copy.
 
-What that verification currently proves, and what it does not, is stated in `README.md` and
-implemented under `tests/`.
+What that verification currently proves, and what it does not, is stated in `README.md`. The
+suite that implements it runs in the development repository before every release.
 
 ---
 

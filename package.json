@@ -40,10 +40,5 @@
     "LICENSE",
     ".mcp.json",
     "skills.sh.json"
-  ],
-  "scripts": {
-    "build": "node scripts/build-skills.mjs",
-    "check": "node scripts/build-skills.mjs --check && node scripts/release.mjs --check && node scripts/check-manifests.mjs",
-    "release": "node scripts/release.mjs"
-  }
+  ]
 }
