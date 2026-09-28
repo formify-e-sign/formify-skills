@@ -10,6 +10,7 @@
   },
   "homepage": "https://formify.eu",
   "repository": "https://github.com/formify-e-sign/formify-skills",
+  "privacyPolicyUrl": "https://formify.eu/privacy/policy",
   "license": "MIT",
   "keywords": [
     "esignature",
