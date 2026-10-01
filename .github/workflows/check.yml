@@ -22,7 +22,9 @@ jobs:
           node -e '
             const fs = require("fs");
             const files = ["plugin.json", "mcp.json", ".claude-plugin/plugin.json", ".claude-plugin/marketplace.json",
-              ".codex-plugin/plugin.json", "skills.sh.json", "package.json",
+              ".codex-plugin/plugin.json", ".cursor-plugin/marketplace.json", "skills.sh.json", "package.json",
+              "plugins/formify/plugin.json", "plugins/formify/mcp.json",
+              "plugins/formify/.cursor-plugin/plugin.json",
               "plugins/formify/.claude-plugin/plugin.json", "plugins/formify/.codex-plugin/plugin.json",
               "plugins/formify-es-real-estate/.claude-plugin/plugin.json", "plugins/formify-es-real-estate/.codex-plugin/plugin.json"];
             for (const f of files) JSON.parse(fs.readFileSync(f, "utf8"));
@@ -38,5 +40,9 @@ jobs:
         run: |
           curl -sfL https://agent-plugins.org/schemas/1.0.0/plugin.schema.json -o /tmp/plugin.schema.json
           curl -sfL https://agent-plugins.org/schemas/1.0.0/mcp.schema.json -o /tmp/mcp.schema.json
-          npx -y ajv-cli@5 validate --spec=draft2020 -s /tmp/plugin.schema.json -d plugin.json
-          npx -y ajv-cli@5 validate --spec=draft2020 -s /tmp/mcp.schema.json -d mcp.json
+          npx -y ajv-cli@5 validate --spec=draft2020 -s /tmp/plugin.schema.json -d plugin.json -d plugins/formify/plugin.json
+          npx -y ajv-cli@5 validate --spec=draft2020 -s /tmp/mcp.schema.json -d mcp.json -d plugins/formify/mcp.json
+          curl -sfL https://raw.githubusercontent.com/cursor/plugins/main/schemas/plugin.schema.json -o /tmp/cursor-plugin.schema.json
+          curl -sfL https://raw.githubusercontent.com/cursor/plugins/main/schemas/marketplace.schema.json -o /tmp/cursor-marketplace.schema.json
+          npx -y ajv-cli@5 validate --strict=false -s /tmp/cursor-plugin.schema.json -d plugins/formify/.cursor-plugin/plugin.json
+          npx -y ajv-cli@5 validate --strict=false -s /tmp/cursor-marketplace.schema.json -d .cursor-plugin/marketplace.json

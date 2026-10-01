@@ -304,6 +304,27 @@ system that does not read a GitHub repository, so the connector gives Grok the a
 without the judgement — how a contract should read, where a signature field belongs, which
 identity check a document calls for.
 
+#### Grok Bot
+
+Grok Bot installs plugins from the Cursor Marketplace. This repository ships **Formify
+Core** for that surface: the five capability skills and the Formify MCP server, packaged
+as `plugins/formify`. The Spanish real-estate pack is not in that plugin.
+
+| File | Role |
+|---|---|
+| `.cursor-plugin/marketplace.json` | Catalog entry. One plugin, `formify`. |
+| `plugins/formify/.cursor-plugin/plugin.json` | Cursor / Grok Bot manifest: the five skills and `mcp.json`. |
+| `plugins/formify/plugin.json` | Agent Plugins 1.0.0 manifest for the same directory. |
+| `plugins/formify/mcp.json` | Formify MCP at `https://mcp.formify.eu/mcp`. |
+
+Listing is a manual review. Submit the public repository at
+[cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). These files are what that
+review reads. After approval, the same listing is what Grok Bot shows under **Marketplace**.
+
+Install Formify Core, then sign in to Formify in the browser. The assistant never sees the
+password. On a team plan an admin enables the plugin on the team plugins page. If that team
+uses an MCP allowlist, the server to add is `https://mcp.formify.eu/mcp`.
+
 **Grok Build**, the CLI, is different: xAI documents that it *"automatically reads Claude
 Code marketplaces, plugins, skills, MCPs, agents, hooks, and instruction files… alongside
 `.grok/`."* The `.claude-plugin/` manifests in this repository are the ones it reads, so
@@ -581,8 +602,9 @@ be asked to log in with your Formify account.
 claude mcp add --transport http formify https://mcp.formify.eu/mcp
 ```
 
-**Anything reading a plugin manifest:** the server is already declared in `mcp.json` and in
-both plugin manifests, so installing the plugin offers the connection.
+**Anything reading a plugin manifest:** the server is already declared in `mcp.json`, in
+`plugins/formify/mcp.json`, and in the Claude, Codex and Cursor plugin manifests, so
+installing the plugin offers the connection.
 
 You authorise with your own Formify account. The skills never see your password, and every
 action runs with exactly the permissions that account already has.
@@ -600,13 +622,16 @@ skills/                        the skills — the one canonical source
   formify-share-link/
   formify-es-real-estate/      sector pack (Formify for Real Estate Agencies)
 plugins/                       two installable plugins pointing at skills/
-  formify/                     Formify Core
-  formify-es-real-estate/      Formify for Real Estate Agencies
+  formify/                     Formify Core — Claude, Codex, and Grok Bot / Cursor
+    plugin.json  mcp.json      Agent Plugins manifest and the Formify MCP server
+    .cursor-plugin/plugin.json Grok Bot and Cursor: five Core skills plus MCP
+  formify-es-real-estate/      Formify for Real Estate Agencies (Claude and Codex)
 demo/                          the install recordings used on this page
 plugin.json  mcp.json          Agent Plugins 1.0.0
 .mcp.json                      the MCP server, referenced by the manifests below
 .claude-plugin/                Claude marketplace (formify) — two plugin entries
 .codex-plugin/                 Codex CLI root overlay
+.cursor-plugin/                Cursor and Grok Bot marketplace — Formify Core only
 package.json  skills.sh.json   npm, npx, and the skills.sh gallery
 .github/workflows/             manifest checks on every push, release on every tag
 ```
