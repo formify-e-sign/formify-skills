@@ -42,6 +42,8 @@ jobs:
               ["package.json", "version"],
               ["plugins/formify/.claude-plugin/plugin.json", "version"],
               ["plugins/formify/.codex-plugin/plugin.json", "version"],
+              ["plugins/formify/plugin.json", "version"],
+              ["plugins/formify/.cursor-plugin/plugin.json", "version"],
             ];
             const mp = JSON.parse(fs.readFileSync(".claude-plugin/marketplace.json", "utf8"));
             const core = mp.plugins.find((p) => p.name === "formify");
