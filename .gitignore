@@ -63,6 +63,9 @@ tests/es-real-estate/out/
 # Dev tooling and media — canonical copy lives in formify-skills-internal.
 tests/
 scripts/
+# ...but skill scripts ship with the skill, in skills/ and in the plugin copies.
+!skills/**/scripts/
+!plugins/**/skills/**/scripts/
 shared/
 .version-bump.json
 .ignore
