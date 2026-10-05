@@ -1,0 +1,117 @@
+<!--
+PLANTILLA 03: OFERTA DE COMPRA Y DOCUMENTO DE RESERVA (ES + idioma del cliente), v2 (2026-09-07)
+Estructura: cuadro A (parte compradora, parte vendedora, agencia), cuadro B (inmueble y oferta: precio, reserva,
+cuenta, plazos), condiciones en dos columnas que solo hablan de «la parte compradora», «la parte vendedora»,
+«la agencia», «el inmueble» y «el cuadro B», y al final la aceptación de la parte vendedora. Ningún dato se repite.
+Dos fases con orden de firma en Formify: comprador y agencia primero, vendedor después.
+Datos que falten del comprador o del vendedor: objetos {"campo": ...} y los rellena esa parte al firmar.
+Variante regional: en Cataluña, --variante CCCat (condición 7). Opcionales: deposito_agencia, financiacion, muebles.
+Perfil recomendado: profesional (o sencillo si el usuario lo pide).
+-->
+<table class="header"><tr>
+  <td class="logo">{{logo_html}}</td>
+  <td class="org">{{agencia_nombre}}<br>{{agencia_direccion}}<br>NIF {{agencia_nif}}{{agencia_registro_linea}}</td>
+</tr></table>
+<div class="reference">Ref. {{referencia}} · {{lugar}}, {{fecha_larga}}, a las {{hora}} horas</div>
+
+<h1>Oferta de compra y documento de reserva / Purchase offer and reservation agreement</h1>
+
+<h2>A. Partes / Parties</h2>
+<table class="form parties3">
+  <tr><td class="k"></td><td class="cab">Parte compradora <span class="tr-lbl">/ Buyer</span></td><td class="cab">Parte vendedora <span class="tr-lbl">/ Seller</span></td><td class="cab">Agencia <span class="tr-lbl">/ Agency</span></td></tr>
+  <tr><td class="k">Nombre <span class="tr-lbl">/ Name</span></td><td>{{comprador_nombres}}</td><td>{{vendedor_nombres}}</td><td>{{agencia_nombre}}</td></tr>
+  <tr><td class="k">Documento / NIF <span class="tr-lbl">/ ID / Tax ID</span></td><td>{{comprador_docs}}</td><td>{{vendedor_docs}}</td><td>{{agencia_nif}}</td></tr>
+  <tr><td class="k">Domicilio <span class="tr-lbl">/ Address</span></td><td>{{comprador_domicilio}}</td><td>{{vendedor_domicilio}}</td><td>{{agencia_direccion}}</td></tr>
+  <tr><td class="k">Correo electrónico <span class="tr-lbl">/ E-mail</span></td><td>{{comprador_email}}</td><td>{{vendedor_email}}</td><td>{{agencia_email}}</td></tr>
+  <tr><td class="k">Interviene <span class="tr-lbl">/ Acting as</span></td><td>en su propio nombre <span class="tr-val">/ on their own behalf</span></td><td>propietario/a; acepta al final <span class="tr-val">/ owner; accepts at the end</span></td><td>mediadora ({{agente_nombre}}), encargo de {{fecha_encargo}} <span class="tr-val">/ broker, mandate of {{fecha_encargo}}</span></td></tr>
+</table>
+
+<h2>B. Inmueble y oferta / Property and offer</h2>
+<table class="form">
+  <tr><td class="k">Inmueble <span class="tr-lbl">/ Property</span></td><td colspan="3">{{inmueble_direccion}}{{anejos_frase}}</td></tr>
+  <tr><td class="k">Registro y catastro <span class="tr-lbl">/ Land registry and cadastre</span></td><td colspan="3">Finca {{finca}}, Registro de la Propiedad {{registro}} · Ref. catastral {{refcat}}</td></tr>
+  <tr><td class="k">Visita y nota simple <span class="tr-lbl">/ Viewing and registry extract</span></td><td>{{fecha_visita}}</td><td class="k">Nota simple de <span class="tr-lbl">/ Extract dated</span></td><td>{{fecha_nota_simple}}</td></tr>
+  <tr><td class="k">Precio de oferta al público <span class="tr-lbl">/ Asking price</span></td><td>{{precio_publico_cifra}} €</td><td class="k">Precio ofrecido <span class="tr-lbl">/ Price offered</span></td><td>{{precio_cifra}} € ({{precio_letras}} euros)</td></tr>
+  <!-- OPTIONAL: muebles -->
+  <tr><td class="k">Incluye <span class="tr-lbl">/ Includes</span></td><td colspan="3">Muebles y enseres del Anexo III <span class="tr-val">/ Furniture and fittings listed in Annex III</span></td></tr>
+  <!-- /OPTIONAL -->
+  <tr><td class="k">Reserva entregada <span class="tr-lbl">/ Reservation deposit paid</span></td><td>{{reserva_cifra}} € ({{reserva_letras}} euros)</td><td class="k">Cuenta de destino <span class="tr-lbl">/ Paid into</span></td><td>{{cuenta_destino}} <span class="tr-val">/ {{cuenta_destino_tr}}</span></td></tr>
+  <tr><td class="k">Justificante de la transferencia <span class="tr-lbl">/ Proof of transfer</span></td><td colspan="3" class="attachment"><span class="pdf-button"><span class="pdf-field button" data-name="justificante_subir|tink-upload-attachment[1]|tink-style-transparent" data-width="75" data-height="22" style="width:75pt !important;height:22pt !important"><span class="field-mark">FIELDMARK</span></span></span><span class="attachment-name">Documento subido <span class="tr-lbl">/ Uploaded document</span><span class="pdf-field" data-name="justificante_nombre|tink-uploaded-attachmentname[1]" data-width="250" data-readonly="1" style="width:250pt"><span class="field-mark">FIELDMARK</span></span></span></td></tr>
+  <tr><td class="k">Oferta válida hasta <span class="tr-lbl">/ Offer valid until</span></td><td>{{fecha_limite_respuesta}}, {{hora_limite_respuesta}} h</td><td class="k">Contrato de arras en <span class="tr-lbl">/ Arras contract within</span></td><td>{{dias_arras}} días <span class="tr-val">/ days</span></td></tr>
+  <tr><td class="k">Arras totales <span class="tr-lbl">/ Total arras</span></td><td>{{porcentaje_arras}} % del precio: {{arras_total_cifra}} €</td><td class="k">Escritura en <span class="tr-lbl">/ Deed within</span></td><td>{{dias_escritura}} días <span class="tr-val">/ days</span></td></tr>
+  <!-- OPTIONAL: financiacion -->
+  <tr><td class="k">Financiación <span class="tr-lbl">/ Financing</span></td><td colspan="3">Condicionada a hipoteca de al menos {{importe_financiacion_cifra}} € antes del {{fecha_limite_financiacion}} <span class="tr-val">/ Subject to a mortgage of at least €{{importe_financiacion_cifra}} before {{fecha_limite_financiacion}}</span></td></tr>
+  <!-- /OPTIONAL -->
+</table>
+
+<h2>C. Condiciones / Terms</h2>
+<table class="bi">
+  <tr><th>Español (versión que prevalece)</th><th>English (for information, see condition 13)</th></tr>
+  <tr><td>La parte compradora identificada en el cuadro A, que ha visitado el inmueble del cuadro B en la fecha indicada, conoce su estado y ha recibido la nota simple que se adjunta como Anexo II, formula la siguiente oferta ante la agencia, que interviene como mediadora en virtud del encargo indicado en el cuadro A y no como mandataria de la parte vendedora.</td>
+      <td class="tr">The buyer identified in box A, who viewed the property in box B on the date stated, knows its condition and has received the registry extract attached as Annex II, makes the following offer before the agency, which acts as broker under the mandate stated in box A and not as the seller's agent.</td></tr>
+
+  <tr><td><span class="num">1. Oferta.</span> La parte compradora ofrece adquirir el inmueble por el precio ofrecido indicado en el cuadro B. El precio no incluye los impuestos y gastos que correspondan a cada parte conforme a la condición 8.</td>
+      <td class="tr"><span class="num">1. Offer.</span> The buyer offers to purchase the property for the price offered in box B. The price excludes the taxes and costs borne by each party under condition 8.</td></tr>
+
+  <tr><td><span class="num">2. Reserva.</span> La parte compradora entrega en este acto, mediante transferencia a la cuenta indicada en el cuadro B, la cantidad indicada como reserva; el justificante de la transferencia es el documento subido en el cuadro B. <!-- OPTIONAL: deposito_agencia -->La agencia recibe esta cantidad en depósito, por cuenta de ambas partes, no la entregará a la parte vendedora hasta la firma del contrato de arras y no percibirá rendimiento alguno por ella. <!-- /OPTIONAL -->No se admiten pagos en efectivo.</td>
+      <td class="tr"><span class="num">2. Reservation deposit.</span> The buyer hereby pays, by transfer to the account stated in box B, the amount stated as reservation deposit; proof of the transfer is the document uploaded in box B. <!-- OPTIONAL: deposito_agencia -->The agency receives this sum in escrow on behalf of both parties, shall not release it to the seller until the arras contract is signed and shall earn no return on it. <!-- /OPTIONAL -->Cash payments are not accepted.</td></tr>
+
+  <tr><td><span class="num">3. Plazo de la oferta.</span> La oferta se mantiene hasta la fecha y hora indicadas en el cuadro B. La parte vendedora la aceptará, en su caso, mediante su firma en el apartado D. La falta de aceptación dentro del plazo equivale a rechazo.</td>
+      <td class="tr"><span class="num">3. Offer period.</span> The offer stands until the date and time stated in box B. The seller accepts it, if at all, by signing section D. Failure to accept within the period amounts to rejection.</td></tr>
+
+  <tr><td><span class="num">4. Oferta no aceptada.</span> Si la parte vendedora no aceptara la oferta dentro del plazo, o la aceptara con modificaciones, la reserva quedará sin efecto y {{depositario}} devolverá a la parte compradora la totalidad de la cantidad depositada, sin retención ni deducción alguna, mediante transferencia a la cuenta de origen en el plazo máximo de cinco días hábiles.</td>
+      <td class="tr"><span class="num">4. Offer not accepted.</span> If the seller does not accept the offer within the period, or accepts it with changes, the reservation lapses and {{depositario_tr}} shall refund the buyer the full amount deposited, without any retention or deduction, by transfer to the account of origin within five working days.</td></tr>
+
+  <tr><td><span class="num">5. Retirada de la oferta.</span> Si la parte compradora retirara la oferta antes de la aceptación, comunicándolo por escrito a la agencia, la reserva quedará sin efecto y {{depositario}} devolverá la cantidad depositada en el mismo plazo y forma de la condición anterior.</td>
+      <td class="tr"><span class="num">5. Withdrawal of the offer.</span> If the buyer withdraws the offer before acceptance, by written notice to the agency, the reservation lapses and {{depositario_tr}} shall refund the amount deposited within the same period and in the same manner as in the previous condition.</td></tr>
+
+  <tr><td><span class="num">6. Efectos de la aceptación.</span> Aceptada la oferta, la cantidad depositada tendrá la consideración de arras a cuenta del precio, y las partes se obligan a: a) suscribir el contrato de arras dentro del plazo indicado en el cuadro B, en el que la parte compradora completará las arras hasta el importe total indicado en el cuadro B, descontada la reserva; b) otorgar la escritura pública de compraventa ante notario dentro del plazo indicado en el cuadro B, con pago del resto del precio en ese acto; c) por parte de la vendedora y de la agencia, retirar el inmueble del mercado y no aceptar otras ofertas mientras esté vigente este documento.</td>
+      <td class="tr"><span class="num">6. Effects of acceptance.</span> Once the offer is accepted, the amount deposited counts as arras on account of the price, and the parties undertake to: a) sign the arras contract within the period stated in box B, in which the buyer tops up the arras to the total stated in box B, less the reservation deposit; b) execute the public deed of sale before a notary within the period stated in box B, paying the balance of the price at that time; c) on the part of the seller and the agency, withdraw the property from the market and accept no other offers while this document is in force.</td></tr>
+
+  <!-- VARIANT CC (todas las regiones salvo Cataluña y Navarra) -->
+  <tr><td><span class="num">7. Desistimiento tras la aceptación.</span> Aceptada la oferta, la cantidad depositada tendrá el carácter de arras penitenciales conforme al artículo 1454 del Código Civil. En consecuencia, cualquiera de las partes podrá desistir de la compraventa: si desiste la parte compradora, perderá la cantidad entregada; si desiste la parte vendedora, devolverá dicha cantidad por duplicado. Ejercido el desistimiento, ninguna de las partes podrá reclamar a la otra cantidad adicional alguna por este concepto. {{depositario_mayus}} entregará el depósito a quien corresponda en el plazo de cinco días hábiles desde que reciba instrucción escrita de ambas partes o acredite documentalmente el desistimiento.</td>
+      <td class="tr"><span class="num">7. Withdrawal after acceptance.</span> Once the offer is accepted, the amount deposited has the character of arras penitenciales (penitential deposit) under article 1454 of the Spanish Civil Code. Accordingly, either party may withdraw from the sale: if the buyer withdraws, the buyer forfeits the amount paid; if the seller withdraws, the seller returns twice that amount. Once withdrawal is exercised, neither party may claim any further sum from the other on this account. {{depositario_mayus_tr}} shall release the deposit to the entitled party within five working days of receiving written instructions from both parties or documentary evidence of the withdrawal.</td></tr>
+  <!-- /VARIANT CC -->
+  <!-- VARIANT CCCat (Cataluña): sustituir la fila anterior por esta
+  <tr><td><span class="num">7. Desistimiento tras la aceptación.</span> Aceptada la oferta, la cantidad depositada tendrá el carácter de arras penitenciales conforme al artículo 621-8 del Código Civil de Cataluña. En consecuencia, cualquiera de las partes podrá desistir de la compraventa: si desiste la parte compradora, perderá la cantidad entregada; si desiste la parte vendedora, devolverá dicha cantidad por duplicado. Ejercido el desistimiento, ninguna de las partes podrá reclamar a la otra cantidad adicional alguna por este concepto. {{depositario_mayus}} entregará el depósito a quien corresponda en el plazo de cinco días hábiles desde que reciba instrucción escrita de ambas partes o acredite documentalmente el desistimiento.</td>
+      <td class="tr"><span class="num">7. Withdrawal after acceptance.</span> Once the offer is accepted, the amount deposited has the character of arras penitenciales (penitential deposit) under article 621-8 of the Civil Code of Catalonia. Accordingly, either party may withdraw from the sale: if the buyer withdraws, the buyer forfeits the amount paid; if the seller withdraws, the seller returns twice that amount. Once withdrawal is exercised, neither party may claim any further sum from the other on this account. {{depositario_mayus_tr}} shall release the deposit to the entitled party within five working days of receiving written instructions from both parties or documentary evidence of the withdrawal.</td></tr>
+  -->
+  <!-- VARIANT FN (Navarra): sustituir la fila anterior por esta
+  <tr><td><span class="num">7. Desistimiento tras la aceptación.</span> Aceptada la oferta, la cantidad depositada tendrá el carácter de arras penitenciales conforme a la ley 467 del Fuero Nuevo de Navarra. En consecuencia, cualquiera de las partes podrá desistir de la compraventa: si desiste la parte compradora, perderá la cantidad entregada; si desiste la parte vendedora, devolverá dicha cantidad por duplicado. Ejercido el desistimiento, ninguna de las partes podrá reclamar a la otra cantidad adicional alguna por este concepto. {{depositario_mayus}} entregará el depósito a quien corresponda en el plazo de cinco días hábiles desde que reciba instrucción escrita de ambas partes o acredite documentalmente el desistimiento.</td>
+      <td class="tr"><span class="num">7. Withdrawal after acceptance.</span> Once the offer is accepted, the amount deposited has the character of arras penitenciales (penitential deposit) under law 467 of the Fuero Nuevo of Navarre. Accordingly, either party may withdraw from the sale: if the buyer withdraws, the buyer forfeits the amount paid; if the seller withdraws, the seller returns twice that amount. Once withdrawal is exercised, neither party may claim any further sum from the other on this account. {{depositario_mayus_tr}} shall release the deposit to the entitled party within five working days of receiving written instructions from both parties or documentary evidence of the withdrawal.</td></tr>
+  -->
+
+  <!-- OPTIONAL: financiacion -->
+  <tr><td><span class="num">7 bis. Condición de financiación.</span> La oferta queda sujeta a la condición suspensiva de que la parte compradora obtenga la financiación hipotecaria indicada en el cuadro B dentro del plazo allí señalado. Si la entidad financiera denegara la financiación y la parte compradora lo acreditara documentalmente dentro de ese plazo, la reserva quedará sin efecto y {{depositario}} devolverá íntegramente la cantidad depositada en el plazo de cinco días hábiles.</td>
+      <td class="tr"><span class="num">7 bis. Financing condition.</span> The offer is subject to the condition precedent that the buyer obtains the mortgage financing stated in box B within the period stated there. If the lender refuses the financing and the buyer provides documentary evidence of this within that period, the reservation lapses and {{depositario_tr}} shall refund the full amount deposited within five working days.</td></tr>
+  <!-- /OPTIONAL -->
+
+  <tr><td><span class="num">8. Gastos e impuestos.</span> Salvo pacto en contrario en el contrato de arras, serán de cuenta de la parte compradora el impuesto que grave la transmisión, los gastos de la escritura y los de inscripción en el Registro de la Propiedad, y de cuenta de la parte vendedora el impuesto sobre el incremento de valor de los terrenos de naturaleza urbana (plusvalía municipal) y los gastos de cancelación de cargas. Los honorarios de la agencia son a cargo de la parte vendedora conforme al contrato de mediación; la parte compradora no abona honorarios a la agencia{{honorarios_comprador_frase}}.</td>
+      <td class="tr"><span class="num">8. Costs and taxes.</span> Unless otherwise agreed in the arras contract, the buyer bears the transfer tax, the notary fees for the deed and the Land Registry fees, and the seller bears the municipal tax on the increase in value of urban land (plusvalía municipal) and the cost of cancelling charges. The agency's fee is payable by the seller under the brokerage agreement; the buyer pays the agency no fee{{honorarios_comprador_frase_tr}}.</td></tr>
+
+  <tr><td><span class="num">9. Notario.</span> La escritura se otorgará ante el notario que designe la parte compradora{{notario_propuesto_frase}}.</td>
+      <td class="tr"><span class="num">9. Notary.</span> The deed shall be executed before the notary chosen by the buyer{{notario_propuesto_frase_tr}}.</td></tr>
+
+  <tr><td><span class="num">10. Estado del inmueble.</span> El inmueble se transmitirá como cuerpo cierto, en el estado en que la parte compradora declara conocerlo, libre de cargas, gravámenes, arrendatarios y ocupantes, y al corriente en el pago de tributos y cuotas de la comunidad de propietarios en el momento de la escritura.</td>
+      <td class="tr"><span class="num">10. Condition of the property.</span> The property is transferred as a whole (cuerpo cierto), in the condition the buyer declares to know, free of charges, encumbrances, tenants and occupants, and up to date with taxes and community fees at the time of the deed.</td></tr>
+
+  <tr><td><span class="num">11. Prevención del blanqueo de capitales y datos.</span> Las partes facilitarán a la agencia la documentación de identificación y de origen de los fondos que esta les requiera para cumplir sus obligaciones legales; todos los pagos se harán por transferencia bancaria. La agencia trata los datos de las partes para gestionar la oferta, la reserva y la posterior compraventa, y los comunica a la otra parte, al notario y a las entidades que intervengan; los conserva durante la relación y los plazos legales posteriores. Los derechos de acceso, rectificación, supresión y demás previstos en la normativa pueden ejercerse en {{agencia_email_datos}}.</td>
+      <td class="tr"><span class="num">11. Anti-money laundering and data.</span> The parties shall provide the agency with the identification and source-of-funds documents it requires to meet its legal obligations; all payments are made by bank transfer. The agency processes the parties' data to manage the offer, the reservation and the subsequent sale, and shares them with the other party, the notary and the entities involved; it keeps them for the duration of the relationship and the statutory periods thereafter. The rights of access, rectification, erasure and the other rights provided for by law may be exercised at {{agencia_email_datos}}.</td></tr>
+
+  <tr><td><span class="num">12. Ley aplicable y fuero.</span> El presente documento se rige por la ley española. Para cualquier controversia, las partes se someten a los juzgados y tribunales del lugar en que se encuentra el inmueble, sin perjuicio del fuero que corresponda por ley a la parte que tenga la condición de consumidora.</td>
+      <td class="tr"><span class="num">12. Governing law and jurisdiction.</span> This document is governed by Spanish law. For any dispute the parties submit to the courts of the place where the property is located, without prejudice to the forum the law grants to a party who is a consumer.</td></tr>
+
+  <tr><td><span class="num">13. Idioma.</span> El presente documento se firma en español y en {{idioma_cliente_es}}. En caso de discrepancia entre ambas versiones prevalecerá la versión española.</td>
+      <td class="tr"><span class="num">13. Language.</span> This document is signed in Spanish and in {{idioma_cliente_tr}}. In the event of any discrepancy between the two versions, the Spanish version shall prevail.</td></tr>
+
+  <tr><td>Y en prueba de conformidad, la parte compradora y la agencia firman electrónicamente el presente documento en la fecha y hora indicadas en el encabezamiento. La agencia declara haber recibido la cantidad indicada en el cuadro B como reserva.</td>
+      <td class="tr">In witness whereof, the buyer and the agency sign this document electronically on the date and at the time stated in the heading. The agency declares that it has received the amount stated in box B as reservation deposit.</td></tr>
+</table>
+
+<h2>D. Aceptación de la parte vendedora / Acceptance by the seller</h2>
+<table class="bi">
+  <tr><td>La parte vendedora identificada en el cuadro A, en su condición de propietaria del inmueble, declara haber recibido la presente oferta y la ACEPTA en todos sus términos, obligándose a suscribir el contrato de arras y a otorgar la escritura en los plazos del cuadro B. La aceptación produce efectos desde la fecha y hora de su firma electrónica, que consta en el certificado de firma del documento.</td>
+      <td class="tr">The seller identified in box A, as owner of the property, declares that it has received this offer and ACCEPTS it in all its terms, undertaking to sign the arras contract and to execute the deed within the periods in box B. Acceptance takes effect from the date and time of the seller's electronic signature, as recorded in the document's signature certificate.</td></tr>
+  <tr><td>Si la parte vendedora deseara aceptar con modificaciones, no firmará este documento y la agencia recogerá la contraoferta en un nuevo documento que requerirá la aceptación de la parte compradora.</td>
+      <td class="tr">If the seller wishes to accept with changes, the seller shall not sign this document and the agency shall record the counter-offer in a new document requiring the buyer's acceptance.</td></tr>
+</table>

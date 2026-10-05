@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Send for Signature"
+  short_description: "Send a document for electronic signature"
+  default_prompt: "Use $formify-send-contract to send this document for signature and preview the placement first."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify e-signature tools — templates, drafts, documents and files"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

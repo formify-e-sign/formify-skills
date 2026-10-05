@@ -1,0 +1,473 @@
+[
+ {
+  "id": "CC-1454",
+  "provision": "Código Civil art. 1454 (arras penitenciales)",
+  "documents": [
+   "arras",
+   "reserva"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763",
+  "key_sentence": "podrá rescindirse el contrato allanándose el comprador a perderlas, o el vendedor a devolverlas duplicadas",
+  "verified": "2026-09-05",
+  "what_to_review": "Estipulación 3 de arras y 7 de reserva: la facultad de desistir y sus consecuencias."
+ },
+ {
+  "id": "CC-1320",
+  "provision": "Código Civil art. 1320 (vivienda habitual de la familia)",
+  "documents": [
+   "arras",
+   "encargo"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763",
+  "key_sentence": "Para disponer de los derechos sobre la vivienda habitual y los muebles de uso ordinario de la familia, aunque tales derechos pertenezcan a uno solo de los cónyuges, se requerirá el consentimiento de ambos",
+  "verified": "2026-09-05",
+  "what_to_review": "Firma del cónyuge no titular en arras; declaración de que el inmueble no es vivienda familiar."
+ },
+ {
+  "id": "CCCat-621-8",
+  "provision": "Código Civil de Cataluña art. 621-8 (arras)",
+  "documents": [
+   "arras",
+   "reserva"
+  ],
+  "regions": [
+   "ES-CT"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2017-2466",
+  "key_sentence": "Las arras penitenciales deben pactarse expresamente. Si el comprador desiste del contrato, las pierde",
+  "verified": "2026-09-05",
+  "what_to_review": "Variante CCCat de la estipulación 3 de arras y 7 de reserva; depósito notarial máximo seis meses."
+ },
+ {
+  "id": "CCCat-621-49",
+  "provision": "Código Civil de Cataluña art. 621-49 (desistimiento por falta de financiación)",
+  "documents": [
+   "arras"
+  ],
+  "regions": [
+   "ES-CT"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2017-2466",
+  "key_sentence": "puede desistir del contrato si justifica documentalmente, en el plazo pactado, la negativa de la entidad designada a conceder la financiación",
+  "verified": "2026-09-05",
+  "what_to_review": "Estipulación 4 de arras en Cataluña (financiación) y la frase financiacion_cccat_frase."
+ },
+ {
+  "id": "CCCat-231-9",
+  "provision": "Código Civil de Cataluña art. 231-9 (vivienda familiar)",
+  "documents": [
+   "arras"
+  ],
+  "regions": [
+   "ES-CT"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-13312",
+  "key_sentence": "el cónyuge titular, sin el consentimiento del otro, no puede hacer acto alguno de enajenación, gravamen o, en general, disposición de su derecho sobre la vivienda familiar",
+  "verified": "2026-09-05",
+  "what_to_review": "Firma del cónyuge en arras en Cataluña; el consentimiento no puede darse con carácter general."
+ },
+ {
+  "id": "TRLGDCU-102",
+  "provision": "TRLGDCU art. 102 (derecho de desistimiento, 14 o 30 días)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555",
+  "key_sentence": "tendrá derecho a desistir del contrato durante un periodo de catorce días naturales sin indicar el motivo",
+  "verified": "2026-09-05",
+  "what_to_review": "Plazo del bloque de desistimiento (14 o 30 días) y sus consecuencias."
+ },
+ {
+  "id": "TRLGDCU-ANEXO",
+  "provision": "TRLGDCU Anexo A y B (información y formulario de desistimiento)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555",
+  "key_sentence": "Tiene usted derecho a desistir del presente contrato en un plazo de 14 días naturales sin necesidad de justificación",
+  "verified": "2026-09-05",
+  "what_to_review": "Texto del bloque «Derecho de desistimiento» y del Anexo I de la nota de encargo: compararlo con references/desistimiento.md."
+ },
+ {
+  "id": "IB-DA14",
+  "provision": "Ley 3/2024 Illes Balears DA 14 (registro voluntario desde Ley 4/2026)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-IB"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-15575",
+  "key_sentence": "La inscripción en este tiene, en todo caso, carácter voluntario",
+  "verified": "2026-09-05",
+  "what_to_review": "Si la frase desaparece, el registro puede haber vuelto a ser obligatorio: campo ROAI obligatorio en la parte A.2."
+ },
+ {
+  "id": "IB-DA13-17",
+  "provision": "Ley 3/2024 Illes Balears DA 13 punto 17 (contenido de la nota de encargo)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-IB"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-15575",
+  "key_sentence": "Datos de la póliza del seguro de responsabilidad civil y del seguro o póliza de caución o fianza",
+  "verified": "2026-09-05",
+  "what_to_review": "Lista de campos de la parte A de la nota de encargo en Baleares."
+ },
+ {
+  "id": "IB-DA13-13",
+  "provision": "Ley 3/2024 Illes Balears DA 13 puntos 13 y 16 (garantía 60.000 €, RC 100.000/600.000 €)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-IB"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2024-15575",
+  "key_sentence": "El importe mínimo de la garantía es de 60.000 euros por año de cobertura",
+  "verified": "2026-09-05",
+  "what_to_review": "Importes en references/regiones.md (fila ES-IB)."
+ },
+ {
+  "id": "CT-L18-55",
+  "provision": "Llei 18/2007 Cataluña art. 55 (nota de encargo obligatoria y su contenido)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-CT"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2008-3657",
+  "key_sentence": "no pueden hacer oferta ni publicidad de inmuebles de terceros si no han suscrito antes la nota de encargo",
+  "verified": "2026-09-05",
+  "what_to_review": "Lista a) a j) de la parte A de la nota de encargo en Cataluña."
+ },
+ {
+  "id": "CT-D12-8",
+  "provision": "Decret 12/2010 Cataluña art. 8 y 11 (garantía y seguro)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-CT"
+  ],
+  "url": "https://legado.elnotario.es/images/pdf/LAU-N30-14-CAT-Decreto-12-2010.pdf",
+  "key_sentence": "60.000 euros per establiment obert al públic a Catalunya i any de cobertura",
+  "verified": "2026-09-05",
+  "what_to_review": "Importes en references/regiones.md (fila ES-CT). La fuente oficial es el DOGC núm. 5563; el enlace es un espejo."
+ },
+ {
+  "id": "CT-CONSUM-128-1",
+  "provision": "Codi de consum de Cataluña art. 128-1 (documentos en catalán a petición del consumidor)",
+  "documents": [
+   "encargo",
+   "arras",
+   "reserva"
+  ],
+  "regions": [
+   "ES-CT"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-13115",
+  "key_sentence": "tienen derecho a recibir en catalán",
+  "verified": "2026-09-05",
+  "what_to_review": "Ofrecer la segunda columna en catalán en Cataluña."
+ },
+ {
+  "id": "MD-RAIN",
+  "provision": "Comunidad de Madrid, RAIN (Decreto 8/2018, registro voluntario)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-MD"
+  ],
+  "url": "https://www.comunidad.madrid/vivienda/registro-agentes-inmobiliarios-rain",
+  "key_sentence": "gratuito y voluntario",
+  "verified": "2026-09-05",
+  "what_to_review": "Madrid anunció en junio de 2026 un proyecto para hacer obligatorio el registro. Si la frase desaparece, comprobar el BOCM y actualizar regiones.md."
+ },
+ {
+  "id": "L10-2010-3",
+  "provision": "Ley 10/2010 art. 3 (identificación antes de la relación de negocios)",
+  "documents": [
+   "kyc"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-6737",
+  "key_sentence": "Con carácter previo al establecimiento de la relación de negocios o a la ejecución de cualesquiera operaciones, los sujetos obligados comprobarán la identidad de los intervinientes mediante documentos fehacientes",
+  "verified": "2026-09-05",
+  "what_to_review": "Momento de la identificación en la guía 02."
+ },
+ {
+  "id": "L10-2010-25",
+  "provision": "Ley 10/2010 art. 25 (conservación diez años)",
+  "documents": [
+   "kyc"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2010-6737",
+  "key_sentence": "conservarán durante un período de diez años la documentación en que se formalice el cumplimiento de las obligaciones",
+  "verified": "2026-09-05",
+  "what_to_review": "Plazo de conservación en las declaraciones de los formularios KYC y en «Lo esencial»."
+ },
+ {
+  "id": "AMLR-22",
+  "provision": "Reglamento (UE) 2024/1624 art. 22 (datos de identificación) y art. 90 (aplicación desde el 10 de julio de 2027)",
+  "documents": [
+   "kyc"
+  ],
+  "regions": [],
+  "url": "https://eur-lex.europa.eu/eli/reg/2024/1624/oj/spa",
+  "key_sentence": "lugar de nacimiento",
+  "verified": "2026-09-05",
+  "what_to_review": "Campos de identidad de los formularios KYC. A partir del 10 de julio de 2027, conservación cinco años y verificación tras la aceptación de la oferta: actualizar la guía 02 y las declaraciones."
+ },
+ {
+  "id": "L7-2012-7",
+  "provision": "Ley 7/2012 art. 7 (límite de pagos en efectivo: 1.000 euros con profesionales, 10.000 para pagadores no residentes)",
+  "documents": [
+   "reserva",
+   "arras",
+   "encargo"
+  ],
+  "regions": [],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-13416",
+  "key_sentence": "No podrán pagarse en efectivo las operaciones, en las que alguna de las partes intervinientes actúe en calidad de empresario o profesional, con un importe igual o superior a 1.000 euros",
+  "verified": "2026-09-06",
+  "what_to_review": "Frase «No se admiten pagos en efectivo» en reserva, arras y encargo."
+ },
+ {
+  "id": "AN-L5-2025-50",
+  "provision": "Ley 5/2025 de Vivienda de Andalucía art. 50 (registro obligatorio de agentes)",
+  "documents": [
+   "encargo",
+   "colaboracion"
+  ],
+  "regions": [
+   "ES-AN"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-423",
+  "key_sentence": "de carácter público, administrativo, gratuito y obligatorio",
+  "verified": "2026-09-08",
+  "what_to_review": "Si aparece el reglamento del registro, la línea de registro en Andalucía pasa de \"pendiente de desarrollo reglamentario\" a número obligatorio; importes de garantía y seguro en regiones.md."
+ },
+ {
+  "id": "AN-L5-2025-53",
+  "provision": "Ley 5/2025 de Vivienda de Andalucía art. 53.3 (póliza o aval en la nota de encargo)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-AN"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2026-423",
+  "key_sentence": "Esta información deberá incluirse igualmente en el contrato de mandato o la nota de encargo",
+  "verified": "2026-09-08",
+  "what_to_review": "Bloque seguro de la nota de encargo obligatorio en Andalucía (guía 01)."
+ },
+ {
+  "id": "VC-L2-2017-DA6",
+  "provision": "Ley 2/2017 Comunitat Valenciana DA 6.ª (registro obligatorio RAICV)",
+  "documents": [
+   "encargo",
+   "colaboracion"
+  ],
+  "regions": [
+   "ES-VC"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2017-2421",
+  "key_sentence": "creará un registro obligatorio de agentes de intermediación inmobiliaria",
+  "verified": "2026-09-08",
+  "what_to_review": "Si la obligación desaparece, la línea de registro en Valencia pasa a voluntaria."
+ },
+ {
+  "id": "EX-L11-2019-50",
+  "provision": "Ley 11/2019 Extremadura art. 50.4.c (seguro de RC obligatorio) y art. 51 (registro previsto)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-EX"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2019-7224",
+  "key_sentence": "creará un registro de agentes y agencias inmobiliarias",
+  "verified": "2026-09-08",
+  "what_to_review": "Si el registro se desarrolla, fila ES-EX de regiones.md y línea de registro."
+ },
+ {
+  "id": "PV-L3-2015-DA1",
+  "provision": "Ley 3/2015 País Vasco DA 1.ª (registro previsto, garantía y RC)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-PV"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-7802",
+  "key_sentence": "Se constituirá reglamentariamente un registro administrativo que tendrá por objeto la inscripción de los agentes inmobiliarios o agencias",
+  "verified": "2026-09-08",
+  "what_to_review": "Si el registro se desarrolla, fila ES-PV de regiones.md."
+ },
+ {
+  "id": "MC-L6-2015-54",
+  "provision": "Ley 6/2015 Región de Murcia art. 54.2 (registro de homologación previsto)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-MC"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2015-4747",
+  "key_sentence": "se creará un registro de homologación de agentes vinculados con el sector de la vivienda",
+  "verified": "2026-09-08",
+  "what_to_review": "Si el registro se desarrolla, fila ES-MC de regiones.md."
+ },
+ {
+  "id": "NC-FN-467",
+  "provision": "Fuero Nuevo de Navarra ley 467 (arras: penitenciales solo por pacto expreso)",
+  "documents": [
+   "arras",
+   "reserva"
+  ],
+  "regions": [
+   "ES-NC"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1973-330",
+  "key_sentence": "sólo cuando expresamente se estableciere podrán una o cualquiera de las partes",
+  "verified": "2026-09-08",
+  "what_to_review": "Variante FN de la estipulación 3 de arras y 7 de reserva."
+ },
+ {
+  "id": "NC-FN-81",
+  "provision": "Fuero Nuevo de Navarra ley 81 (vivienda familiar)",
+  "documents": [
+   "arras"
+  ],
+  "regions": [
+   "ES-NC"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1973-330",
+  "key_sentence": "Se necesitará el consentimiento de ambos cónyuges para disponer",
+  "verified": "2026-09-08",
+  "what_to_review": "Declaración de vivienda familiar en arras (Navarra)."
+ },
+ {
+  "id": "AR-CDFA-190",
+  "provision": "Código del Derecho Foral de Aragón art. 190 (vivienda familiar)",
+  "documents": [
+   "arras"
+  ],
+  "regions": [
+   "ES-AR"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOA-d-2011-90007",
+  "key_sentence": "será necesario el consentimiento del otro o, en su defecto, autorización judicial",
+  "verified": "2026-09-08",
+  "what_to_review": "Declaración de vivienda familiar en arras (Aragón)."
+ },
+ {
+  "id": "IB-COMP-4-3",
+  "provision": "Compilación de derecho civil de las Illes Balears art. 4.3 (vivienda familiar)",
+  "documents": [
+   "arras"
+  ],
+  "regions": [
+   "ES-IB"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOIB-i-1990-90001",
+  "key_sentence": "se requiere el consentimiento de los dos o, en su caso, autorización judicial",
+  "verified": "2026-09-08",
+  "what_to_review": "Declaración de vivienda familiar en arras (Baleares): cita el art. 4.3 (o 67.1 en Eivissa y Formentera)."
+ },
+ {
+  "id": "CN-DL1-2025-32",
+  "provision": "Decreto Legislativo 1/2025 Canarias art. 32.1 (tipo general del IGIC)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-CN"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOC-j-2025-90249",
+  "key_sentence": "El tipo general en el impuesto general indirecto canario es el 7 %",
+  "verified": "2026-09-08",
+  "what_to_review": "Tipo del IGIC en regiones.md y en la fila de honorarios (Canarias)."
+ },
+ {
+  "id": "L37-1992-90",
+  "provision": "Ley 37/1992 del IVA art. 90 (tipo general)",
+  "documents": [
+   "encargo",
+   "colaboracion"
+  ],
+  "regions": [
+   "ES"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1992-28740",
+  "key_sentence": "El Impuesto se exigirá al tipo del 21 por ciento",
+  "verified": "2026-09-08",
+  "what_to_review": "Tipo del IVA en regiones.md y en los honorarios."
+ },
+ {
+  "id": "TRLGDCU-60",
+  "provision": "TRLGDCU art. 60.2.c y 60.4 (precio total con impuestos; lengua cooficial a petición)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555",
+  "key_sentence": "a petición de cualquiera de las partes, deberá redactarse también en cualquiera de las otras lenguas oficiales",
+  "verified": "2026-09-08",
+  "what_to_review": "Total con impuesto incluido en la fila de honorarios; segunda columna en lengua cooficial a petición."
+ },
+ {
+  "id": "PV-L4-2023-79",
+  "provision": "Ley 4/2023 País Vasco art. 79 (derechos lingüísticos de las personas consumidoras)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-PV"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2023-13537",
+  "key_sentence": "tienen derecho a recibir en euskera o en castellano la información sobre bienes y servicios",
+  "verified": "2026-09-08",
+  "what_to_review": "Columna de lengua de la fila ES-PV."
+ },
+ {
+  "id": "GA-L2-2012-46",
+  "provision": "Ley 2/2012 Galicia art. 46 (derecho a usar cualquiera de las lenguas oficiales)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-GA"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2012-5595",
+  "key_sentence": "tienen derecho a usar cualquiera de las lenguas oficiales de la Comunidad Autónoma de Galicia",
+  "verified": "2026-09-08",
+  "what_to_review": "Columna de lengua de la fila ES-GA."
+ },
+ {
+  "id": "IB-L7-2014-30",
+  "provision": "Ley 7/2014 Illes Balears art. 30 (lengua de la información al consumidor)",
+  "documents": [
+   "encargo"
+  ],
+  "regions": [
+   "ES-IB"
+  ],
+  "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2014-8820",
+  "key_sentence": "deberá figurar al menos en una de las dos lenguas oficiales de la comunidad autónoma",
+  "verified": "2026-09-08",
+  "what_to_review": "Columna de lengua de la fila ES-IB."
+ }
+]

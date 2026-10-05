@@ -1,0 +1,111 @@
+<!--
+PLANTILLA 02a: FORMULARIO DE IDENTIFICACIÓN Y DILIGENCIA DEBIDA, COMPRADOR (ES + idioma del cliente)
+Formulario, no contrato. Cuadro A: el cliente escanea su documento al firmar (campo tink-scan-id, imagen 180x120 pt a la derecha) y
+los datos de identidad se extraen automáticamente a los campos (atributos tink-scanned-id-mrz-*, siempre campos, nunca texto). El escaneo es obligatorio: el campo de escaneo y los seis datos que toda zona legible contiene (nombre, apellidos, nacimiento, nacionalidad, número, caducidad) son obligatorios; sin escanear no se puede firmar.
+Cuadros A (identidad), B (actividad u operación), C (PEP), opcionales y declaraciones; cada dato una sola vez, en su cuadro, impreso o como campo que rellena el cliente al firmar. Lo rellena el agente con lo que el cliente le dice y lo firma el cliente con verificación
+de identidad (foto del documento y, si la cuenta lo permite, prueba de vida). Campos según el Reglamento (UE) 2024/1624
+y la Ley 10/2010, en la lista de la guía. Este documento sí cita la Ley 10/2010 como base del tratamiento (excepción permitida).
+Opcionales: persona_juridica, representante.
+Perfil recomendado: oficial. Firmante: el comprador (y su representante si lo hay), con id_scan.
+-->
+<table class="header"><tr>
+  <td class="logo">{{logo_html}}</td>
+  <td class="org">{{agencia_nombre}}<br>{{agencia_direccion}}<br>NIF {{agencia_nif}}{{agencia_registro_linea}}</td>
+</tr></table>
+<div class="reference">Ref. {{referencia}} · {{lugar}}, {{fecha_larga}}</div>
+
+<h1>Formulario de identificación del comprador / Buyer identification form</h1>
+
+
+<h2>A. Identidad / Identity</h2>
+<table class="form identity">
+  <tr><td class="k">Nombre <span class="tr-lbl">/ First name(s)</span></td><td><span class="pdf-field" data-name="nombre|tink-scanned-id-mrz-firstname[1]|tink-style-transparent" data-required="0" data-width="135" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td><td class="image" rowspan="10"><div class="lbl">Documento de identidad <span class="tr-lbl">/ Identity document</span></div><span class="pdf-field image" data-name="documento_scan|tink-scan-id[1]" data-width="180" data-height="120" data-required="1" style="width:180pt !important;height:120pt !important"><span class="field-mark">FIELDMARK</span></span><div class="lbl">Reverso <span class="tr-lbl">/ Back</span></div><div class="back"><span class="pdf-field button" data-name="documento_reverso_subir|tink-upload-attachment[1]|tink-style-transparent" data-width="75" data-height="22" style="width:75pt !important;height:22pt !important"><span class="field-mark">FIELDMARK</span></span><span class="back-text">Pulse el botón y fotografíe el reverso <span class="tr-lbl">/ Press the button and photograph the back</span></span></div><div class="val"><span class="pdf-field" data-name="documento_reverso_nombre|tink-uploaded-attachmentname[1]" data-width="180" data-readonly="1" style="width:180pt"><span class="field-mark">FIELDMARK</span></span></div></td></tr>
+  <tr><td class="k">Apellidos <span class="tr-lbl">/ Surname(s)</span></td><td><span class="pdf-field" data-name="apellidos|tink-scanned-id-mrz-lastname[1]|tink-style-transparent" data-required="0" data-width="135" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Fecha de nacimiento <span class="tr-lbl">/ Date of birth</span></td><td><span class="pdf-field" data-name="fecha_nacimiento|tink-scanned-id-mrz-birthdate[1]|tink-style-transparent" data-required="0" data-width="135" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Lugar de nacimiento <span class="tr-lbl">/ Place of birth</span></td><td><span class="pdf-field" data-name="lugar_nacimiento|tink-scanned-id-mrz-placeofbirth[1]|tink-style-transparent" data-width="135" data-required="0" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Nacionalidad <span class="tr-lbl">/ Nationality</span></td><td><span class="pdf-field" data-name="nacionalidad|tink-scanned-id-mrz-nationality[1]|tink-style-transparent" data-required="0" data-width="135" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Documento n.º <span class="tr-lbl">/ Document no.</span></td><td><span class="pdf-field" data-name="documento_numero|tink-scanned-id-mrz-documentid[1]|tink-style-transparent" data-required="0" data-width="135" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">País emisor <span class="tr-lbl">/ Issuing country</span></td><td><span class="pdf-field" data-name="documento_pais|tink-scanned-id-mrz-issuingstatename[1]|tink-style-transparent" data-width="135" data-required="0" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Fecha de expedición <span class="tr-lbl">/ Date of issue</span></td><td><span class="pdf-field" data-name="documento_expedicion|tink-scanned-id-mrz-issuedate[1]|tink-style-transparent" data-width="135" data-required="0" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Fecha de caducidad <span class="tr-lbl">/ Expiry date</span></td><td><span class="pdf-field" data-name="documento_caducidad|tink-scanned-id-mrz-expirydate[1]|tink-style-transparent" data-required="0" data-width="135" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">N.º personal del documento <span class="tr-lbl">/ Personal number on the document</span></td><td><span class="pdf-field" data-name="documento_personal|tink-scanned-id-mrz-personalnumber[1]|tink-style-transparent" data-width="135" data-required="0" style="width:135pt"><span class="field-mark">FIELDMARK</span></span></td></tr>
+  <tr><td class="k">Domicilio habitual <span class="tr-lbl">/ Usual residence</span></td><td colspan="2">{{domicilio}}</td></tr>
+  <tr><td class="k">País de residencia fiscal <span class="tr-lbl">/ Country of tax residence</span></td><td colspan="2">{{residencia_fiscal}}</td></tr>
+  <tr><td class="k">NIF / NIE o número fiscal <span class="tr-lbl">/ Spanish tax number or TIN</span></td><td colspan="2">{{nif}}</td></tr>
+  <tr><td class="k">Teléfono <span class="tr-lbl">/ Telephone</span></td><td colspan="2">{{telefono}}</td></tr>
+  <tr><td class="k">Correo electrónico <span class="tr-lbl">/ E-mail</span></td><td colspan="2">{{email}}</td></tr>
+</table>
+
+<h2>B. Actividad y operación / Activity and transaction</h2>
+<table class="form">
+  <tr><td class="k">Profesión o actividad <span class="tr-lbl">/ Occupation or business</span></td><td>{{profesion}}</td></tr>
+  <tr><td class="k">Finalidad de la compra <span class="tr-lbl">/ Purpose of the purchase</span></td><td>{{finalidad}} <span class="tr-val">/ {{finalidad_tr}}</span></td></tr>
+  <tr><td class="k">Origen de los fondos <span class="tr-lbl">/ Source of funds</span></td><td>{{origen_fondos}} <span class="tr-val">/ {{origen_fondos_tr}}</span></td></tr>
+  <tr><td class="k">Financiación bancaria prevista <span class="tr-lbl">/ Bank financing expected</span></td><td>{{financiacion}} <span class="tr-val">/ {{financiacion_tr}}</span></td></tr>
+  <tr><td class="k">Actúa en nombre propio <span class="tr-lbl">/ Acting on own behalf</span></td><td>{{nombre_propio}} <span class="tr-val">/ {{nombre_propio_tr}}</span></td></tr>
+</table>
+
+<h2>C. Personas con responsabilidad pública / Politically exposed persons</h2>
+<table class="bi">
+  <tr><td>¿Desempeña o ha desempeñado en los últimos doce meses usted, un familiar suyo o una persona allegada un cargo público importante (jefe de Estado o de Gobierno, ministro, parlamentario, magistrado de tribunal supremo o constitucional, embajador, alto mando militar, directivo de empresa pública, dirigente de partido u organización internacional)?</td>
+      <td class="tr">Do you, a family member or a close associate hold, or have you held in the last twelve months, a prominent public function (head of State or government, minister, member of parliament, supreme or constitutional court judge, ambassador, high-ranking officer, director of a State-owned enterprise, party leader or official of an international organisation)?</td></tr>
+  <tr><td><span class="checkbox{{pep_no_marca}}"></span> No. &nbsp; <span class="checkbox{{pep_si_marca}}"></span> Sí: {{pep_detalle}}</td>
+      <td class="tr"><span class="checkbox{{pep_no_marca}}"></span> No. &nbsp; <span class="checkbox{{pep_si_marca}}"></span> Yes: {{pep_detalle_tr}}</td></tr>
+</table>
+
+<!-- OPTIONAL: representante -->
+<h2>Representante / Representative</h2>
+<table class="form">
+  <tr><td class="k">Nombre y apellidos <span class="tr-lbl">/ Full name</span></td><td>{{rep_nombre}}</td></tr>
+  <tr><td class="k">Fecha y lugar de nacimiento, nacionalidad <span class="tr-lbl">/ Date and place of birth, nationality</span></td><td>{{rep_nacimiento}}, {{rep_nacionalidad}}</td></tr>
+  <tr><td class="k">Documento de identidad <span class="tr-lbl">/ Identity document</span></td><td>{{rep_documento}}</td></tr>
+  <tr><td class="k">Domicilio <span class="tr-lbl">/ Address</span></td><td>{{rep_domicilio}}</td></tr>
+  <tr><td class="k">Poder <span class="tr-lbl">/ Power of attorney</span></td><td>{{rep_poder}}</td></tr>
+</table>
+<!-- /OPTIONAL -->
+
+<!-- OPTIONAL: persona_juridica -->
+<h2>Persona jurídica compradora / Corporate buyer</h2>
+<table class="form">
+  <tr><td class="k">Denominación y forma jurídica <span class="tr-lbl">/ Name and legal form</span></td><td>{{pj_denominacion}}</td></tr>
+  <tr><td class="k">NIF, registro y número <span class="tr-lbl">/ Tax ID, register and number</span></td><td>{{pj_nif}} · {{pj_registro}}</td></tr>
+  <tr><td class="k">Domicilio social y centro de actividad <span class="tr-lbl">/ Registered office and principal place of business</span></td><td>{{pj_domicilio}}</td></tr>
+  <tr><td class="k">País de constitución <span class="tr-lbl">/ Country of incorporation</span></td><td>{{pj_pais}}</td></tr>
+  <tr><td class="k">Administradores <span class="tr-lbl">/ Directors</span></td><td>{{pj_administradores}}</td></tr>
+  <tr><td class="k">Actividad <span class="tr-lbl">/ Business activity</span></td><td>{{pj_actividad}}</td></tr>
+  <tr><td class="k">Titulares reales (25 % o más, o control por otros medios): nombre, fecha y lugar de nacimiento, nacionalidad, documento, domicilio, porcentaje <span class="tr-lbl">/ Beneficial owners (25 % or more, or control by other means): name, date and place of birth, nationality, ID document, address, percentage</span></td><td>{{pj_titulares_reales}}</td></tr>
+  <tr><td class="k">Accionistas o administradores fiduciarios <span class="tr-lbl">/ Nominee shareholders or directors</span></td><td>{{pj_fiduciarios}} <span class="tr-val">/ {{pj_fiduciarios_tr}}</span></td></tr>
+  <tr><td class="k">Documentación aportada <span class="tr-lbl">/ Documents provided</span></td><td>{{pj_documentos}} <span class="tr-val">/ {{pj_documentos_tr}}</span></td></tr>
+</table>
+<!-- /OPTIONAL -->
+
+<h2>Declaraciones / Declarations</h2>
+<table class="bi">
+  <tr><td>El firmante declara que los datos de los cuadros anteriores son ciertos y completos, que el documento de identidad aportado está en vigor, que los fondos destinados a la compra tienen origen lícito y que comunicará a la agencia cualquier cambio en estos datos mientras dure la operación.</td>
+      <td class="tr">The signatory declares that the details in the boxes above are true and complete, that the identity document provided is valid, that the funds intended for the purchase are of lawful origin and that he or she will inform the agency of any change in these details for the duration of the transaction.</td></tr>
+  <tr><td>La agencia, {{agencia_nombre}}, es responsable del tratamiento de estos datos. Los trata para cumplir las obligaciones de identificación y diligencia debida que le impone la Ley 10/2010, de 28 de abril, de prevención del blanqueo de capitales y de la financiación del terrorismo, y los conserva durante diez años desde el fin de la relación, sin usarlos para otros fines. Puede comunicarlos a las autoridades competentes cuando la ley lo exija. La copia del documento de identidad se almacena en soporte electrónico que garantiza su integridad. El firmante puede ejercer sus derechos de acceso, rectificación y los demás previstos en la normativa de protección de datos en {{agencia_email_datos}}, sin que ello afecte a las obligaciones legales de conservación.</td>
+      <td class="tr">The agency, {{agencia_nombre}}, is the controller of these data. It processes them to comply with the identification and due diligence obligations imposed by Spanish Law 10/2010 of 28 April on the prevention of money laundering and terrorist financing, and keeps them for ten years after the end of the relationship, without using them for any other purpose. It may disclose them to the competent authorities where the law so requires. The copy of the identity document is stored electronically in a manner that ensures its integrity. The signatory may exercise the rights of access, rectification and the other rights provided for by data protection law at {{agencia_email_datos}}, without prejudice to the statutory retention obligations.</td></tr>
+</table>
+
+<!-- SIGNATURES -->
+
+<!-- Cuadro D: lo cumplimenta la agencia a mano después de la firma del cliente; sin campos PDF, sin instrucciones de método -->
+<h2 class="new-page">D. Comprobación y valoración por la agencia / Verification and assessment by the agency</h2>
+<p class="assessment-note">Cumplimenta la agencia después de la firma del cliente. No lo rellena el cliente. <span class="tr-val">/ Completed by the agency after the client has signed. Not filled in by the client.</span></p>
+<table class="form assessment">
+  <tr><td class="k">Estado <span class="tr-lbl">/ Status</span></td><td><span class="checkbox"></span> Datos recogidos <span class="tr-val">/ Data collected</span> &nbsp; <span class="checkbox"></span> Identidad comprobada <span class="tr-val">/ Identity verified</span> &nbsp; <span class="checkbox"></span> Diligencia debida valorada <span class="tr-val">/ Due diligence assessed</span></td></tr>
+  <tr><td class="k">Comprobación de la identidad <span class="tr-lbl">/ Identity verification</span></td><td><span class="checkbox"></span> Presencial, con el documento original <span class="tr-val">/ In person, original document</span><br><span class="checkbox"></span> Otro procedimiento <span class="tr-val">/ Other procedure</span>: <span class="blank"></span></td></tr>
+  <tr><td class="k">Fecha de la comprobación <span class="tr-lbl">/ Date of verification</span></td><td><span class="blank short"></span></td></tr>
+  <tr><td class="k">Documento comprobado <span class="tr-lbl">/ Document verified</span></td><td><span class="checkbox"></span> Pasaporte <span class="checkbox"></span> DNI / NIE <span class="checkbox"></span> Otro <span class="tr-val">/ Other</span> &nbsp; N.º: <span class="blank short"></span><br><span class="checkbox"></span> En vigor en la fecha de la comprobación <span class="tr-val">/ Valid on the date of verification</span></td></tr>
+  <tr><td class="k">Comprobado por <span class="tr-lbl">/ Verified by</span></td><td><span class="blank"></span></td></tr>
+  <tr><td class="k">Representación (si procede) <span class="tr-lbl">/ Representation (if any)</span></td><td><span class="checkbox"></span> Poder en documento público exhibido <span class="tr-val">/ Power of attorney in a public deed shown</span> &nbsp; Notario y fecha <span class="tr-val">/ Notary and date</span>: <span class="blank short"></span><br><span class="checkbox"></span> Copia del documento del representado obtenida <span class="tr-val">/ Copy of the principal's identity document obtained</span></td></tr>
+  <tr><td class="k">Titular real (personas jurídicas) <span class="tr-lbl">/ Beneficial owner (legal persons)</span></td><td><span class="checkbox"></span> Identificado <span class="tr-val">/ Identified</span> &nbsp; Comprobado con <span class="tr-val">/ Verified with</span>: <span class="checkbox"></span> Registro Mercantil <span class="checkbox"></span> Estatutos o libro de socios <span class="tr-val">/ Articles or share register</span> <span class="checkbox"></span> Declaración responsable<br><span class="checkbox"></span> Sin participación superior al 25 %: administrador anotado como titular real <span class="tr-val">/ No holding above 25 %: director recorded as beneficial owner</span></td></tr>
+  <tr><td class="k">Propósito e índole de la relación <span class="tr-lbl">/ Purpose and nature</span></td><td><span class="checkbox"></span> Finalidad, financiación y fondos coherentes con la actividad declarada <span class="tr-val">/ Purpose, financing and funds consistent with the declared activity</span><br><span class="checkbox"></span> Discrepancia <span class="tr-val">/ Discrepancy</span>: <span class="blank"></span></td></tr>
+  <tr><td class="k">Persona con responsabilidad pública <span class="tr-lbl">/ Politically exposed person</span></td><td><span class="checkbox"></span> No <span class="checkbox"></span> Sí, o allegado <span class="tr-val">/ Yes, or close associate</span><br>Si sí <span class="tr-val">/ If yes</span>: <span class="checkbox"></span> Medidas reforzadas aplicadas <span class="tr-val">/ Enhanced measures applied</span> <span class="checkbox"></span> Origen del patrimonio documentado <span class="tr-val">/ Source of wealth documented</span> &nbsp; Aprobado por <span class="tr-val">/ Approved by</span>: <span class="blank short"></span><br><span class="row-note">OpenSanctions es un servicio que puede utilizarse para consultar registros de personas con responsabilidad pública. <span class="tr-val">/ OpenSanctions is a service that can be used to search registers of politically exposed persons.</span></span></td></tr>
+  <tr><td class="k">Factores de riesgo <span class="tr-lbl">/ Risk factors</span></td><td><span class="checkbox"></span> No residente en la UE / EEE <span class="tr-val">/ Not resident in the EU / EEA</span> <span class="checkbox"></span> País de alto riesgo <span class="tr-val">/ High-risk country</span>: <span class="blank short"></span><br><span class="checkbox"></span> Efectivo en la operación <span class="tr-val">/ Cash in the transaction</span> <span class="checkbox"></span> Estructura compleja o fideicomiso <span class="tr-val">/ Complex structure or trust</span> <span class="checkbox"></span> Paga un tercero <span class="tr-val">/ Third party pays</span><br><span class="checkbox"></span> Importe o estructura inusual para el cliente <span class="tr-val">/ Amount or structure unusual for the client</span> <span class="checkbox"></span> Ninguno <span class="tr-val">/ None</span></td></tr>
+  <tr><td class="k">Clasificación del riesgo <span class="tr-lbl">/ Risk class</span></td><td><span class="checkbox"></span> Bajo <span class="tr-val">/ Low</span> <span class="checkbox"></span> Medio <span class="tr-val">/ Medium</span> <span class="checkbox"></span> Alto <span class="tr-val">/ High</span> &nbsp; Medidas reforzadas <span class="tr-val">/ Enhanced measures</span>: <span class="blank short"></span></td></tr>
+  <tr><td class="k">Origen de los fondos <span class="tr-lbl">/ Source of funds</span></td><td><span class="checkbox"></span> Declaración suficiente (riesgo bajo) <span class="tr-val">/ Declaration sufficient (low risk)</span><br>Acreditado con <span class="tr-val">/ Evidenced by</span>: <span class="checkbox"></span> Extracto bancario <span class="tr-val">/ Bank statement</span> <span class="checkbox"></span> Oferta de préstamo <span class="tr-val">/ Loan offer</span> <span class="checkbox"></span> Escritura de venta <span class="tr-val">/ Sale deed</span> <span class="checkbox"></span> Otro <span class="tr-val">/ Other</span>: <span class="blank short"></span></td></tr>
+  <tr><td class="k">Examen especial <span class="tr-lbl">/ Special examination</span></td><td><span class="checkbox"></span> Sin indicios <span class="tr-val">/ No indications</span> <span class="checkbox"></span> Indicios: informe interno de fecha <span class="tr-val">/ Indications: internal report dated</span> <span class="blank short"></span></td></tr>
+  <tr><td class="k">Decisión <span class="tr-lbl">/ Decision</span></td><td><span class="checkbox"></span> Se acepta la relación <span class="tr-val">/ Relationship accepted</span> <span class="checkbox"></span> Se acepta con medidas reforzadas <span class="tr-val">/ Accepted with enhanced measures</span> <span class="checkbox"></span> Se rechaza <span class="tr-val">/ Declined</span><br>Aprobado por <span class="tr-val">/ Approved by</span>: <span class="blank short"></span> &nbsp; Fecha <span class="tr-val">/ Date</span>: <span class="blank short"></span> &nbsp; Firma <span class="tr-val">/ Signature</span>: <span class="blank short"></span></td></tr>
+  <tr><td class="k">Seguimiento <span class="tr-lbl">/ Follow-up</span></td><td>Próxima revisión <span class="tr-val">/ Next review</span>: <span class="blank short"></span><br><span class="row-note">Este formulario y las copias de los documentos se conservan diez años desde el fin de la relación de negocios. <span class="tr-val">/ This form and the document copies are kept for ten years from the end of the business relationship.</span></span></td></tr>
+</table>

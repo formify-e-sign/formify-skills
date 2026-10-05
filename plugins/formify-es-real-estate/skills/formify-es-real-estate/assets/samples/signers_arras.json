@@ -1,0 +1,26 @@
+[
+ {
+  "name": "Anna Andersson",
+  "role": "Vendedora",
+  "id_scan": true,
+  "role_tr": "Seller"
+ },
+ {
+  "name": "Erik Andersson",
+  "role": "Cónyuge",
+  "id_scan": true,
+  "role_tr": "Spouse"
+ },
+ {
+  "name": "Jan de Vries",
+  "role": "Comprador",
+  "id_scan": true,
+  "role_tr": "Buyer"
+ },
+ {
+  "name": "María López García",
+  "role": "Agencia depositaria",
+  "id_scan": false,
+  "role_tr": "Escrow agency"
+ }
+]

@@ -10,7 +10,7 @@
     {
       "name": "formify",
       "source": "plugins/formify",
-      "description": "Formify Core — for any business that needs e-signature. Build fillable PDF forms and contracts, send them for signature or publish one signing link, verify signers with BankID or an ID scan, and track what happens after sending. Not industry-specific."
+      "description": "Formify Core — e-signatures for any business. Build fillable PDF forms and contracts, send them for signature or publish one signing link, verify signers with BankID or an ID scan, and track what happens after sending."
     }
   ]
 }

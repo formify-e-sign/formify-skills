@@ -1,0 +1,14 @@
+[
+ {
+  "name": "Peter Jones",
+  "role": "Agencia titular",
+  "id_scan": false,
+  "role_tr": "Listing agency"
+ },
+ {
+  "name": "Carmen Ruiz Soler",
+  "role": "Agencia colaboradora",
+  "id_scan": false,
+  "role_tr": "Collaborating agency"
+ }
+]

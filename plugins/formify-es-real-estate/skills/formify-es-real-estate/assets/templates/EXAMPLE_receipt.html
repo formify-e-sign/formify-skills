@@ -1,0 +1,65 @@
+<!--
+TEMPLATE EXAMPLE: a short bilingual receipt. Shows every mechanism the scripts understand.
+How to use it: copy this file per document type, keep the left column (master language) as fixed clause text,
+leave the right column in the segment's default second language (translate.py swaps it for any other language),
+open with lettered data boxes (A. Parties side by side, B. the deal) whose values appear once, printed or as a form field, and let the clauses speak only of roles and boxes; mark every variable as {{field}}, wrap optional rows in OPTIONAL blocks, alternatives in VARIANT blocks, and
+put <!-- SIGNATURES -- > where the signature rows go if not after the last paragraph.
+The left column is fixed text: it is never rewritten, only the fields are filled.
+Recommended profile: light. Signers: the two parties.
+-->
+<table class="header"><tr>
+  <td class="logo">{{logo_html}}</td>
+  <td class="org">{{org_name}}<br>{{org_address}}<br>Tax ID {{org_tax_id}}</td>
+</tr></table>
+<div class="reference">Ref. {{reference}} · {{place}}, {{date_long}}</div>
+
+<h1>Example receipt / Exempelkvitto</h1>
+
+<h2>A. Parties / Parter</h2>
+<table class="form parties">
+  <tr><td class="k"></td><td class="cab">Giver <span class="tr-lbl">/ Överlämnare</span></td><td class="cab">Receiver <span class="tr-lbl">/ Mottagare</span></td></tr>
+  <tr><td class="k">Name <span class="tr-lbl">/ Namn</span></td><td>{{giver_name}}</td><td>{{receiver_name}}</td></tr>
+  <tr><td class="k">ID / Tax ID <span class="tr-lbl">/ ID-nummer</span></td><td>{{giver_id}}</td><td>{{receiver_id}}</td></tr>
+  <tr><td class="k">Address <span class="tr-lbl">/ Adress</span></td><td>{{giver_address}}</td><td>{{receiver_address}}</td></tr>
+  <tr><td class="k">E-mail <span class="tr-lbl">/ E-post</span></td><td>{{giver_email}}</td><td>{{receiver_email}}</td></tr>
+</table>
+
+<h2>B. Handover / Överlämnande</h2>
+<table class="form">
+  <tr><td class="k">What <span class="tr-lbl">/ Vad</span></td><td colspan="3">{{what}} <span class="tr-val">/ {{what_tr}}</span></td></tr>
+  <tr><td class="k">Purpose <span class="tr-lbl">/ Ändamål</span></td><td colspan="3">{{purpose}} <span class="tr-val">/ {{purpose_tr}}</span></td></tr>
+  <tr><td class="k">Item A <span class="tr-lbl">/ Föremål A</span></td><td>{{n_item_a}}</td><td class="k">Item B <span class="tr-lbl">/ Föremål B</span></td><td>{{n_item_b}}</td></tr>
+  <tr><td class="k">Until when <span class="tr-lbl">/ Till när</span></td><td colspan="3">{{until}} <span class="tr-val">/ {{until_tr}}</span></td></tr>
+</table>
+
+<h2>C. Terms / Villkor</h2>
+<table class="bi">
+  <tr><td><span class="num">1. Purpose.</span> The giver hands over to the receiver the items listed in box B, which the receiver holds for the sole purpose stated in box B. Any other use requires the giver's prior written consent.</td>
+      <td class="tr"><span class="num">1. Ändamål.</span> Överlämnaren överlämnar till mottagaren de föremål som anges i ruta B, vilka mottagaren innehar uteslutande för det ändamål som anges i ruta B. All annan användning kräver överlämnarens föregående skriftliga samtycke.</td></tr>
+
+  <tr><td><span class="num">2. Condition.</span> The receiver acknowledges receipt of the items in box B in good condition and returns them in the same condition, fair wear excepted.</td>
+      <td class="tr"><span class="num">2. Skick.</span> Mottagaren bekräftar att föremålen i ruta B mottagits i gott skick och återlämnar dem i samma skick, normalt slitage undantaget.</td></tr>
+
+  <!-- VARIANT STANDARD -->
+  <tr><td><span class="num">3. Return.</span> The receiver returns the items within {{return_days}} working days of the giver's request.</td>
+      <td class="tr"><span class="num">3. Återlämnande.</span> Mottagaren återlämnar föremålen inom {{return_days}} arbetsdagar från överlämnarens begäran.</td></tr>
+  <!-- /VARIANT STANDARD -->
+  <!-- VARIANT FIXEDDATE: activate with --variant FIXEDDATE
+  <tr><td><span class="num">3. Return.</span> The receiver returns the items no later than {{return_date}}.</td>
+      <td class="tr"><span class="num">3. Återlämnande.</span> Mottagaren återlämnar föremålen senast den {{return_date}}.</td></tr>
+  -->
+
+  <!-- OPTIONAL: loss -->
+  <tr><td><span class="num">4. Loss.</span> If the items are lost while in the receiver's possession, the receiver bears the cost of replacement.</td>
+      <td class="tr"><span class="num">4. Förlust.</span> Om föremålen förloras medan de är i mottagarens besittning bär mottagaren kostnaden för ersättning.</td></tr>
+  <!-- /OPTIONAL -->
+
+  <tr><td><span class="num">{{n_data}}. Personal data.</span> The parties' data are processed by {{org_name}} to perform this document and are kept for as long as the relationship lasts and for the statutory periods thereafter. Requests go to {{org_data_email}}.</td>
+      <td class="tr"><span class="num">{{n_data}}. Personuppgifter.</span> Parternas uppgifter behandlas av {{org_name}} för att fullgöra denna handling och bevaras så länge förhållandet består och under de lagstadgade tiderna därefter. Förfrågningar skickas till {{org_data_email}}.</td></tr>
+
+  <tr><td><span class="num">{{n_language}}. Language.</span> This document is signed in English and in {{client_language}}. In the event of any discrepancy, the English version prevails. The translated halves of the boxes are for information only.</td>
+      <td class="tr"><span class="num">{{n_language}}. Språk.</span> Denna handling undertecknas på engelska och {{client_language_tr}}. Vid avvikelse gäller den engelska versionen. Rutornas översatta halvor är endast information.</td></tr>
+
+  <tr><td>In witness whereof, the parties sign this document electronically on the date stated in the heading.</td>
+      <td class="tr">Till bekräftelse härav undertecknar parterna denna handling elektroniskt på den dag som anges i ingressen.</td></tr>
+</table>

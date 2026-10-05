@@ -1,0 +1,14 @@
+[
+ {
+  "name": "Anna Andersson",
+  "role": "Propietaria",
+  "id_scan": true,
+  "role_tr": "Owner"
+ },
+ {
+  "name": "María López García",
+  "role": "Agente inmobiliario",
+  "id_scan": false,
+  "role_tr": "Estate agent"
+ }
+]

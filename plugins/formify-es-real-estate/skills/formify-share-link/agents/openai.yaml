@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Public Signing Links"
+  short_description: "Publish one reusable link anyone can open and sign"
+  default_prompt: "Use $formify-share-link to publish this PDF as one link anyone can sign."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify public signing links and the documents they produce"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,102 @@
+<!--
+PLANTILLA 06: DOCUMENTO DE ENTREGA DE LLAVES (ES + idioma del cliente), v2 (2026-09-07)
+Estructura: cuadros A (documento), B (parte propietaria), C (agencia), D (inmueble), E (inventario) y después las
+condiciones en dos columnas que solo hablan de «la parte propietaria», «la agencia» y los cuadros. Ningún dato se
+repite en el texto. Campos: propietario_1_nombre, propietario_1_doc, propietario_1_domicilio (bloque OPCIONAL
+propietario_2 con los mismos campos _2); la agencia y el agente vienen de la memoria. Si faltan datos del
+propietario, se pasan como objetos {"campo": ...} y el propietario los rellena al firmar. Etiquetas bilingües en
+los cuadros (<span class="tr-lbl">); columna derecha de las condiciones en inglés (traducir.py para otros idiomas).
+Perfil recomendado: profesional o sencillo. Firmantes: propietario(s) y agente. Sin códigos de alarma.
+-->
+<table class="header"><tr>
+  <td class="logo">{{logo_html}}</td>
+  <td class="org">{{agencia_nombre}}<br>{{agencia_direccion}}<br>NIF {{agencia_nif}}{{agencia_registro_linea}}</td>
+</tr></table>
+
+<h1>Documento de entrega de llaves / Key handover receipt</h1>
+
+
+<h2>A. Documento / Document</h2>
+<table class="form">
+  <tr><td class="k">Referencia <span class="tr-lbl">/ Reference</span></td><td>{{referencia}}</td>
+      <td class="k">Lugar y fecha <span class="tr-lbl">/ Place and date</span></td><td>{{lugar}}, {{fecha_larga}}</td></tr>
+  <tr><td class="k">Operación encargada <span class="tr-lbl">/ Transaction entrusted</span></td><td>{{operacion}} <span class="tr-val">/ {{operacion_tr}}</span></td>
+      <td class="k">Contrato de mediación de fecha <span class="tr-lbl">/ Brokerage agreement dated</span></td><td>{{fecha_encargo}}</td></tr>
+</table>
+
+<h2>B. Parte propietaria (entrega) / Owner (hands over)</h2>
+<table class="form">
+  <tr><td class="k">Nombre y apellidos <span class="tr-lbl">/ Full name</span></td><td colspan="3">{{propietario_1_nombre}}</td></tr>
+  <tr><td class="k">Documento de identidad <span class="tr-lbl">/ Identity document</span></td><td>{{propietario_1_doc}}</td>
+      <td class="k">Domicilio <span class="tr-lbl">/ Address</span></td><td>{{propietario_1_domicilio}}</td></tr>
+  <!-- OPTIONAL: propietario_2 -->
+  <tr><td class="k">Nombre y apellidos (2) <span class="tr-lbl">/ Full name (2)</span></td><td colspan="3">{{propietario_2_nombre}}</td></tr>
+  <tr><td class="k">Documento de identidad (2) <span class="tr-lbl">/ Identity document (2)</span></td><td>{{propietario_2_doc}}</td>
+      <td class="k">Domicilio (2) <span class="tr-lbl">/ Address (2)</span></td><td>{{propietario_2_domicilio}}</td></tr>
+  <!-- /OPTIONAL -->
+</table>
+
+<h2>C. Agencia (recibe) / Agency (receives)</h2>
+<table class="form">
+  <tr><td class="k">Agencia <span class="tr-lbl">/ Agency</span></td><td>{{agencia_nombre}}</td>
+      <td class="k">NIF <span class="tr-lbl">/ Tax ID</span></td><td>{{agencia_nif}}</td></tr>
+  <tr><td class="k">Domicilio <span class="tr-lbl">/ Registered address</span></td><td colspan="3">{{agencia_direccion}}{{agencia_registro_frase}}</td></tr>
+  <tr><td class="k">Agente que recibe <span class="tr-lbl">/ Receiving agent</span></td><td colspan="3">{{agente_nombre}}</td></tr>
+</table>
+
+<h2>D. Inmueble / Property</h2>
+<table class="form">
+  <tr><td class="k">Dirección <span class="tr-lbl">/ Address</span></td><td colspan="3">{{inmueble_direccion}}{{inmueble_datos_registrales_frase}}</td></tr>
+</table>
+
+<h2>E. Inventario de llaves entregadas / Inventory of keys handed over</h2>
+<table class="form count">
+  <tr><td class="k">Puerta de la vivienda <span class="tr-lbl">/ Front door</span></td><td class="n">{{n_llaves_vivienda}}</td>
+      <td class="k">Portal o acceso común <span class="tr-lbl">/ Building entrance</span></td><td class="n">{{n_llaves_portal}}</td></tr>
+  <tr><td class="k">Garaje o trastero <span class="tr-lbl">/ Garage or storage room</span></td><td class="n">{{n_llaves_garaje}}</td>
+      <td class="k">Buzón <span class="tr-lbl">/ Letterbox</span></td><td class="n">{{n_llaves_buzon}}</td></tr>
+  <tr><td class="k">Mandos a distancia o tarjetas <span class="tr-lbl">/ Remote controls or access cards</span></td><td class="n">{{n_mandos}}</td>
+      <td class="k">Otros <span class="tr-lbl">/ Other</span></td><td>{{otros_llaves}} <span class="tr-val">/ {{otros_llaves_tr}}</span></td></tr>
+</table>
+
+<h2>F. Condiciones / Terms</h2>
+<table class="bi">
+  <tr><th>Español (versión que prevalece)</th><th>English (for information, see condition {{n_idioma}})</th></tr>
+  <tr><td>La parte propietaria identificada en el cuadro B, titular del inmueble del cuadro D, entrega en este acto a la agencia del cuadro C las llaves relacionadas en el cuadro E, con sujeción a las siguientes condiciones. Ambas partes se reconocen capacidad legal suficiente para otorgar el presente documento.</td>
+      <td class="tr">The owner identified in box B, holder of title to the property in box D, hereby hands over to the agency in box C the keys listed in box E, subject to the following terms. Both parties acknowledge that they have sufficient legal capacity to execute this document.</td></tr>
+
+  <tr><td><span class="num">1. Objeto.</span> La agencia recibe las llaves con el único fin de mostrar el inmueble a personas interesadas en la operación encargada. Cualquier otro uso requiere el consentimiento previo y por escrito de la parte propietaria.</td>
+      <td class="tr"><span class="num">1. Purpose.</span> The agency receives the keys for the sole purpose of showing the property to persons interested in the transaction entrusted. Any other use requires the owner's prior written consent.</td></tr>
+
+  <tr><td><span class="num">2. Inventario.</span> Las llaves y dispositivos entregados son los que constan en el cuadro E. La parte propietaria declara que no entrega ningún otro.</td>
+      <td class="tr"><span class="num">2. Inventory.</span> The keys and devices handed over are those recorded in box E. The owner declares that no others are handed over.</td></tr>
+
+  <tr><td><span class="num">3. Custodia.</span> La agencia custodiará las llaves con la diligencia de un profesional, en lugar cerrado y sin identificación de la dirección del inmueble. Queda prohibido hacer copias de las llaves por cualquier motivo y cederlas a terceros, salvo a personal de la agencia para las visitas.</td>
+      <td class="tr"><span class="num">3. Safekeeping.</span> The agency shall keep the keys with professional diligence, in a locked place and without any label identifying the property's address. Copying the keys for any reason, or passing them to third parties, is prohibited, except to agency staff for viewings.</td></tr>
+
+  <tr><td><span class="num">4. Visitas.</span> Las visitas se realizarán siempre acompañadas por personal de la agencia{{visitas_aviso_frase}}. Al terminar cada visita, la agencia dejará cerradas todas las puertas y ventanas, desconectados los aparatos que hubiera encendido y el inmueble en el mismo estado en que lo encontró.</td>
+      <td class="tr"><span class="num">4. Viewings.</span> Viewings shall always be accompanied by agency staff{{visitas_aviso_frase_tr}}. At the end of each viewing the agency shall leave all doors and windows closed, switch off any appliances it turned on and leave the property in the same condition in which it found it.</td></tr>
+
+  <tr><td><span class="num">5. Alarma y accesos.</span> Los códigos de alarma, claves de acceso y contraseñas no constan en este documento y se comunican por separado. La agencia los tratará como información confidencial y no los anotará junto a las llaves.</td>
+      <td class="tr"><span class="num">5. Alarm and access codes.</span> Alarm codes, access codes and passwords are not recorded in this document and are communicated separately. The agency shall treat them as confidential and shall not keep them together with the keys.</td></tr>
+
+  <tr><td><span class="num">6. Devolución.</span> La agencia devolverá las llaves a la parte propietaria, contra recibo, en el plazo máximo de dos días hábiles desde que se produzca cualquiera de estos hechos: la formalización de la operación encargada, la extinción del contrato de mediación, o el requerimiento de la parte propietaria por cualquier medio que deje constancia.</td>
+      <td class="tr"><span class="num">6. Return.</span> The agency shall return the keys to the owner, against receipt, within two working days of any of the following: completion of the transaction entrusted, termination of the brokerage agreement, or a request by the owner made by any means that leaves a record.</td></tr>
+
+  <tr><td><span class="num">7. Pérdida o extravío.</span> Si las llaves se perdieran o fueran sustraídas mientras están en poder de la agencia, esta lo comunicará a la parte propietaria sin demora y asumirá el coste de sustitución de los bombines afectados y de las nuevas llaves.</td>
+      <td class="tr"><span class="num">7. Loss or theft.</span> If the keys are lost or stolen while in the agency's possession, the agency shall inform the owner without delay and shall bear the cost of replacing the affected lock cylinders and the new keys.</td></tr>
+
+  <!-- OPTIONAL: registro_visitas -->
+  <tr><td><span class="num">8. Registro de visitas.</span> La agencia llevará un registro con fecha y hora de cada visita y lo facilitará a la parte propietaria cuando lo solicite.</td>
+      <td class="tr"><span class="num">8. Viewing log.</span> The agency shall keep a log with the date and time of each viewing and shall provide it to the owner on request.</td></tr>
+  <!-- /OPTIONAL -->
+
+  <tr><td><span class="num">{{n_datos}}. Datos personales.</span> Los datos de las partes se tratan por la agencia para cumplir este documento y el contrato de mediación, y se conservan mientras duren esas relaciones y los plazos legales posteriores. Las partes pueden ejercer sus derechos de acceso, rectificación, supresión y demás previstos en la normativa de protección de datos dirigiéndose a {{agencia_email_datos}}.</td>
+      <td class="tr"><span class="num">{{n_datos}}. Personal data.</span> The parties' data are processed by the agency to perform this document and the brokerage agreement, and are kept for as long as those relationships last and for the statutory periods thereafter. The parties may exercise their rights of access, rectification, erasure and the other rights provided for in data protection law by writing to {{agencia_email_datos}}.</td></tr>
+
+  <tr><td><span class="num">{{n_idioma}}. Idioma.</span> El presente documento se firma en español y en {{idioma_cliente_es}}. En caso de discrepancia entre ambas versiones prevalecerá la versión española.</td>
+      <td class="tr"><span class="num">{{n_idioma}}. Language.</span> This document is signed in Spanish and in {{idioma_cliente_tr}}. In the event of any discrepancy between the two versions, the Spanish version shall prevail.</td></tr>
+
+  <tr><td>Y en prueba de conformidad, las partes firman electrónicamente el presente documento en el lugar y la fecha del cuadro A.</td>
+      <td class="tr">In witness whereof, the parties sign this document electronically at the place and on the date stated in box A.</td></tr>
+</table>

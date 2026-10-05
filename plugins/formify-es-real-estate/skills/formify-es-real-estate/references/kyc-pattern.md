@@ -1,0 +1,22 @@
+<!-- generated from core/references/kyc-pattern.md by build_vertical.py; edit the core file, not this copy -->
+# The identification (KYC) form pattern: client scans, organisation assesses
+
+Built and tested in the Spanish real-estate vertical (September 2026, buyer and seller forms) with the AML rules of Ley 10/2010 and RD 304/2014; the structure is the same for every profession that must identify clients (estate agents, financial advisers, lawyers, accountants, letting agents). Only the wording, the legal basis in the data-protection text and the risk factors change per country.
+
+## Structure
+
+1. **Box A, identity.** The ID-scan box of `references/id-scan.md`: MRZ-filled fields on the left (135 pt, not required), the scan field on the right (180 × 120 pt, required, so the form cannot be signed without a scan). Directly under the scan image, in the same column: a label "Back", an upload button `document_back_upload|tink-upload-attachment[1]|tink-style-transparent` (75 × 22 pt, class `pdf-field button`) with the instruction "Press the button and photograph the back" beside it, and a read-only file-name field `document_back_name|tink-uploaded-attachmentname[1]` (180 pt) under it; the component takes a photo, not only a file. Below the identity table, full-width rows for what no document contains: address, tax residence, tax number, telephone, e-mail. Nothing else in the right column.
+2. **Box B, activity and transaction** (or ownership and transaction for a seller): occupation, purpose, source of funds, financing, acting on own behalf.
+3. **Box C, politically exposed person**: the question and yes/no boxes as the client's declaration.
+4. **Optional blocks**: representative (with the represented party's identity document and the power of attorney as upload rows), legal person (directors, beneficial owners).
+5. **Declarations** and the client's signature. The declarations say what the client declares and how the organisation processes and keeps the data. They never say how the organisation verifies identity, and never mention video, liveness or any remote procedure.
+6. **Box D, verification and assessment by the organisation**, on its own page after the signature (`h2.new-page`, placed after `<!-- SIGNATURES -->`): filled in by hand by the organisation after the client has signed. Checkboxes (`.checkbox`) and blank cells (`.blank`, `.blank.short`), no PDF fields, no question in the chat, nothing the client fills in. Rows, in this order: status (data collected, identity verified, due diligence assessed); identity verification (in person with the original document, or other procedure with a free-text cell; nothing else); date; document verified and its validity; verified by; representation; beneficial owner; purpose and nature of the relationship; politically exposed person (with one sentence naming a public lookup service, no link, no instruction); risk factors; risk class; source of funds; special examination; decision (accepted, accepted with enhanced measures, declined; approved by, date, signature); follow-up and retention.
+
+## Rules
+
+- Signing method for the client on an identification form: `face_liveness` (ID scan plus video selfie in the signing flow), preselected in `signeeDetails` without asking, whatever the memory default is; `digital_ink` only when the account lacks `signatureFaceLiveness`, said in one sentence (David, 2026-09-10). This is a setting of the Formify invitation, not text in the form: rule above still holds, the document never mentions it.
+- The scan and the back photo are the evidence the client supplies; the verification is the organisation's. The form and the chat never say how the organisation must verify, which remote procedures count, or that the electronic signature is a verification. The organisation decides (David, 2026-09-09).
+- Box D is the organisation's record: it makes the form show which measures were relevant and that a decision was taken. Most rows stay empty for a low-risk private client; that is the point.
+- No hyperlinks anywhere in the PDF (David, 2026-09-09). A lookup service is named in plain text at most.
+- Fields in box A stay inside their cells (opaque); the right column holds the scan, the back-photo row and the file-name field only, so that everything fits beside ten rows on the left.
+- Sample pack: every field empty; the user sees the scan button and the back-photo button on a phone.

@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Spanish Real Estate"
+  short_description: "The six documents a Spanish estate agency signs most, bilingual and ready for e-signature"
+  default_prompt: "Use $formify-es-real-estate to prepare a nota de encargo, reserva, arras, KYC form, collaboration agreement or key handover and send it for signature through Formify."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify e-signature and identity verification"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,86 @@
+[
+ {
+  "name": "colaboracion",
+  "doc": "colaboracion",
+  "template": "assets/templates/05_colaboracion.html",
+  "data": "data_colab.json",
+  "signers": "signers_colab.json",
+  "profile": "professional",
+  "title": "Acuerdo de colaboración entre agencias",
+  "reference": "COL-MUESTRA-01",
+  "language": "en",
+  "message": "Sample 1 of 6: collaboration agreement, two agencies side by side, fee with the owner and split in box B."
+ },
+ {
+  "name": "encargo",
+  "doc": "encargo",
+  "template": "assets/templates/01_encargo.html",
+  "data": "data_encargo.json",
+  "signers": "signers_encargo.json",
+  "profile": "official",
+  "title": "Nota de encargo y contrato de mediación",
+  "reference": "ENC-MUESTRA-02",
+  "language": "en",
+  "message": "Sample 2 of 6: brokerage mandate with the withdrawal information. Spanish master text, English column."
+ },
+ {
+  "name": "reserva",
+  "doc": "reserva",
+  "template": "assets/templates/03_reserva.html",
+  "data": "data_reserva.json",
+  "signers": "signers_reserva.json",
+  "profile": "professional",
+  "title": "Oferta y reserva",
+  "reference": "RES-MUESTRA-03",
+  "language": "en",
+  "message": "Sample 3 of 6: offer and reservation, three parties in box A, the figures in box B."
+ },
+ {
+  "name": "arras",
+  "doc": "arras",
+  "template": "assets/templates/04_arras.html",
+  "data": "data_arras.json",
+  "signers": "signers_arras.json",
+  "profile": "professional",
+  "title": "Contrato de arras penitenciales",
+  "reference": "ARR-MUESTRA-04",
+  "language": "en",
+  "message": "Sample 4 of 6: penitential arras contract with consenting spouse, escrow and financing."
+ },
+ {
+  "name": "kyc_comprador",
+  "doc": "kyc",
+  "template": "assets/templates/02_kyc_comprador.html",
+  "data": "data_kyc.json",
+  "signers": "signers_kyc.json",
+  "profile": "official",
+  "title": "Formulario de identificación del comprador",
+  "reference": "KYC-MUESTRA-05",
+  "language": "en",
+  "message": "Sample 5a of 6: buyer KYC form. Scan an ID document in box A to see the identity fields fill themselves."
+ },
+ {
+  "name": "kyc_vendedor",
+  "doc": "kyc",
+  "template": "assets/templates/02_kyc_vendedor.html",
+  "data": "data_kyc_vendedor.json",
+  "signers": "signers_kyc_vendedor.json",
+  "profile": "official",
+  "title": "Formulario de identificación del vendedor",
+  "reference": "KYC-MUESTRA-06",
+  "language": "en",
+  "message": "Sample 5b of 6: seller KYC form, same identity box plus the ownership details."
+ },
+ {
+  "name": "llaves",
+  "doc": "llaves",
+  "template": "assets/templates/06_llaves.html",
+  "data": "data_llaves.json",
+  "signers": "signers_llaves.json",
+  "profile": "light",
+  "title": "Documento de entrega de llaves",
+  "reference": "LLA-MUESTRA-07",
+  "language": "en",
+  "message": "Sample 6 of 6: key handover receipt, boxes A to E and short conditions."
+ }
+]

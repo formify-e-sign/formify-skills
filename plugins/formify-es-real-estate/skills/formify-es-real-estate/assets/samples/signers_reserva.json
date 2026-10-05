@@ -1,0 +1,20 @@
+[
+ {
+  "name": "Jan de Vries",
+  "role": "Comprador",
+  "id_scan": false,
+  "role_tr": "Buyer"
+ },
+ {
+  "name": "María López García",
+  "role": "Agente inmobiliario",
+  "id_scan": false,
+  "role_tr": "Estate agent"
+ },
+ {
+  "name": "Anna Andersson",
+  "role": "Vendedora",
+  "id_scan": false,
+  "role_tr": "Seller"
+ }
+]

@@ -1,0 +1,59 @@
+{
+ "optional": [
+  "registro"
+ ],
+ "logo_html": "",
+ "agencia_nombre": "Inmobiliaria Ejemplo, S.L.",
+ "agencia_direccion": "Calle Ficticia 1, 07000 Palma",
+ "agencia_nif": "B00000000",
+ "agencia_registro_linea": "",
+ "referencia": "COL-2026-0003",
+ "lugar": "Palma",
+ "fecha_larga": "7 de septiembre de 2026",
+ "titular_nombre": {
+  "field": "titular_nombre",
+  "width": 180
+ },
+ "titular_nif": {
+  "field": "titular_nif",
+  "width": 100
+ },
+ "titular_direccion": {
+  "field": "titular_direccion",
+  "width": 180
+ },
+ "titular_email": {
+  "field": "titular_email",
+  "width": 180
+ },
+ "titular_registro": {
+  "field": "titular_registro",
+  "width": 100
+ },
+ "titular_agente": "Peter Jones",
+ "colaboradora_nombre": "Inmobiliaria Ejemplo, S.L.",
+ "colaboradora_nif": "B00000000",
+ "colaboradora_direccion": "Calle Ficticia 1, 07000 Palma",
+ "colaboradora_email": "demo.account@formify.eu",
+ "colaboradora_registro": "",
+ "colaboradora_agente": "Carmen Ruiz Soler",
+ "operacion": "venta",
+ "operacion_tr": "sale",
+ "encargo_resumen": "Contrato de mediación en exclusiva de 1 de julio de 2026, vigente hasta el 31 de diciembre de 2026",
+ "encargo_resumen_tr": "Exclusive brokerage agreement of 1 July 2026, in force until 31 December 2026",
+ "honorarios_titular": {
+  "field": "honorarios_titular",
+  "width": 90
+ },
+ "reparto_colaboradora": {
+  "field": "reparto_colaboradora",
+  "width": 90
+ },
+ "dias_pago": "10",
+ "mediacion_frase": "",
+ "mediacion_frase_tr": "",
+ "idioma_cliente_es": "inglés",
+ "idioma_cliente_tr": "English",
+ "inmuebles": "Carrer Inventat 128, 3.º A, 07000 Palma, 650.000 €; Carrer Inventat 10, 2.º, 07000 Palma",
+ "cliente_nombre": "Olga Ivanova y Liam Byrne"
+}

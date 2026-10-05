@@ -1,0 +1,7 @@
+interface:
+  display_name: "Formify PDF Forms"
+  short_description: "Build fillable PDF forms and contracts"
+  default_prompt: "Use $formify-pdf-forms to turn this document into a fillable PDF form with signature space."
+
+policy:
+  allow_implicit_invocation: true

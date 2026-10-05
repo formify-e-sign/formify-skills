@@ -36,6 +36,17 @@ jobs:
             }
           '
 
+      - name: Plugin folders are self-contained
+        # The Claude plugin directory copies only plugins/<name>/ into its cache. A symlink that
+        # points outside that folder arrives as a one-line file, and every skill behind it fails
+        # to load. Skills under plugins/ must be real copies of the root skills/ folders.
+        run: |
+          test -z "$(git ls-files -s plugins | awk '$1==120000')" || { echo "Symlinks found under plugins/ - replace with real directories"; exit 1; }
+          for d in plugins/*/skills/*; do
+            test -f "$d/SKILL.md" || { echo "$d has no SKILL.md"; exit 1; }
+            diff -r "$d" "skills/$(basename "$d")" > /dev/null || { echo "$d differs from skills/$(basename "$d") - run the plugin sync before releasing"; exit 1; }
+          done
+
       - name: Agent Plugins 1.0.0 schema
         run: |
           curl -sfL https://agent-plugins.org/schemas/1.0.0/plugin.schema.json -o /tmp/plugin.schema.json

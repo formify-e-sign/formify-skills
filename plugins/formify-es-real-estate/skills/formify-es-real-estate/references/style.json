@@ -1,0 +1,157 @@
+{
+ "_about": "Spanish legal drafting rules for check_style.py (from references/style.md). Anglicisms and fillers are checked in the master column; per_document adds forbidden wording per document type.",
+ "fixed_block_classes": [
+  "legal-fixed",
+  "fixed-form"
+ ],
+ "anglicisms": [
+  [
+   "\\ben base a\\b",
+   "con base en / conforme a / de acuerdo con"
+  ],
+  [
+   "\\ba nivel de\\b",
+   "en el ámbito de / en cuanto a"
+  ],
+  [
+   "\\ben orden a\\b",
+   "para / con el fin de / a fin de"
+  ],
+  [
+   "\\bpor y entre\\b",
+   "entre"
+  ],
+  [
+   "\\bel presente acuerdo\\b",
+   "el presente contrato"
+  ],
+  [
+   "\\bconsiderando que\\b",
+   "EXPONEN / I. Que ..."
+  ],
+  [
+   "\\bbajo el presente contrato\\b",
+   "en virtud de / conforme a"
+  ],
+  [
+   "\\bbajo la ley\\b",
+   "conforme a la ley / al amparo de"
+  ],
+  [
+   "\\bincluyendo,? sin limitaci[oó]n\\b",
+   "incluidos, a título enunciativo y no limitativo"
+  ],
+  [
+   "\\bpor la presente\\b(?! le comunico)",
+   "suprimir (hereby)"
+  ],
+  [
+   "\\bde aqu[ií] en adelante referid[oa] como\\b",
+   "en adelante, / en lo sucesivo,"
+  ],
+  [
+   "\\bel tiempo es esencial\\b",
+   "el plazo tiene carácter esencial"
+  ],
+  [
+   "\\bt[eé]rminos y condiciones\\b",
+   "condiciones / cláusulas"
+  ],
+  [
+   "\\bimplementar\\b",
+   "aplicar"
+  ],
+  [
+   "\\bapartamento\\b",
+   "piso / vivienda"
+  ],
+  [
+   "\\bparking\\b",
+   "aparcamiento / plaza de garaje"
+  ],
+  [
+   "\\bbroker\\b",
+   "agente inmobiliario"
+  ],
+  [
+   "\\bclosing\\b",
+   "otorgamiento de la escritura"
+  ],
+  [
+   "\\bescrow\\b",
+   "depósito en cuenta de tercero"
+  ],
+  [
+   "\\bdeber[aá] de pagar\\b",
+   "deberá pagar"
+  ],
+  [
+   "\\bAnexo (?![IVX]+\\b)[A-Z]\\b(?! del texto refundido)",
+   "Anexo I, II ... (salvo el Anexo A/B legal de desistimiento)"
+  ],
+  [
+   "\\bServicios a prestar\\b",
+   "servicios que deben prestarse"
+  ],
+  [
+   "\\b(?:el|la) mism[oa]\\b(?=\\s*[.,;)]|\\s+(?:de|en|a|por|para|con)\\b)",
+   "su / dicho / la referida (uso pronominal de «el mismo»)"
+  ]
+ ],
+ "filler_phrases": [
+  "\\bes importante (destacar|señalar|mencionar)\\b",
+  "\\bcabe (señalar|destacar|mencionar)\\b",
+  "\\ben el marco de\\b",
+  "\\ba d[ií]a de hoy\\b",
+  "\\ben definitiva\\b",
+  "\\bsin duda alguna\\b",
+  "\\bit is important to note\\b",
+  "\\bplease note\\b",
+  "\\bin today's\\b"
+ ],
+ "forbidden": [
+  "\\binteligencia artificial\\b",
+  "\\bIA\\b(?=[^A-Za-z])",
+  "\\bartificial intelligence\\b",
+  "\\bAI[- ]generated\\b",
+  "\\bno constituye asesoramiento (jur[ií]dico|legal)\\b",
+  "\\bnot legal advice\\b",
+  "\\bdisclaimer\\b",
+  "\\bgenerado (por|con)\\b.*\\b(asistente|modelo)\\b",
+  "\\bChatGPT\\b",
+  "\\bClaude\\b",
+  "\\bFormify no es\\b"
+ ],
+ "per_document": {
+  "encargo": [
+   [
+    "\\bpenalizaci[oó]n\\b|\\bpenalidad\\b",
+    "encargo con consumidor: sin penalizaciones por desistir en plazo (art. 108 TRLGDCU)"
+   ],
+   [
+    "\\brenuncia\\w* al derecho de desistimiento\\b",
+    "prohibida la renuncia al desistimiento"
+   ]
+  ],
+  "colaboracion": [
+   [
+    "\\b(50|60|70)\\s*%\\s*(/|y)\\s*(50|40|30)\\s*%",
+    "no fijar el reparto en la plantilla (CNMC S/0003/20): dejarlo a lo que pacten las partes"
+   ],
+   [
+    "\\breparto (est[aá]ndar|habitual|obligatorio)\\b",
+    "no prescribir reparto"
+   ]
+  ],
+  "arras": [
+   [
+    "art(?:[ií]culo|\\.)\\s*1254\\b",
+    "error frecuente: es el art. 1454 CC"
+   ]
+  ],
+  "reserva": [],
+  "kyc": [],
+  "llaves": []
+ },
+ "required_text": {}
+}

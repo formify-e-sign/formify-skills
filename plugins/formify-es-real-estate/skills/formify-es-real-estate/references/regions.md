@@ -1,0 +1,7 @@
+# Regions: parameters per autonomous community (region by region check, 8 September 2026)
+
+Read this table when starting any document. The region is that of the property, not that of the agency. Each row has been checked against the consolidated text in the BOE (via Ansvar) or the region's official gazette or legal portal on the date shown; anything that could not be read in a primary source is marked `[no verificado]` (not verified). The checks in `controles.json` watch the key phrases.
+
+This file is the index. Read `regions-table.md` for the row of the property's region (registers, insurance, civil law variant, tax, language, default profile); read `regions-encargo.md` when producing an encargo or an arras (minimum content the law requires, the register line, the family home article, how the tax on fees is printed).
+- `references/regions-table.md`: Regions: the parameter table per autonomous community, checked row by row (Main table, Rule that does not change, What changed in this check (compared with version 2.0.1), Default profile, Primary sources read (08-09-2026))
+- `references/regions-encargo.md`: Regions: what the mandate note (encargo), the arras and the header take from the region (Minimum content of the mandate note required by law, Register line in the header and in part A (field `registro_linea`), Family home (who signs and which article the declaration cites), Tax on fees and how it is printed)

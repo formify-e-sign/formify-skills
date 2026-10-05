@@ -1,0 +1,91 @@
+<!--
+PLANTILLA 05: ACUERDO DE COLABORACIÓN PUNTUAL ENTRE AGENCIAS (ES + idioma del cliente), v2.1 (2026-09-07)
+Estructura: cuadro A (las dos agencias, lado a lado), cuadro B (la operación: inmueble, cliente presentado, honorarios,
+reparto, pago) y después las condiciones en dos columnas, que solo hablan de «la agencia titular», «la agencia
+colaboradora», «el cliente presentado», «los inmuebles del cuadro B» y «el cuadro B». Ningún dato se repite en el texto.
+Dos escenarios con la misma plantilla: (1) el usuario conoce todos los datos: todo impreso, ningún campo;
+(2) faltan datos de la otra agencia, o los honorarios con el propietario, o el reparto: esos valores se pasan en
+datos.json como objetos {"campo": "...", "ancho": ...} y la otra agencia los rellena al firmar. El cliente presentado (solo nombre)
+y los inmuebles (texto libre: una o varias direcciones, precio opcional) los indica siempre el usuario. Sin fecha de registro
+del cliente (este contrato es el registro), sin regla de visitas. Fila OPCIONAL documento_agente si el usuario quiere su NIE. La columna izquierda es texto fijo; la derecha, inglés de referencia
+(traducir.py para otros idiomas). Las etiquetas de los cuadros son bilingües (<span class="tr-lbl">).
+La plantilla está redactada desde la agencia titular; si el usuario es la colaboradora, se rellenan las columnas al revés.
+Perfil recomendado: profesional o sencillo. Firmantes: los dos agentes. Sin cuadro «Lo esencial» (regla 2026-09-07).
+-->
+<table class="header"><tr>
+  <td class="logo">{{logo_html}}</td>
+  <td class="org">{{agencia_nombre}}<br>{{agencia_direccion}}<br>NIF {{agencia_nif}}{{agencia_registro_linea}}</td>
+</tr></table>
+<div class="reference">Ref. {{referencia}} · {{lugar}}, {{fecha_larga}}</div>
+
+<h1>Acuerdo de colaboración entre agencias / Inter-agency collaboration agreement</h1>
+
+<h2>A. Partes / Parties</h2>
+<table class="form parties">
+  <tr><td class="k"></td><td class="cab">Agencia titular <span class="tr-lbl">/ Listing agency</span></td><td class="cab">Agencia colaboradora <span class="tr-lbl">/ Collaborating agency</span></td></tr>
+  <tr><td class="k">Agencia <span class="tr-lbl">/ Agency</span></td><td>{{titular_nombre}}</td><td>{{colaboradora_nombre}}</td></tr>
+  <tr><td class="k">NIF <span class="tr-lbl">/ Tax ID</span></td><td>{{titular_nif}}</td><td>{{colaboradora_nif}}</td></tr>
+  <tr><td class="k">Domicilio <span class="tr-lbl">/ Address</span></td><td>{{titular_direccion}}</td><td>{{colaboradora_direccion}}</td></tr>
+  <tr><td class="k">Correo electrónico <span class="tr-lbl">/ E-mail</span></td><td>{{titular_email}}</td><td>{{colaboradora_email}}</td></tr>
+  <!-- OPTIONAL: registro -->
+  <tr><td class="k">N.º de registro <span class="tr-lbl">/ Register no.</span></td><td>{{titular_registro}}</td><td>{{colaboradora_registro}}</td></tr>
+  <!-- /OPTIONAL -->
+  <tr><td class="k">Agente que firma <span class="tr-lbl">/ Signing agent</span></td><td>{{titular_agente}}</td><td>{{colaboradora_agente}}</td></tr>
+  <!-- OPTIONAL: documento_agente -->
+  <tr><td class="k">Documento del agente <span class="tr-lbl">/ Agent's ID</span></td><td>{{titular_agente_doc}}</td><td>{{colaboradora_agente_doc}}</td></tr>
+  <!-- /OPTIONAL -->
+</table>
+
+<h2>B. Operación / Transaction</h2>
+<table class="form">
+  <tr><td class="k">Inmueble o inmuebles <span class="tr-lbl">/ Property or properties</span></td><td colspan="3">{{inmuebles}}</td></tr>
+  <tr><td class="k">Operación <span class="tr-lbl">/ Transaction</span></td><td colspan="3">{{operacion}} <span class="tr-val">/ {{operacion_tr}}</span></td></tr>
+  <tr><td class="k">Encargo de la agencia titular <span class="tr-lbl">/ Listing agency's mandate</span></td><td colspan="3">{{encargo_resumen}} <span class="tr-val">/ {{encargo_resumen_tr}}</span></td></tr>
+  <tr><td class="k">Cliente presentado <span class="tr-lbl">/ Introduced client</span></td><td colspan="3">{{cliente_nombre}}</td></tr>
+  <tr><td class="k">Honorarios pactados con el propietario <span class="tr-lbl">/ Fee agreed with the owner</span></td><td>{{honorarios_titular}}</td>
+      <td class="k">Parte de la agencia colaboradora <span class="tr-lbl">/ Collaborating agency's share</span></td><td>{{reparto_colaboradora}}</td></tr>
+  <tr><td class="k">Plazo de pago <span class="tr-lbl">/ Payment term</span></td><td colspan="3">{{dias_pago}} días desde el cobro de los honorarios <span class="tr-val">/ days from collection of the fee</span></td></tr>
+</table>
+
+<h2>C. Condiciones / Terms</h2>
+<table class="bi">
+  <tr><th>Español (versión que prevalece)</th><th>English (for information, see condition 11)</th></tr>
+  <tr><td>Las agencias identificadas en el cuadro A, representadas por los agentes que firman, acuerdan colaborar en la operación descrita en el cuadro B con arreglo a las siguientes condiciones. Ambas se reconocen capacidad suficiente para suscribir el presente contrato.</td>
+      <td class="tr">The agencies identified in box A, represented by the signing agents, agree to collaborate on the transaction described in box B under the following terms. Both acknowledge sufficient capacity to enter into this agreement.</td></tr>
+
+  <tr><td><span class="num">1. Objeto.</span> La colaboración se limita a los inmuebles del cuadro B y al cliente presentado. La agencia titular se relaciona con la parte propietaria; la agencia colaboradora, con el cliente presentado.</td>
+      <td class="tr"><span class="num">1. Purpose.</span> The collaboration is limited to the properties in box B and the introduced client. The listing agency deals with the owner; the collaborating agency, with the introduced client.</td></tr>
+
+  <tr><td><span class="num">2. Cliente presentado.</span> La agencia colaboradora declara que el cliente presentado es cliente propio. Con la firma de este contrato la agencia titular lo reconoce como presentado por la agencia colaboradora a todos los efectos de este contrato, y la fecha de este contrato vale como fecha de registro del cliente.</td>
+      <td class="tr"><span class="num">2. Introduced client.</span> The collaborating agency declares that the introduced client is its own client. By signing this agreement the listing agency acknowledges the client as introduced by the collaborating agency for all purposes of this agreement, and the date of this agreement counts as the date the client was registered.</td></tr>
+
+  <tr><td><span class="num">3. Ofertas.</span> Las ofertas del cliente presentado se trasladarán por escrito a la agencia titular, que las presentará a la parte propietaria.</td>
+      <td class="tr"><span class="num">3. Offers.</span> Offers from the introduced client are passed in writing to the listing agency, which presents them to the owner.</td></tr>
+
+  <tr><td><span class="num">4. Honorarios y reparto.</span> Los honorarios pactados entre la agencia titular y la parte propietaria son los indicados en el cuadro B, IVA no incluido. Si la operación se formaliza con el cliente presentado, la agencia titular abonará a la agencia colaboradora la parte indicada en el cuadro B de los honorarios que efectivamente cobre, calculada sobre la base imponible sin IVA, más el IVA que corresponda. Ninguna de las agencias cobrará al cliente presentado cantidad alguna por esta operación.</td>
+      <td class="tr"><span class="num">4. Fee and split.</span> The fee agreed between the listing agency and the owner is the one stated in box B, excluding VAT. If the transaction is completed with the introduced client, the listing agency shall pay the collaborating agency the share stated in box B of the fee it actually collects, calculated on the amount before VAT, plus the applicable VAT. Neither agency shall charge the introduced client anything for this transaction.</td></tr>
+
+  <tr><td><span class="num">5. Devengo y pago.</span> La parte de la agencia colaboradora se devenga cuando la agencia titular cobre sus honorarios y se paga dentro del plazo indicado en el cuadro B, previa factura con mención de este contrato. Si la parte propietaria no pagara los honorarios devengados, ambas agencias compartirán la reclamación y sus costes en la misma proporción que el reparto.</td>
+      <td class="tr"><span class="num">5. Accrual and payment.</span> The collaborating agency's share accrues when the listing agency collects its fee and is paid within the term stated in box B, against an invoice referring to this agreement. If the owner fails to pay the fee due, both agencies share the claim and its costs in the same proportion as the split.</td></tr>
+
+  <tr><td><span class="num">6. Respeto de clientes.</span> Durante la vigencia de este contrato y los doce meses siguientes, la agencia titular no contactará ni contratará directa o indirectamente con el cliente presentado, y la agencia colaboradora no lo hará con la parte propietaria, en relación con los inmuebles del cuadro B. La agencia que incumpla abonará a la otra la parte de honorarios que le habría correspondido, sin perjuicio de los demás daños que se acrediten.</td>
+      <td class="tr"><span class="num">6. Client protection.</span> During this agreement and the twelve months that follow, the listing agency shall not contact or contract, directly or indirectly, with the introduced client, and the collaborating agency shall not do so with the owner, in relation to the properties in box B. The agency in breach shall pay the other the share of the fee it would have received, without prejudice to any further damage proven.</td></tr>
+
+  <tr><td><span class="num">7. Alcance, publicidad y confidencialidad.</span> Este contrato no se cede ni se extiende a otras agencias sin consentimiento escrito de ambas. La agencia colaboradora no publicará los inmuebles sin autorización escrita de la agencia titular. Ambas mantendrán confidenciales el precio, las ofertas y las circunstancias de la parte propietaria y del cliente presentado durante dos años desde la firma.</td>
+      <td class="tr"><span class="num">7. Scope, advertising and confidentiality.</span> This agreement is not assigned or extended to other agencies without the written consent of both. The collaborating agency shall not advertise the properties without the listing agency's written authorisation. Both shall keep the price, the offers and the circumstances of the owner and of the introduced client confidential for two years from signature.</td></tr>
+
+  <tr><td><span class="num">8. Datos personales.</span> Cada agencia es responsable independiente del tratamiento de los datos de su propio cliente. Los datos intercambiados se limitan a los necesarios para las visitas y la oferta, no se usarán con fines comerciales propios y se suprimirán al terminar la operación o el plazo de la condición 6, salvo obligación legal de conservación.</td>
+      <td class="tr"><span class="num">8. Personal data.</span> Each agency is an independent controller of its own client's data. The data exchanged are limited to what the viewings and the offer require, shall not be used for either agency's own marketing and shall be deleted when the transaction ends or the period in condition 6 expires, unless the law requires retention.</td></tr>
+
+  <tr><td><span class="num">9. Prevención del blanqueo de capitales.</span> Cada agencia identifica y aplica las medidas de diligencia debida a su propio cliente. La agencia colaboradora no recibirá fondos del cliente presentado ni de la parte propietaria por esta operación.</td>
+      <td class="tr"><span class="num">9. Anti-money laundering.</span> Each agency identifies and applies due diligence to its own client. The collaborating agency shall not receive funds from the introduced client or from the owner for this transaction.</td></tr>
+
+  <tr><td><span class="num">10. Duración y controversias.</span> El contrato rige desde su firma hasta el primero de estos hechos: la formalización de la operación con el cliente presentado, la extinción del encargo de la agencia titular, o el transcurso de doce meses. Las condiciones 5, 6, 7 y 8 subsisten tras su terminación. Las partes intentarán resolver de buena fe cualquier controversia en quince días{{mediacion_frase}}; en su defecto, se someten a los juzgados y tribunales del lugar de la agencia titular, con arreglo a la ley española.</td>
+      <td class="tr"><span class="num">10. Term and disputes.</span> This agreement runs from signature until the first of: completion of the transaction with the introduced client, termination of the listing agency's mandate, or twelve months. Conditions 5, 6, 7 and 8 survive termination. The parties shall try in good faith to resolve any dispute within fifteen days{{mediacion_frase_tr}}; failing that, they submit to the courts of the place of the listing agency, under Spanish law.</td></tr>
+
+  <tr><td><span class="num">11. Idioma.</span> El presente contrato se firma en español y en {{idioma_cliente_es}}. En caso de discrepancia prevalecerá la versión española.</td>
+      <td class="tr"><span class="num">11. Language.</span> This agreement is signed in Spanish and in {{idioma_cliente_tr}}. In the event of any discrepancy, the Spanish version prevails.</td></tr>
+
+  <tr><td>Y en prueba de conformidad, las partes firman electrónicamente el presente contrato en la fecha indicada en el encabezamiento.</td>
+      <td class="tr">In witness whereof, the parties sign this agreement electronically on the date stated in the heading.</td></tr>
+</table>
