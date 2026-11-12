@@ -37,6 +37,16 @@ assistant act on your Formify account.
 Building and structuring a document works without an account. Sending, signing, identity
 checks and public links use your Formify account.
 
+### Cursor and Grok Bot
+
+1. Install **Formify Core** from the Cursor Marketplace (or add the repository
+   `https://github.com/formify-e-sign/formify-skills` as a plugin source).
+2. The plugin registers the Formify MCP server at `https://mcp.formify.eu/mcp`. When the
+   assistant first needs your account, Cursor opens a browser window: sign in to Formify
+   there and approve access (OAuth). No API key or password is shared with the assistant.
+3. If Cursor does not offer the sign-in on its own, open **Settings → MCP**, find
+   `formify`, and select **Connect**.
+
 Spanish estate agencies should install **Formify for Real Estate Agencies** instead. It
 already includes everything in Core, so do not install both.
 

@@ -706,7 +706,7 @@ updating them by hand:
 
 | Where | What is listed |
 |---|---|
-| [Smithery](https://smithery.ai/server/formify-e-sign/formify-mcp) | The MCP server, plus each skill separately at `smithery.ai/skills/formify-e-sign/<skill>` |
+| Smithery | Each skill separately at `smithery.ai/skills/formify-e-sign/<skill>` (the server page `smithery.ai/server/formify-e-sign/formify-mcp` returns 404, so it is not linked) |
 | [Glama](https://glama.ai/mcp/connectors/eu.formify.mcp/formify) | The MCP server |
 
 The Anthropic plugin directory is the exception — it re-reads GitHub on every push, so it
