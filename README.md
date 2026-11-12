@@ -3,7 +3,7 @@
 
 # Formify Skills
 
-[![Formify MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/eu.formify.mcp/formify/badges/score.svg)](https://glama.ai/mcp/connectors/eu.formify.mcp/formify) [![Smithery](https://img.shields.io/badge/Smithery-formify--mcp-6b46c1?style=flat)](https://smithery.ai/server/formify-e-sign/formify-mcp)
+[![Formify MCP connector – tool definition quality and endpoint health on Glama](https://glama.ai/mcp/connectors/eu.formify.mcp/formify/badges/score.svg)](https://glama.ai/mcp/connectors/eu.formify.mcp/formify)
 
 **Ask an AI assistant to get something signed, and it knows how.**
 
@@ -30,7 +30,8 @@ Manus, Cursor and around twenty other agents.
 - [Claude Desktop and claude.ai](#install-in-claude-desktop) — three steps, recorded
 - [Codex Desktop](#install-in-codex-desktop) — two steps, recorded
 - [Claude Code and Codex CLI](#install-in-claude-code-or-codex-cli) — two commands
-- [Every other app](#every-other-app) — ChatGPT, Grok, Manus, and any agent
+- [ChatGPT](#chatgpt) — install from the plugin directory, no terminal
+- [Every other app](#every-other-app) — Grok, Manus, and any agent
 - [Try it](#try-it)
 
 **What it does**
@@ -66,7 +67,8 @@ already bundles Core.
 | **Claude** — Desktop, browser or Cowork | [Claude Desktop](#install-in-claude-desktop) | no |
 | **Codex** — the desktop app | [Codex Desktop](#install-in-codex-desktop) | no |
 | **Claude Code** or **Codex CLI** | [Claude Code and Codex CLI](#install-in-claude-code-or-codex-cli) | yes |
-| ChatGPT, Grok, Manus, any other agent | [Every other app](#every-other-app) | mixed |
+| **ChatGPT** | [ChatGPT](#chatgpt) | no |
+| Grok, Manus, any other agent | [Every other app](#every-other-app) | mixed |
 
 ---
 
@@ -271,18 +273,17 @@ Turn it on for good in `/plugin` → **Marketplaces** → **Enable auto-update**
 
 #### ChatGPT
 
-**What works today:** the connector. In ChatGPT's settings, add a connector and paste:
+Formify is in the [ChatGPT plugin directory](https://chatgpt.com/plugins/plugin_asdk_app_6ae1f7b461848191ad8ac74368c0b88f).
+The plugin carries both halves: the Formify connector and five skills.
 
-```
-https://mcp.formify.eu/mcp
-```
+1. While signed in to ChatGPT, open **Plugins** and search for **Formify**, or open the
+   link above.
+2. Select **Install plugin**.
+3. In the **Connect Formify** dialog, select **Connect Formify** and sign in to your Formify
+   account when asked.
 
-ChatGPT can then create documents, send them for signature and check who has signed.
-
-**What does not, yet:** the skills. ChatGPT installs skills only from its own reviewed
-directory, and Formify is not in it. So you get the actions but not the judgement — ChatGPT
-will do what you ask, without knowing what a good contract looks like or where a signature
-field has to sit. Claude Desktop is where you get both halves today.
+ChatGPT can then create documents, send them for signature, check who has signed, send
+reminders and download the signed copy.
 
 #### Grok
 
@@ -700,13 +701,11 @@ step, blur before committing, roughly 2 MB each — are written out in
 
 ### Directory listings are not automatic
 
-Two directories carry this project as a live product surface rather than a passive index,
-and they are addressed per skill, so adding, renaming or materially changing a skill means
-updating them by hand:
+One directory carries this project as a live product surface rather than a passive index,
+so changing the MCP server's tools means updating it by hand:
 
 | Where | What is listed |
 |---|---|
-| Smithery | Each skill separately at `smithery.ai/skills/formify-e-sign/<skill>` (the server page `smithery.ai/server/formify-e-sign/formify-mcp` returns 404, so it is not linked) |
 | [Glama](https://glama.ai/mcp/connectors/eu.formify.mcp/formify) | The MCP server |
 
 The Anthropic plugin directory is the exception — it re-reads GitHub on every push, so it
