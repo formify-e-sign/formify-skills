@@ -32,10 +32,13 @@ assistant act on your Formify account.
 1. Install the plugin.
 2. Connect your Formify account: open the plugin, go to **Connectors**, select **Connect**,
    and sign in to Formify in the browser window that opens. The assistant never sees your
-   password, and it can do only what your account and plan allow.
+   password, and it can do only what your account allows.
 
 Building and structuring a document works without an account. Sending, signing, identity
 checks and public links use your Formify account.
+
+**Creating an account:** sign up at https://app.formify.eu/ with your email address, in
+any country. Swedish users can also sign up with BankID.
 
 ### Cursor and Grok Bot
 
