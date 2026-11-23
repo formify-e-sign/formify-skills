@@ -45,14 +45,14 @@ Conversion from millimetres: `pt = mm × 72 / 25.4`.
 **ID scan box, bottom-right of US Letter:**
 `x = 612 − 218 = 394`, `y = 792 − 138 = 654`, `page = 0`
 
-## Coordinates must be whole numbers
+## Coordinates are numbers, and decimals are kept
 
-The schema accepts a decimal. The backend does not use it: a fractional value is discarded
-rather than rounded, and `74.7` is stored as `0`. The field then sits in the top-left corner
-of the page and the document sends anyway.
+`x` and `y` accept decimals and the backend keeps them: a draft created with `x = 120.5`,
+`y = 300.25` is stored with exactly those values and its preview draws the field there. A
+value that is not a number is rejected with 400. Rounding is optional, for readability only.
 
-Round every coordinate to an integer before sending. This is the single most damaging
-placement mistake, because nothing reports it.
+A field that ends up in the top-left corner was sent without `x`/`y`, or with `0`. Read the
+draft back and check page, x and y before sending.
 
 ## ID-scan signing needs both boxes
 
