@@ -45,6 +45,11 @@ Conversion from millimetres: `pt = mm × 72 / 25.4`.
 **ID scan box, bottom-right of US Letter:**
 `x = 612 − 218 = 394`, `y = 792 − 138 = 654`, `page = 0`
 
+**Signature on a printed line:** the field's bottom edge sits on the line, so
+`y = line y − 58 × scale`. Line at x 72.75, y 640.4 (top-left origin), page 2 of A4:
+`page = 1`, `x = 72.75`, `y = 582.4`. From a bottom-left-origin tool, convert first:
+`line y from top = 842 − y`.
+
 ## Coordinates are numbers, and decimals are kept
 
 `x` and `y` accept decimals and the backend keeps them: a draft created with `x = 120.5`,

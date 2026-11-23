@@ -62,7 +62,13 @@ Read the cost section below before creating anything.
 
 ### 1. Announce what this is, and check it is what they want
 
-Before asking anything:
+**If the user talks about a link they already have** ("our link", "the link called…",
+"the membership form we published"), find it first with `list_links` (follow `nextOffset`
+to the end) and work on that one. Every new link is billed, so create one only when no
+existing link fits or the user asks for a new one; if two links match the name, ask which.
+Prefill, editing and reading results (steps 6–8) all start from an existing `active` link.
+
+Otherwise, before asking anything:
 
 > I can publish this as one link that anyone can open and sign. You share the link yourself —
 > nobody gets invited — and each person who signs ends up with their own signed copy that you
@@ -212,7 +218,9 @@ Two limits worth naming before the user asks:
 An HTML form on the user's own website can send each visitor into the link with that visitor's
 own document already filled in. It needs no API key. Offer it when the user has a web form,
 booking page or sign-up page that already collects the same details. Read
-`references/html-form-prefill.md` before doing any of it.
+`references/html-form-prefill.md` before doing any of it. Prefill goes on a link that
+already exists: look it up with `list_links` before anything else, and never create a new
+billed link just to add prefill.
 
 1. **Check it is possible.** `get_account_capabilities` must report `htmlFormPrefill: true`,
    and the link must be `active`. While it is `processing` the read fails with a 409. Only the

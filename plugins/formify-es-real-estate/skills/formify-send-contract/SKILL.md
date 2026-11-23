@@ -235,6 +235,15 @@ For an existing page you need page, x and y.
 
 Bottom-right on A4: x = 595 − 219 = 376, y = 842 − 58 = 784, page = 0.
 
+**From a signature line to a box.** The user usually gives the position of a printed line
+("sign here ____"), not of the field. The field sits **on** the line, so its top is one field
+height above it: `x = line start`, `y = line y − 58 × scale`. A line at x 72.75, y 640.4
+(top-left origin) on page 2 gives `page 1, x 72.75, y 582.4`. Using the line's y as the
+field's y puts the field below the line, over the text that follows. If the coordinates came
+from a tool with a bottom-left origin (most PDF libraries), first convert:
+`y from top = page height − y`. When it is unclear which origin was used, say so and check the
+draft preview.
+
 **Formify does not detect overlapping fields, and a field is fully opaque.** Anything behind
 it is hidden, and nothing warns you. Never place a field over text the signer needs to read.
 Where space is tight, shrink the field with a scale factor between 0.25 and 1.5 rather than

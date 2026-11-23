@@ -20,7 +20,7 @@ tmp/
 graft/.cache/
 
 # graft's local graph cache — regenerable, not committed (run `graft build`).
-graft/
+/graft/
 
 # Playwright MCP session snapshots — scratch output, never part of the release
 .playwright-mcp/

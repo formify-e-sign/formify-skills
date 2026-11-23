@@ -112,7 +112,9 @@ Reminders are the most-asked and most-mishandled action.
   `reminderCooldown`. Always read `remindersSentTo` and `remindersNotSentTo` to see who
   actually got one. Check `signeeDetails[].reminders.reminderCooldown` from `get_document`
   (seconds left, 0 when allowed) before calling, and tell the user how long is left instead
-  of retrying.
+  of retrying. Example: reminders at 10:00 and 10:20 go out; one at 10:40 returns 200 but
+  lands in `remindersNotSentTo` with `reminderCooldown` ≈ 1200 (allowed again at 11:00, when
+  the 10:00 one leaves the window). Say plainly "not sent, wait 20 minutes", never "sent".
 - Show who will be reminded and get a yes before sending. If several people are
   outstanding, offer both: remind everyone, or pick.
 
