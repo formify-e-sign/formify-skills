@@ -3,19 +3,19 @@ name: formify-verify-identity
 description: 'Verify a signer with BankID, ID scan, face liveness or company lookup. Use when a signature needs proof of who signed, for KYC or anti-money-laundering, when scanning an ID document, or when verifying a company registration number. Triggers on "BankID", "ID scan", "verify identity", "KYC", "AML", "face liveness", "legitimering", "identitetskontroll", "verificar identidad". Not for ordinary signing without identity checks: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.6.5"
+  version: "1.7.0"
 ---
 
 # Verify who is signing
 
-Version 1.6.5. If asked which version you are, quote this line.
+Version 1.7.0. If asked which version you are, quote this line.
 
 ## Purpose
 
 Bind a signature to a verified person or company. Formify can check an identity document,
 match a live face against it, authenticate through Swedish BankID, look up a company
-registration number, or require a one-time code before a document opens — and attach the
-result to the signature rather than leaving it as a separate errand.
+registration number — and attach the result to the signature rather than leaving it as a
+separate errand. The checks themselves run on Formify's signing page, not through the API.
 
 ## When this applies
 
@@ -43,8 +43,12 @@ The keys that matter here:
 | `signatureBankId` | BankID signing |
 | `signatureIdScan` | ID-document scan as part of signing |
 | `signatureFaceLiveness` | Live face check |
-| `verificationEmail` / `verificationPhone` | One-time code before the document opens |
-| `verificationToOpen` | Requiring that code to open at all |
+| `verificationEmail` / `verificationPhone` | One-time code field in the document (`tink-email-verification`, `tink-sms-verification`) |
+
+No MCP tool exposes a setting that requires a one-time code before a document opens. The only
+verification lock reachable through the MCP is on `get_recipient_links` links: opening one needs
+a code Formify sends to the contact on file. Do not promise a code-to-open lock on a normal
+invitation.
 
 If a needed capability is off, say what it would do and what it needs, then offer the
 strongest option the account *does* have. Never silently downgrade.
@@ -98,13 +102,24 @@ common failure in this area — see `formify-send-contract` for placement.
 
 Methods are set per signer. Different signers on one document can use different methods.
 
+**Consent before an ID image.** Before selecting `digital_ink_id_scan`, tell the user that a copy
+of the signer's ID document (front side) will be embedded in the signed document at `idScanBox`,
+and get an explicit yes. The sender needs its own legal basis for keeping that copy. If they do
+not need the copy, suggest another method (`face_liveness`, `bankid_identification`) or the
+data-only fields in step 3. The same applies to a PDF field whose name contains `tink-scan-id`
+(scan trigger) or `tink-scanned-id-` (image), as reported by `get_file_fields` or
+`get_template_fields`, and to a template signee whose `signatureType` is `digital_ink_id_scan`
+(see `get_template`). A trigger combined with `tink-scanned-id-mrz-` on the same field only fills
+in text, so it needs no such consent.
+
 **All four work on a public link too**, with the same capability gates and the same two-box
 rule for the ID scan. The difference is that a link's signature entries are slots rather than
 people, so the method is chosen per slot, before anyone is known — every person who opens that
 link is verified the same way. That is usually the point: an intake form that requires an ID
 scan verifies whoever turns up, without the sender knowing their name in advance. Placement is
 stricter there — a link inherits no coordinates from anything, so every box must be given
-explicitly. See `formify-share-link`.
+explicitly. See `formify-share-link`. Link slots also take `hidePersonalNumber` (BankID only):
+it keeps the signer's national identity number off the rendered signature.
 
 ### 3. Decide what goes inside the document
 
@@ -126,8 +141,9 @@ The second is the data-minimisation pattern and it carries legal weight: keeping
 an identity document needs its own legal basis. **When the user needs the details but not
 the picture, say so and use it.** Most do not know it is an option.
 
-**One-time codes.** Email or SMS verification before the document opens. Not indexed, and
-gated on `verificationEmail` / `verificationPhone`.
+**One-time codes.** Email or SMS verification of a typed address or number, as a field in the
+document (`tink-email-verification`, `tink-sms-verification`). Not indexed, and gated on
+`verificationEmail` / `verificationPhone`. This is a field, not a lock on opening the document.
 
 ### 4. Do not make them scan twice
 
@@ -158,6 +174,11 @@ compliance programme. If the user asks whether this satisfies a specific regulat
 what the product does and does not decide, and let them confirm with their own adviser.
 
 Do not describe a document as "KYC compliant" because it carries a KYC trigger.
+
+Verification is performed by Formify's signing page, after the invitation is sent. No identity
+document, biometric data or national identity number is sent to, returned by or stored through
+the API, so the agent cannot read verification results over the MCP. Tell the user where to
+look: the signed document and Formify's own interface.
 
 ## Failure modes
 

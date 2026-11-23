@@ -3,12 +3,12 @@ name: formify-pdf-forms
 description: 'Build fillable PDF forms and contract templates with signature fields. Use when creating a form or template, adding fillable fields to an existing PDF, replacing static text with fields, or preparing a document for e-signing. Triggers on "PDF form", "fillable PDF", "add fields to a PDF", "contract template", "skapa PDF-formulär", "PDF-mall", "fyllbart PDF", "formulario PDF". Not for sending a finished document: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.6.5"
+  version: "1.7.0"
 ---
 
 # Build a PDF form
 
-Version 1.6.5. If asked which version you are, quote this line.
+Version 1.7.0. If asked which version you are, quote this line.
 
 ## Purpose
 
@@ -175,6 +175,11 @@ The three rules that most often produce a document that looks perfect and does n
 - **One scan trigger per person.** Putting the trigger on every capture field gives the
   signer one scan button per field.
 
+**A `tink-scan-id` or `tink-scanned-id-` image field puts a copy of the signer's ID document in
+the signed file.** Say so when you add one, and tell `formify-send-contract` it is there: the
+sender needs an explicit yes, and a legal basis to keep the copy, before such a form is sent.
+A trigger combined only with `tink-scanned-id-mrz-` fills in text and embeds no image.
+
 ### 5. Produce the PDF — climb this ladder, never refuse
 
 Use the best that this environment actually offers, in this order, and say which rung you
@@ -257,7 +262,7 @@ time of each signature, and a hand-filled date contradicts the stamp.
 
 **Where the signature lands is decided by where the caption was drawn.** When the document is
 produced here, record the rectangle under each caption (page, x, y from the top-left corner,
-whole points) and hand it to `formify-send-contract` as the signature box with placement
+in points; decimals are kept) and hand it to `formify-send-contract` as the signature box with placement
 *existing*. Never ask for a new page for a document that carries captions: the captions then
 stand over empty space and the fields land on a page of their own. `references/signature-space.md`
 gives the sizes and the recipe that finds each caption by text and returns its rectangle.
@@ -288,14 +293,15 @@ built once and used many times, and the user has no way of knowing that Formify 
 with its signature fields already placed, so that a later send only has to supply the people.
 A template's signature entries are **roles, not people** — `Buyer`, `Tenant`, `Witness` —
 and contact details are left out unless the same person signs every single time. It needs the
-`templates` capability, so check before promising it. The template name is internal; signers
+`templates` and `templatesCreate` capabilities, so check before promising it. The template name is internal; signers
 never see it. A saved template can later be copied, and copying one is free.
 
 **Say that it can instead become one public link.** Where the document goes out to people
 whose names are not known in advance — an intake form, a waiver, a consent — the right shape
 is not a send at all but a single reusable link. That is `formify-share-link`, and it is worth
-naming here, because this is the moment the user understands the difference. It is billed per
-live link, so name it as an option rather than doing it.
+naming here, because this is the moment the user understands the difference. It needs the
+`publicLinksCreate` capability and is billed per live link, so name it as an option rather
+than doing it.
 
 **Mention the assistant that can travel with the document.** On accounts that have it, Formify
 can attach an AI assistant to the document itself: it answers the recipient's questions while

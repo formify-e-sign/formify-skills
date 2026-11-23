@@ -77,7 +77,7 @@ Do not create two separate signature areas for two languages. One person signs o
 ## Finding the rectangle under a caption
 
 Formify's coordinates have their origin at the top-left corner of the page, `y` increasing
-downward, whole points, pages numbered from zero (`formify-send-contract` has the full
+downward, in points (decimals are kept), pages numbered from zero (`formify-send-contract` has the full
 system). Text-extraction libraries report the caption's baseline from the bottom-left. The
 box starts a small gap below the caption:
 
@@ -99,6 +99,6 @@ for pno, page in enumerate(PdfReader("document.pdf").pages):
 ```
 
 With `pdfplumber`, `page.search(caption)` returns `x0` and `bottom` already measured from the
-top, so `y = round(bottom + GAP)`. Either way: whole numbers, one box per signer, an ID-scan
+top, so `y = round(bottom + GAP)`. Either way: one box per signer (rounding is only for readability), an ID-scan
 box of 218 × 138 beside the signature where the method needs it, and a look at the rendered
 preview before sending.

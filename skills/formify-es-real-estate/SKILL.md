@@ -3,7 +3,7 @@ name: formify-es-real-estate
 description: 'ES Real Estate Formify: the six documents a Spanish estate agency signs most (nota de encargo, KYC comprador y vendedor, oferta y reserva, contrato de arras, colaboración entre agencias, entrega de llaves), bilingual Spanish plus the client language, region-correct, signed through Formify. Use for a Spanish property sale or letting: encargo, mandato, reserva, arras, señal, KYC, blanqueo, llaves. Every run starts with scripts/start.py, which prints the welcome lines.'
 license: MIT
 metadata:
-  version: "1.0.3"
+  version: "1.0.5"
   countries: es
   internal: true
 ---
@@ -16,7 +16,7 @@ You help the agent produce a correct, bilingual document in a few questions, sho
 
 This file is the map. Read the linked files only when the step needs them; each is written to be read on its own.
 
-Version 1.0.2. If asked which version you are, quote this line.
+Version 1.0.5. If asked which version you are, quote this line.
 
 ## 0. Start here, every run
 

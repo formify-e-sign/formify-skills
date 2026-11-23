@@ -3,12 +3,12 @@ name: formify-send-contract
 description: 'Send a contract or document for e-signature through Formify. Use when sending something to be signed, from a saved template, an uploaded PDF, or a document drafted in this conversation. Triggers on "send for signature", "send this contract", "e-sign", "signing request", "skicka för signering", "skicka kontrakt", "enviar para firmar". Not for a reusable link anyone can sign (formify-share-link) or checking who signed (formify-track-signatures).'
 license: MIT
 metadata:
-  version: "1.6.5"
+  version: "1.7.0"
 ---
 
 # Send a document for signature
 
-Version 1.6.5. If asked which version you are, quote this line.
+Version 1.7.0. If asked which version you are, quote this line.
 
 ## Purpose
 
@@ -142,7 +142,8 @@ WhatsApp is a normal case, not an edge case, and refusing it turns away business
 platform supports.
 
 Delivery channel, gated on capabilities: email is always available; SMS needs `deliverySms`;
-WhatsApp needs `deliveryWhatsapp`.
+WhatsApp needs `deliveryWhatsapp`. A phone number goes by SMS unless the signer's
+`phoneNumberDeliveryMethod` is `whatsapp`.
 
 **A document takes at most 18 signees.** A larger signing — a board resolution, a residents'
 association — is several documents, and it is better to say so while collecting names than to
@@ -152,8 +153,10 @@ A personal message may run to 500 characters, but **keep it under about 250 for 
 WhatsApp**, where the rest is what gets cut off on the recipient's phone.
 
 If the user wants to distribute the links themselves rather than have Formify invite anyone,
-suppress the invitation when creating the document, then hand over the personal links with
-`formify-track-signatures`. Suppression covers **invitations only** — including the
+set `disableInvitationMessage: true` on those signers, then hand over the personal links from
+`get_recipient_links` once the document is sent (see `formify-track-signatures`). Each link is
+verification-locked: opening it needs a code Formify sends to the contact on file, so every
+such signer still needs an email or phone. Suppression covers **invitations only** — including the
 invitation each person gets when their turn comes in a signing order. Reminders and the
 completed-document email still go out.
 
@@ -203,6 +206,15 @@ does not already decide it.
 ID-scan box. Configuring only the signature box is the most common cause of a failed send in
 this area. See `references/signature-placement.md`.
 
+**ID scan embeds a copy of the ID document — ask first.** With `digital_ink_id_scan` the front
+of the signer's ID is placed in the signed document at the ID-scan box, and the sender needs
+a legal basis to keep that copy. Before choosing it, say so and get an explicit yes; if the
+user only needs proof of identity, offer BankID or the face check instead. The same applies
+when a template signee already carries this method, and to PDF fields whose names contain
+`tink-scan-id` or `tink-scanned-id-` (a trigger with `tink-scanned-id-mrz-` on the same field
+only fills in text). Verification itself happens on Formify's signing page; no identity data
+passes through the API, so its result cannot be read back.
+
 Methods are per signer. Different people on one document can use different methods.
 
 ### 6. Place the signature
@@ -217,8 +229,8 @@ For an existing page you need page, x and y.
 - Origin is the **top-left** corner. x increases right, y increases **down**. (x, y) is the
   top-left corner of the field.
 - A standard signature field is **219 × 58 points**.
-- **Coordinates must be whole numbers.** A decimal is not rounded — it is discarded, and
-  `74.7` is stored as `0`, putting the field in the corner of the page. Round before sending.
+- **Coordinates are numbers in points; decimals are kept** (`120.5` stays `120.5`). A value
+  that is not a number is rejected with 400.
 - Check the actual page size. A4 is 595 × 842 points; US Letter is 612 × 792. Do not assume.
 
 Bottom-right on A4: x = 595 − 219 = 376, y = 842 − 58 = 784, page = 0.
@@ -282,14 +294,14 @@ Three things about drafts worth knowing:
   invitation language, personal message, AI assistant, sharing settings and signing order. Anything
   omitted can be reset. This read is required before updating, sending or deleting a draft,
   including when resuming one from an earlier session.
-- Fields without valid coordinates do not appear in the preview but remain in the draft.
-  **A field missing from the preview is a real warning**, not a rendering quirk — and a
-  preview that looks right is not proof that every box is configured.
+- **A preview needs a live draft.** An expired draft cannot be previewed or sent.
 
 ### 8. Confirm, then send
 
-Show a compact summary — document name, each signer with their contact and signing method,
-delivery channel, invitation language — and ask for one explicit yes.
+Before sending a draft, read it with `get_draft` and check that every signer has a full name
+and at least one contact method, and that every `existing` placement and every ID-scan signer
+has its boxes. Then show a compact summary — document name, each signer with their contact
+and signing method, delivery channel, invitation language — and ask for one explicit yes.
 
 Three settings to establish before that:
 
@@ -337,7 +349,7 @@ job ended at the send.
 | The preview link stopped working | It was consumed, or the draft was updated | Request a new one. Links are single-use and expire in ten minutes. |
 | More than 18 signers rejected | A document takes at most 18 signees | Split the signing across several documents. |
 | Send rejected, 400 on fields | A checkbox, dropdown or list box was sent as a string, or a field was sent as `""` | Wrap in an array; omit empty values. |
-| Signature landed in the corner of the page | A decimal coordinate was discarded | Send whole numbers. |
+| Signature landed in the corner of the page | x or y was left out or sent as 0, or the page index is off by one | Re-read the draft and check page, x and y. Pages count from 0. |
 | Signature covers the text | The field is opaque | Move it to clear space. Where there is none, shrink it with a scale factor between 0.25 and 1.5 — never leave it overlapping. |
 | ID-scan send fails | The ID-scan box was not placed | Both boxes are required for that method. |
 | Signers vanished after an update | The draft update replaced the configuration | Read the draft, resend the complete signer list. |
