@@ -3,12 +3,12 @@ name: formify-share-link
 description: 'Publish one reusable signing link anyone can sign, and let a website''s HTML form prefill it. Use when signers are unknown, a link goes on a website or QR code, a webform should open it prefilled, or to read what it collected. Triggers on "public link", "signing link", "share a form", "put it on our website", "HTML form prefill", "signeringslänk", "delningslänk", "förifyll formulär", "enlace público", "enlace para firmar", "prellenar formulario". Not for named signers: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.7.0"
+  version: "1.8.0"
 ---
 
 # Publish a document as one signing link
 
-Version 1.7.0. If asked which version you are, quote this line.
+Version 1.8.0. If asked which version you are, quote this line.
 
 ## Purpose
 

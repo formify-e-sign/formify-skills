@@ -3,12 +3,12 @@ name: formify-track-signatures
 description: 'Track who has signed, remind them, get notified, fix a wrong recipient, change a field value or cancel a send. Use after sending for signature. Triggers: "who has signed", "send a reminder", "notify me when signed", "wrong email address", "cancel the signing", "signed copy", "vem har signerat", "påminnelse", "återkalla", "quién ha firmado". Not for sending: formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.7.0"
+  version: "1.8.0"
 ---
 
 # After the document was sent
 
-Version 1.7.0. If asked which version you are, quote this line.
+Version 1.8.0. If asked which version you are, quote this line.
 
 ## Purpose
 
