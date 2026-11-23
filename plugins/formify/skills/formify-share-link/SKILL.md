@@ -132,8 +132,8 @@ Four settings per slot matter:
   signature box and a separate ID-scan box — and must be placed on an existing page.
 - **Coordinates are mandatory.** Unlike a document created from a template, a link has nothing
   to inherit them from, so every slot placed on an existing page must be given its page, x and
-  y. See `references/signature-placement.md` before choosing them; the corner-of-the-page
-  failure from a decimal coordinate is the same here as everywhere.
+  y. See `references/signature-placement.md` before choosing them. Decimals are kept; a slot
+  sent without x and y, or with 0, lands in the top-left corner, the same as everywhere.
 - **Name clarification** asks the signer to type their name beside the signature. It defaults
   to on, and on a public link that is almost always right, since the slot has no identity of
   its own. Leave it alone unless the user objects.
@@ -141,6 +141,9 @@ Four settings per slot matter:
   in the Formify client, not here — never invent its identifier — and it **must be one that
   allows multiple use**, because a single public link is signed by many people. A single-use
   payment link works once and then silently blocks everyone after the first signer.
+- **Initials instead of a full signature** (`useInitials`), where the account reports
+  `initials`. Offer it for forms where each signer only acknowledges, such as a house-rules
+  page; leave it off for anything contractual.
 
 Ask which language signers should see. The choice is English, Swedish or Spanish, and it is a
 closed list. The in-document AI assistant, where the account has it, is offered here as it is

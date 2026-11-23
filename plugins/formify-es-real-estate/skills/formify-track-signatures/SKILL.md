@@ -1,6 +1,6 @@
 ---
 name: formify-track-signatures
-description: 'Track who has signed, remind them, get notified, fix a wrong recipient or cancel a send. Use after sending for signature. Triggers: "who has signed", "send a reminder", "notify me when signed", "wrong email address", "cancel the signing", "signed copy", "vem har signerat", "påminnelse", "återkalla", "quién ha firmado". Not for sending: formify-send-contract.'
+description: 'Track who has signed, remind them, get notified, fix a wrong recipient, change a field value or cancel a send. Use after sending for signature. Triggers: "who has signed", "send a reminder", "notify me when signed", "wrong email address", "cancel the signing", "signed copy", "vem har signerat", "påminnelse", "återkalla", "quién ha firmado". Not for sending: formify-send-contract.'
 license: MIT
 metadata:
   version: "1.7.0"
@@ -134,6 +134,9 @@ Limits, and the first one surprises people:
   updates return 400. Read `signeeDetails[].updates.updateCooldown` from `get_document`
   (seconds left) before calling, and tell the user how long is left.
 - Adding a phone number can also return 403 when the account's phone-channel lock applies.
+- A request that changes nothing comes back as 400 "Invalid request parameters: emailAddress,
+  phoneNumber, fullName". It does not mean the address is wrong: compare with what is on file
+  and tell the user it is already set.
 
 Confirm the correction before sending it: a second wrong address costs another round of the
 same cooldown.
@@ -179,16 +182,22 @@ help. `get_document_fields` returns field definitions and predefined defaults on
 no way to show the user what a signer has entered so far or what was pre-filled.
 
 This changes field values only. It cannot change the contract text; that requires cancelling
-and sending a corrected document.
+and sending a corrected document. The cheapest way to do that is `duplicate_document`: it
+copies the file, fields, signers and settings into a new draft and sends nothing, so the
+correction is made there and sent with `formify-send-contract`. Nothing is charged until that
+draft is sent.
 
 ### 6. Cancel, and delete
 
-**Cancelling** is possible while a document is not yet fully signed. It is irreversible.
+**Cancelling** (`revoke_document`) is possible while a document is not yet fully signed. It is
+irreversible.
 Show a summary — what the document is, who has already signed — and require an explicit yes.
 Someone having already signed is worth naming out loud; their effort is about to be
 discarded.
 
-**Deleting** is only possible for a document that is `completed` or `revoked`. A revoked
+**Deleting** (`delete_document`) is only possible for a document that is `completed` or
+`revoked`; on a live one it returns 403 "The document must be revoked first". So "delete the
+contract he never signed" is two steps, cancel and then delete, each with its own yes. A revoked
 document is deleted together with its file. A completed document is removed from the account
 at once, but it is permanently deleted with its signed file only after every signer has also
 deleted their own copy. Confirm separately. Deleting is not archiving: if the user needs the
@@ -196,7 +205,7 @@ signed copy, retrieve it first.
 
 ### 7. Retrieve the signed document
 
-Once complete, produce a download link for the finished PDF. **It expires after ten
+Once complete, produce a download link for the finished PDF (`get_signed_document_url`). **It expires after ten
 minutes**, so fetch it when the user is ready to use it, not earlier in the conversation.
 
 Offer it before it is asked for. A completed signature that nobody downloaded is a job left
@@ -225,11 +234,13 @@ having to check"*, or *"can this land in our system automatically"*. Three quest
 3. **Do they want reminders too?** There is no scheduled or automatic reminder: reminders go
    out only when someone calls `send_reminder`, so say that rather than promising a chase.
 
-Each subscription is created with a signing secret, which is how the receiving system knows a
-message really came from Formify. Give the secret to the user once, tell them their system
-must check it, and say that it can be rotated (`rotate_webhook_secret`, which returns the new
-secret) if it is ever exposed. Call `list_webhooks` before adding one, so as not to duplicate an
-existing subscription; `delete_webhook` stops delivery immediately.
+A signing secret is how the receiving system knows a message really came from Formify.
+`list_webhooks` shows per subscription whether it has one (`hasSigningSecret`), and older
+subscriptions often do not. `rotate_webhook_secret` returns a new HMAC secret: give it to the
+user once, tell them their system must check it, and use the same call if a secret is ever
+exposed. Call `list_webhooks` before adding one, so as not to duplicate an existing
+subscription, and offer a secret for any listed one that lacks it; `delete_webhook` stops
+delivery immediately.
 
 **Say what this replaces.** After it is set up, tell the user they no longer need to ask you
 whether it has been signed. That sentence is the whole value of the step.
@@ -245,7 +256,8 @@ whether it has been signed. That sentence is the whole value of the step.
 | Field values read returns 403 | The document is not `completed` | Values are readable only after completion. |
 | A signer is missing from the link list | They have no contact method on file | Same as above. |
 | Cancel refused | The document is already fully signed | Nothing to cancel. Offer the signed copy instead. |
-| Delete refused | The document is still live | Only `completed` or `revoked` documents can be deleted. |
+| Delete refused, 403 "must be revoked first" | The document is still live | Cancel it first (with its own yes), then delete. |
+| Contact update returns 400 naming every field | The request changed nothing | The value is already on file; say so. |
 | The download link stopped working | The ten-minute window elapsed | Fetch a new one. |
 | Field values will not change | Someone has signed | The window closed. A correction now needs a new document. |
 | A document the user swears they sent is not in the list | Either the listing stopped at a short page, or it went out as a public link | Follow `nextOffset` to the end first; then check their links and read that link's documents. |

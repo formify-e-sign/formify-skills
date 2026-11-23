@@ -104,7 +104,9 @@ Methods are set per signer. Different signers on one document can use different 
 
 **Consent before an ID image.** Before selecting `digital_ink_id_scan`, tell the user that a copy
 of the signer's ID document (front side) will be embedded in the signed document at `idScanBox`,
-and get an explicit yes. The sender needs its own legal basis for keeping that copy. If they do
+and get an explicit yes. A request such as "we want his ID in the PDF" is not that yes yet:
+it was given before the user heard what is embedded and that keeping it needs a legal basis.
+Say both, then ask once. The sender needs its own legal basis for keeping that copy. If they do
 not need the copy, suggest another method (`face_liveness`, `bankid_identification`) or the
 data-only fields in step 3. The same applies to a PDF field whose name contains `tink-scan-id`
 (scan trigger) or `tink-scanned-id-` (image), as reported by `get_file_fields` or

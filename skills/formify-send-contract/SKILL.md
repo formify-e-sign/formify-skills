@@ -1,6 +1,6 @@
 ---
 name: formify-send-contract
-description: 'Send a contract or document for e-signature through Formify. Use when sending something to be signed, from a saved template, an uploaded PDF, or a document drafted in this conversation. Triggers on "send for signature", "send this contract", "e-sign", "signing request", "skicka för signering", "skicka kontrakt", "enviar para firmar". Not for a reusable link anyone can sign (formify-share-link) or checking who signed (formify-track-signatures).'
+description: 'Send a contract or document for e-signature through Formify, or prepare, edit and resume a signing draft. Use when sending something to be signed from a template, an uploaded PDF or a document drafted here. Triggers on "send for signature", "e-sign", "save as draft", "resume the draft", "skicka för signering", "spara utkast", "enviar para firmar". Not for a reusable link anyone can sign (formify-share-link) or checking who signed (formify-track-signatures).'
 license: MIT
 metadata:
   version: "1.7.0"
@@ -57,8 +57,8 @@ One question at a time from here on. Never present a form of six questions.
 
 ### 2. Get the document in place
 
-**From a template.** List templates and let the user pick by name — never show IDs. Read the
-template and its fields. A template carries its own signer count and its own pre-configured
+**From a template.** List templates (`list_templates`) and let the user pick by name — never
+show IDs. Read the template and its fields (`get_template`, `get_template_fields`). A template carries its own signer count and its own pre-configured
 signature settings; **do not override them unless the user explicitly asks.** If the user
 wants a different number of signers than the template defines, it is possible, but warn that
 signature placement may be wrong.
@@ -93,12 +93,16 @@ The ceiling is 50 MB per file.
 If one route fails, say which and offer another. Do not retry the same one.
 
 **Several documents into one.** Two to eight uploaded PDFs can be merged into a single file
-for signing. The order given is the page order. The originals are kept, so a merge is safe
+for signing (`merge_files`). The order given is the page order. The originals are kept, so a merge is safe
 to redo.
 
 **Drafted here.** Build it with `formify-pdf-forms`, then continue from route 3 or 4.
 
-**From something already sent.** A document that went out before can be copied — its file,
+**From a draft saved earlier.** Find it with `list_drafts` (follow `nextOffset` to the end),
+let the user pick by name, then read it with `get_draft` before anything else.
+
+**From something already sent.** A document that went out before can be copied
+(`duplicate_document`; a draft with `duplicate_draft`) — its file,
 signature fields, signers, language, sharing and AI assistant come with it. The copy arrives
 as a **draft, and nothing is sent**: that is deliberate, because re-sending a contract to the
 same people on one click is almost never what was meant. Review it, adjust, then send. A draft
@@ -298,11 +302,20 @@ Three things about drafts worth knowing:
   or neither, is an error. Starting from a template is how you preview one before anyone is
   contacted — its document and signature fields are copied into the draft, you check or adjust
   them, then send. The template itself is never touched.
-- **Updating a draft replaces its configuration.** Always read the draft first, and send
-  back everything you want to keep — not only the signers, but the field values, name,
-  invitation language, personal message, AI assistant, sharing settings and signing order. Anything
-  omitted can be reset. This read is required before updating, sending or deleting a draft,
-  including when resuming one from an earlier session.
+- **Updating a draft replaces its configuration.** `update_draft` is a full update, not a
+  patch. Always read the draft first, and send back everything you want to keep — not only
+  the signers, but the field values, read-only mode, name, invitation language, personal
+  message, AI assistant, sharing settings and signing order. Anything omitted can be reset:
+  an update that carried only a new personal message kept the signers but silently switched
+  the invitation language from Swedish back to English. This read is required before
+  updating, sending or deleting a draft (`delete_draft`), including when resuming one from
+  an earlier session.
+- **A draft does not echo everything you set.** `get_draft` returns the signers, their
+  placements, language, sharing and signing order, but not the pre-filled field values, the
+  personal message, the read-only mode or a signer's no-invitation setting, and the preview
+  renders signature placement, not the pre-filled values. Keep those values from the
+  conversation, carry them into every update, and repeat them in the summary before sending.
+  They cannot be read back from Formify until the document is completed.
 - **A preview needs a live draft.** An expired draft cannot be previewed or sent.
 
 ### 8. Confirm, then send
@@ -362,6 +375,8 @@ job ended at the send.
 | Signature covers the text | The field is opaque | Move it to clear space. Where there is none, shrink it with a scale factor between 0.25 and 1.5 — never leave it overlapping. |
 | ID-scan send fails | The ID-scan box was not placed | Both boxes are required for that method. |
 | Signers vanished after an update | The draft update replaced the configuration | Read the draft, resend the complete signer list. |
+| Invitation language, message or field values changed after an update | The update omitted them and they were reset | Send the complete configuration in every `update_draft`, using the values kept from the conversation. |
+| The preview shows no pre-filled values | The preview renders signature placement only | Confirm the values from the conversation in the summary instead. |
 | Draft creation rejected | Both a file and a template were supplied, or neither | A draft takes exactly one source. Send one. |
 | An invitation language was refused | Only English, Swedish and Spanish exist | Offer the document in their language instead. |
 | The account lacks a channel or method | Capability off | Name it, say what it does, offer the best available alternative. |
