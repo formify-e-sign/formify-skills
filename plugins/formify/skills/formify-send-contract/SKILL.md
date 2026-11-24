@@ -93,7 +93,8 @@ read with `get_file_fields`.
    so anything past roughly 30–50 kB of PDF exceeds what can be emitted in one message.
 
 The ceiling is 50 MB per file. An upload that will not be used can be removed (`delete_file`),
-but only while no active document uses it.
+but not while a document or a draft uses it: the refusal (403) says "used in a document sent for
+signing" even when only an unsent draft holds the file.
 
 If one route fails, say which and offer another. Do not retry the same one.
 

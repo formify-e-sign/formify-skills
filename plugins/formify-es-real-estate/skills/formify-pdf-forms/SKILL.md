@@ -297,7 +297,7 @@ and contact details are left out unless the same person signs every single time.
 never see it. Saving it is `create_template` on the uploaded file. A saved template can later
 be copied (`duplicate_template`, free, and the way to get an editable copy of a colleague's
 shared template), changed (`update_template`, a full replace: read it with `get_template` and
-send everything back), or deleted (`delete_template`, permanent: confirm by name first;
+send everything back — an update that carried only the signers turned a shared template private), or deleted (`delete_template`, permanent: confirm by name first;
 documents already sent from it are not affected).
 
 **Say that it can instead become one public link.** Where the document goes out to people
