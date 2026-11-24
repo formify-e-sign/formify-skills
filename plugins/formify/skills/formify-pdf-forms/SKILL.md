@@ -294,7 +294,11 @@ with its signature fields already placed, so that a later send only has to suppl
 A template's signature entries are **roles, not people** — `Buyer`, `Tenant`, `Witness` —
 and contact details are left out unless the same person signs every single time. It needs the
 `templates` and `templatesCreate` capabilities, so check before promising it. The template name is internal; signers
-never see it. A saved template can later be copied, and copying one is free.
+never see it. Saving it is `create_template` on the uploaded file. A saved template can later
+be copied (`duplicate_template`, free, and the way to get an editable copy of a colleague's
+shared template), changed (`update_template`, a full replace: read it with `get_template` and
+send everything back), or deleted (`delete_template`, permanent: confirm by name first;
+documents already sent from it are not affected).
 
 **Say that it can instead become one public link.** Where the document goes out to people
 whose names are not known in advance — an intake form, a waiver, a consent — the right shape

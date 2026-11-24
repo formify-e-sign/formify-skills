@@ -1,4 +1,3 @@
-<!-- generated from core/references/attachments.md by build_vertical.py; edit the core file, not this copy -->
 # The attachment pattern: the signer uploads a document at signing
 
 Verified against Formify 2026-09-08 (Formify's own KYC form uses it for the proof of residence; es-real-estate-formify uses it for the proof of the deposit transfer). Use it whenever a document must be accompanied by a file the counterparty holds (a payment receipt, a proof of residence, a licence, a certificate) instead of an annex page or a chat question.

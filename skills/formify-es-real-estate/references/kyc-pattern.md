@@ -1,4 +1,3 @@
-<!-- generated from core/references/kyc-pattern.md by build_vertical.py; edit the core file, not this copy -->
 # The identification (KYC) form pattern: client scans, organisation assesses
 
 Built and tested in the Spanish real-estate vertical (September 2026, buyer and seller forms) with the AML rules of Ley 10/2010 and RD 304/2014; the structure is the same for every profession that must identify clients (estate agents, financial advisers, lawyers, accountants, letting agents). Only the wording, the legal basis in the data-protection text and the risk factors change per country.

@@ -1,4 +1,3 @@
-<!-- generated from core/references/own-templates.md by build_vertical.py; edit the core file, not this copy -->
 # Own templates: the user's adjustments survive
 
 The skill's templates in `assets/templates/` are never edited. When a user changes something in a document type for good (a wording, a clause added or removed, a row taken out of a box, a different default), the change lives in the user's own copy of that template, in the working folder:

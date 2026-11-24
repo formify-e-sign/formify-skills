@@ -1,4 +1,3 @@
-<!-- generated from core/references/id-scan.md by build_vertical.py; edit the core file, not this copy -->
 # The ID-scan pattern: the client scans the document, the data fills itself
 
 Verified against Formify on 2026-09-07 (`get_file_fields` lists every field), mandatory scan added 2026-09-08. Use it for any identification or KYC form, and for any document where a party's identity data should come from the document rather than from typing.

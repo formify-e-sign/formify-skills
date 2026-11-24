@@ -61,7 +61,8 @@ eleven, and nothing about the answer looks wrong.
 
 ### 1. Read the document and report it in human terms
 
-`get_document` returns the document's status and one entry per signer. Present it the way a
+Find the document by name with `list_documents` when the user does not give an id; never show
+ids. `get_document` returns the document's status and one entry per signer. Present it the way a
 person would ask for it:
 
 > **Rental agreement — Calle Mayor 14**

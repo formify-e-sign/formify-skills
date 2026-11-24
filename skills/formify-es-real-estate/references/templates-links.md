@@ -1,4 +1,3 @@
-<!-- generated from core/references/templates-links.md by build_vertical.py; edit the core file, not this copy -->
 # Formify templates and public links
 
 Formify MCP 1.3.0 added two things a vertical can use: a **template** (the uploaded PDF with its signature slots saved once, so a new draft needs no upload) and a **public link** (one reusable signing address that anyone holding it can open; each opener produces a separate document). Both are optional, both are the user's choice, and both fit only one kind of document.

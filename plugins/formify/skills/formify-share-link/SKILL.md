@@ -109,7 +109,8 @@ Four upload routes, **exactly one per upload**. Try them in this order and say w
 The file must not be password-protected and must not carry a digital signature from another
 service. The ceiling is 50 MB.
 
-Read the document's form fields after uploading. Whatever values the link carries are the
+Read the document's form fields after uploading (`get_file_fields`; on an existing link,
+`get_link_fields`). Whatever values the link carries are the
 **starting point every signer sees**, not anyone's answers — a public link has no single set
 of answers, because everyone who opens it fills it in independently. Pre-fill only what is
 genuinely constant, such as the sender's own company details.
@@ -168,12 +169,12 @@ too. Both are clean failures — say what happened and stop, rather than retryin
 
 ### 5. Create it, then hand over the URL
 
-The link is live the moment it is created. **Formify sends nothing to anyone** — the URL comes
+The link is live the moment it is created (`create_link`). **Formify sends nothing to anyone** — the URL comes
 back to you, and the user distributes it themselves. Say that plainly, because a user who has
 sent documents before will assume invitations went out.
 
 A new link may come back as `processing`, with no URL yet: the AI assistant is still reading
-the document. Wait and read it again rather than reporting a failure. A link's statuses are
+the document. Wait and read it again (`get_link`) rather than reporting a failure. A link's statuses are
 `active`, `disabled` and `processing` — deliberately not a document's vocabulary, because a
 link is a source of documents rather than a signature request.
 
@@ -204,7 +205,7 @@ Everything after that — reading a signed copy, checking field values — is
 Editing is safe and free: **the public URL survives**, so anyone already holding the link
 keeps a working one, and nothing is billed again.
 
-**But an edit is a full replace.** Read the link first and send its complete configuration
+**But an edit is a full replace.** Read the link first (`get_link`) and send its complete configuration
 back with your change applied. Every property round-trips, so nothing is lost by doing it that
 way — and a name, a language or a slot left out of the call is gone. The one exception is the
 document: omit it to keep the file the link already has.
@@ -256,7 +257,7 @@ Updating and revoking:
 
 ### 9. Switch it off, and delete it
 
-**Disabling is permanent and there is no way back.** The link stops accepting signers and its
+**Disabling is permanent and there is no way back** (`disable_link`). The link stops accepting signers and its
 URL stops working. Confirm first, naming the link, and say what it does and does not touch:
 
 - Documents the link already produced are unaffected and stay accessible.
@@ -267,7 +268,7 @@ URL stops working. Confirm first, naming the link, and say what it does and does
 
 Anyone on the account may disable a link shared with the account; it is not owner-only.
 
-**Deleting is separate, and it comes second.** A link must be disabled before it can be
+**Deleting is separate, and it comes second** (`delete_link`). A link must be disabled before it can be
 deleted; deleting a live one fails. That order exists because deleting does not close the link
 — a live link that was deleted would keep serving with nothing left behind it to stop. Deleting
 permanently removes the link's generated PDFs, thumbnails and any AI assistant data, and it is

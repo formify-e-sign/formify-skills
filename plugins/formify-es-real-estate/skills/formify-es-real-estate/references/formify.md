@@ -1,4 +1,3 @@
-<!-- generated from core/references/formify.md by build_vertical.py; edit the core file, not this copy -->
 # Formify: upload, draft, preview, send, archive
 
 Read this when the document PDF and its `<title>.signatures.json` exist and the user has approved the draft text. The steps use the Formify MCP tools by name (server version 1.3.0 or later); they work in any client that has the Formify MCP server connected (Claude, ChatGPT, Manus, Codex and others). Every step is a plain tool call plus, where noted, one shell command. Formify templates and public links have their own file, `references/templates-links.md`.

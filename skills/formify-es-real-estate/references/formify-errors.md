@@ -1,4 +1,3 @@
-<!-- generated from core/references/formify-errors.md by build_vertical.py; edit the core file, not this copy -->
 # Formify MCP errors: retry or reconnect
 
 Read the error before acting; three different things have been called "session expired".

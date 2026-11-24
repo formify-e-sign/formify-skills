@@ -1,4 +1,3 @@
-/* generated from core/base.css by build_vertical.py; edit the core file, not this copy */
 /* base.css: the shared stylesheet for every document of a segment skill. Embedded into the final HTML by render_pdf.py.
    Rules: simple CSS only (tables, absolute positioning only in the signature areas), A4, no external
    dependencies, no remote fonts.

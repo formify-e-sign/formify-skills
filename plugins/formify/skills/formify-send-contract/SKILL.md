@@ -69,13 +69,17 @@ digital signature from another service. Check before uploading; neither can be r
 Four upload routes, **exactly one per upload** — a host file reference, a URL, a staged
 upload id, or the bytes. Try them in this order and say which one you used:
 
+Every route ends in one file registration (`upload_file`), and the document's fields are then
+read with `get_file_fields`.
+
 1. **A file reference the host supplied**, when the user attached the file and this
    environment passes attachments through to tools. Pass it exactly as given; the server
    fetches the bytes itself. Never build one by hand and never put a local path in it.
    If the user did attach a file but no reference arrived, retry the call once before
    falling to another route — the reference sometimes lands on the second attempt.
 2. **A public HTTPS URL** — works in every environment. Prefer it whenever a URL exists.
-3. **A staged upload**, when shell commands are available: request the upload URL, run the
+3. **A staged upload**, when shell commands are available: request the upload URL
+   (`request_file_upload_url`), run the
    returned command, and wait for it to return success **before** registering the file.
    The upload goes to the host named in the returned URL — normally the Formify MCP host —
    not to the document API host.
@@ -88,7 +92,8 @@ upload id, or the bytes. Try them in this order and say which one you used:
    one is available. The practical ceiling is small: base64 is a third larger than the file,
    so anything past roughly 30–50 kB of PDF exceeds what can be emitted in one message.
 
-The ceiling is 50 MB per file.
+The ceiling is 50 MB per file. An upload that will not be used can be removed (`delete_file`),
+but only while no active document uses it.
 
 If one route fails, say which and offer another. Do not retry the same one.
 
@@ -258,11 +263,11 @@ moving it onto the text.
 This is the step that catches a misplaced field, and it is the one the user actually cares
 about.
 
-Create a draft with exactly the configuration you would have sent, then show the rendered
-PDF. Two ways to present it; pick by what this environment can do:
+Create a draft (`create_draft`) with exactly the configuration you would have sent, then show
+the rendered PDF. Two ways to present it; pick by what this environment can do:
 
-- **Inline**, if PDFs can be displayed here.
-- **A one-time link** the user opens in a browser. It needs no login, expires in ten minutes
+- **Inline** (`get_draft_file`), if PDFs can be displayed here.
+- **A one-time link** (`get_draft_file_url`) the user opens in a browser. It needs no login, expires in ten minutes
   and is consumed once used.
 
 If neither works, say so plainly and offer to send without a preview — but say what is being
@@ -349,7 +354,20 @@ Three settings to establish before that:
   Say what it does when offering it. Users do not know this exists, and it is the single
   capability most likely to save the sender a week of email.
 
-Send only after the yes.
+Send only after the yes: a previewed draft goes out with `send_draft`, a document built without
+a draft with `create_document`.
+
+**Account features this skill cannot switch on.** `get_account_capabilities` also reports
+`verificationToOpen`, `searchableFormFields`, `companyLogo`, `aiAssistantCustomProfile`,
+`sharedDocuments`, `signAndPay` and `initials`. None of them is a parameter of a document or a
+draft through this connection: they are set in the Formify app (a payment before signing and
+initials exist only on public links, see `formify-share-link`). Mention one when it fits, say
+where it is switched on, and never claim you applied it.
+
+**Sending on behalf of a colleague.** `get_current_user` names the connected user. On an
+account with several users, `get_account_users`
+lists them; passing one's `userId` to `create_document` or `create_draft` makes that person the
+owner instead of the connected user. Do it only when the user names the colleague.
 
 ### 9. Hand back the result, and say what comes next
 

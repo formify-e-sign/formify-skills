@@ -1,4 +1,3 @@
-<!-- generated from core/templates/EXAMPLE_receipt.guide.md by build_vertical.py; edit the core file, not this copy -->
 # Guide: EXAMPLE receipt (copy this structure for every document type)
 
 One guide per template, same headings every time. The agent reads only the guide of the document it is building.

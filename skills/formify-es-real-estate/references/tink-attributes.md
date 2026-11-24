@@ -1,4 +1,3 @@
-<!-- generated from core/references/tink-attributes.md by build_vertical.py; edit the core file, not this copy -->
 <!-- Mirrored from formify-e-sign/formify-skills shared/references/tink-attributes.md (commit d7cc486, 2026-09-10) by the segment factory. Never edit here: refresh from the developer's repository at each master release. -->
 # `tink-*` field attributes — the complete catalogue
 
