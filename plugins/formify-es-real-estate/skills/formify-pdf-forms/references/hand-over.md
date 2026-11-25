@@ -25,7 +25,7 @@ One row per field, every column filled. `-` means "none", never "unknown".
 | # | name | label | kind | required | options | read-only | page | anchor | size |
 |---|---|---|---|---|---|---|---|---|---|
 
-- **name** — the exact AcroForm field name, unique in the document, carrying any `tink-*`
+- **name** — the exact AcroForm field name, unique in the document, with no period, carrying any `tink-*`
   attributes with their brackets: `buyer_id|tink-scan-id[1]`. Never a display name.
 - **label** — what the person sees beside the field, in the document's language.
 - **kind** — `text`, `multiline`, `checkbox`, `radio`, `dropdown`, `image`, `upload`.

@@ -22,7 +22,7 @@ font, which is rung 4 with the user's yes or rung 5. Do not ship a document with
 
 ## Rules the script already follows — keep them when you change it
 
-- **Field names are ASCII** and unique; the `tink-*` catalogue goes in the name with its
+- **Field names are ASCII**, unique and free of periods (`.` splits a PDF field name); the `tink-*` catalogue goes in the name with its
   brackets. Labels, headings and paragraphs may carry any WinAnsi character.
 - **Signature space is empty**: a gap and a caption, no box, no line, no widget. The gap is
   70 points; 58 is the minimum Formify's signature field needs.

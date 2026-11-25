@@ -183,7 +183,7 @@ a `/`; the slash corrupts the stored value.
 
 - Render at least the first page and every page carrying fields to an image, and look at them.
 - Confirm every widget's `/P` matches the page it is on.
-- Confirm field names are unique, and that every `tink-*` name matches the catalogue exactly —
+- Confirm field names are unique and contain no period (`.`), and that every `tink-*` name matches the catalogue exactly —
   see `references/tink-attributes.md`. There is no error path for a wrong attribute; silence is
   the failure.
 - Confirm the signature areas are still empty. A widget in the signature space collides with

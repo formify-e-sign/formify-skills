@@ -146,6 +146,16 @@ at least one option; a radio group needs at least two.
 **Every field name must be unique in the document.** Two fields sharing a name are one field
 to Formify — two boxes both called `Date` fill from a single keystroke.
 
+**A field name never contains a period (`.`).** In a PDF the period separates the levels of a
+field name (`parent.child`), so a field's own name may not carry one (ISO 32000-1, 12.7.3.2);
+tools split the name there and the label comes back cut or empty. Drop the period or use an
+underscore: `Ev. kundansvarig` becomes `ev_kundansvarig`. This holds for the whole name, the
+readable part and every `tink-*` attribute after the `|`.
+
+**The readable part of a name is a short identifier, never a sentence**: `email_party1`,
+`company_name`. A checkbox for *"I accept the terms."* is named `accept_terms`; the sentence is
+the text printed beside the box, and the tooltip (`/TU`) when you set one.
+
 **A value the signer fills in is a field in its own cell, exactly once.** Never a placeholder
 such as *[to be completed]* printed in the cell with the field placed somewhere else, and never
 the same value as a field twice. When a library cannot put a widget inside a table cell, place
@@ -270,6 +280,7 @@ gives the sizes and the recipe that finds each caption by text and returns its r
 ### 7. Check it before handing it over
 
 - Every field name unique.
+- No field name contains a period (`.`), and none is a sentence.
 - Every trigger and every auto-filled field marked read-only.
 - Every image-capture field shaped correctly — a captured image is stretched to the
   rectangle exactly, so a portrait in a wide one-line box renders as a smeared face.

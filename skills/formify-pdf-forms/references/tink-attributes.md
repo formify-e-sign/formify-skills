@@ -177,7 +177,9 @@ or only when a signer reaches it.
 
 1. **Brackets are mandatory.** `tink-scan-id1` is not an index; the fields never link.
 2. **Two fields with the same name are one field to Formify.** Two boxes both named `Date`
-   fill from a single keystroke. Every field name must be unique across the document.
+   fill from a single keystroke. Every field name must be unique across the document, and
+   no name contains a period: the period separates name levels in a PDF, so
+   `Ev. kundansvarig` comes back as ` kundansvarig`. Write `ev_kundansvarig`.
 3. **Set the read-only flag on the widget itself** for every trigger and every captured
    value. A scan trigger without the flag is an ordinary text box with a long name: the
    signer clicks in and types, and what should have been a scan button never reads as a
