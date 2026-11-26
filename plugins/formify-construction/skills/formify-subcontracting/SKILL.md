@@ -88,16 +88,19 @@ instead of asking. Then:
 | No country file and no web access | Apply `references/eu-baseline.md` only. |
 | Outside the EU | Say this skill covers EU law, offer the documents without the statutory parts, and continue if the user wants that. |
 
+Never pick a country because a file exists for it. When the user cannot be asked, write the EU
+baseline version, leave the national parts marked as open, and say which country you need to know.
+
 Tell the user in one or two plain sentences what you are relying on, once, before the first document:
 
 - verified file: nothing needs saying beyond the rule that changes their document;
 - live lookup: "I looked up the rules for <country> just now; these come from <source, with
-  link>, read today, and Formify has not reviewed them";
+  link>, read on <the date, written out>, and Formify has not reviewed them";
 - baseline only: "I am applying the rules common to all EU countries; I could not check
   <country>'s own rules here."
 
-A rule found by lookup is used in the document like any other, but it keeps its link in your
-summary. Never present a looked-up rule as verified, and never fill a gap from memory: a question
+A rule found by lookup is used in the document like any other, but it keeps its link and the date
+you read it, written out as a date and never only as "today", in your summary. Never present a looked-up rule as verified, and never fill a gap from memory: a question
 the sources did not answer is reported as not found.
 
 The rules in brief, for when a reference file cannot be opened. The files carry the sources, the
@@ -185,6 +188,7 @@ line, at the end.
 | Two official sources disagree, or a change is scheduled | Give both with their dates of application and let the user choose which date their contract falls under. |
 | The payment period is longer than the baseline allows without express agreement | Say so once with the source, print the period the parties chose, and leave the decision to them. |
 | The user asks what payment period or price to use | Do not suggest one. Say what the law fixes, if the sources give it, and ask what they agreed. |
+| The user asks for a subcontract the country file says is not allowed (for example onward from a self-employed worker) | Say what the rule is, with its source, and do not draft that document. Offer the arrangement the file allows instead. |
 | The user asks whether the chain of subcontractors is allowed | State only the limits the country file lists, with the source; say that whether the works fall under the national construction regime was not checked unless the file says so. |
 | The user asks for the register book, an extra-tier approval or a posting declaration | Name it, say it is not produced here, and say who keeps or files it only as far as the country file does. |
 | The user asks whether a certificate is genuine or still valid | Say this skill records that the subcontractor supplied it and does not check it; point to the issuing body only if the country file names it. |

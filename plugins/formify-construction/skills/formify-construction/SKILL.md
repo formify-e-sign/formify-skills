@@ -80,17 +80,20 @@ line instead of asking. Then:
 | No country file and no web access | Apply `references/eu-baseline.md` only. |
 | Outside the EU | Say this skill covers EU law, offer the documents without the statutory parts, and continue if the user wants that. |
 
+Never pick a country because a file exists for it. When the user cannot be asked, write the EU
+baseline version, leave the national parts marked as open, and say which country you need to know.
+
 Tell the user in one or two plain sentences what you are relying on, once, before the first
 document:
 
 - verified file: nothing needs saying beyond the rule that changes their document;
 - live lookup: "I looked up the rules for <country> just now; these come from <source, with
-  link>, read today, and Formify has not reviewed them";
+  link>, read on <the date, written out>, and Formify has not reviewed them";
 - baseline only: "I am applying the rules common to all EU countries; I could not check
   <country>'s own rules here."
 
-A rule found by lookup is used in the document like any other, but it keeps its link in your
-summary. Never present a looked-up rule as verified, and never fill a gap from memory: a question
+A rule found by lookup is used in the document like any other, but it keeps its link and the date
+you read it, written out as a date and never only as "today", in your summary. Never present a looked-up rule as verified, and never fill a gap from memory: a question
 the sources did not answer is reported as not found.
 
 The rules in brief, for when a reference file cannot be opened. The files carry the sources, the
@@ -118,7 +121,8 @@ the answer.
 
 Decide the withdrawal pages from the facts in Preconditions 2 with `references/eu-baseline.md`
 and the country layer. When they apply, the text comes from `references/withdrawal-form.md`,
-word for word, in the language of the contract.
+word for word, in the language of the contract. Print the text in the document yourself; never
+leave it for the user to add, and never replace it with a summary.
 
 The contractor states prices and tax rates; never calculate tax, a share or a total they did not
 give. When a national rule ties a tax rate to conditions, offer the document that records them and
@@ -177,7 +181,7 @@ Quote → contract → variation orders → handover record → warranty note. O
 | The client wants works to start at once | Add the express-request checkbox of document 2; never tick it for them. |
 | The contractor asks which tax rate applies | State the conditions the country file lists, with the source; do not pick the rate. |
 | A rule asks for handwriting (for example a waiver) | Say an electronic form cannot replace it and leave that item out of the e-signed document. |
-| The user asks for a design, a site diary or a final certificate | Out of scope: these belong to the technical professions and often need a qualified signature. |
+| The user asks for a design, a site diary or a final certificate | Out of scope: these belong to the technical professions and often need a qualified signature. Say so and offer the document you can prepare instead, for example the handover record. |
 | No Formify tools are connected | Finish the document, hand it over under step 7, and say it is ready to upload to Formify. |
 
 ## References

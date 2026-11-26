@@ -101,7 +101,7 @@ number>` (see `withdrawal-form.md`).
 One or two sentences, once, before the first document:
 
 > I looked up <country>'s rules just now. The withdrawal period and the quote rules come from
-> <law, article> on <portal> (link), read today. Formify has not reviewed these, so treat them as a
+> <law, article> on <portal> (link), read on the date you state. Formify has not reviewed these, so treat them as a
 > careful first reading. I could not find <open question>.
 
 Then use the rules in the document without repeating the caveat on every line.

@@ -469,6 +469,16 @@ Spanish estate agencies sign most (nota de encargo, KYC, reserva, arras, collabo
 key handover), bilingual and region-correct. Install that plugin only if you need the pack;
 it is not part of Formify Core.
 
+Two more sector plugins cover any EU country. Each asks which country applies first, uses a
+verified rule file where one exists (Spain today), and otherwise looks the national rules up on
+the official legislation portal and shows the source and the date. Each includes all five Core
+skills, so install one plugin, not two.
+
+| Plugin | Adds | Documents |
+|---|---|---|
+| **Formify for Tourism** (`formify-tourism`) | `formify-guest-register`, `formify-vehicle-hire` | Guest registration form, house rules acknowledgement, property-manager mandate; vehicle rental agreement, pick-up and return records |
+| **Formify for Construction** (`formify-construction`) | `formify-construction`, `formify-subcontracting` | Quote, works contract with the consumer withdrawal information and form, variation order, handover record, warranty note; subcontract, completion record, payment confirmation, certificate checklist |
+
 Building and structuring a document happens in the conversation. Sending, signing and
 identity checks run through your Formify account.
 

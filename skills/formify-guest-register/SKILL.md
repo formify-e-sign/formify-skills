@@ -83,15 +83,19 @@ line. Then:
 | No country file and no web access | Apply `references/eu-baseline.md` only. |
 | Outside the EU | Say this skill covers EU law, offer the documents without the statutory parts, and continue if the user wants that. |
 
+Never pick a country because a file exists for it. When the user cannot be asked, write the EU
+baseline version, leave the national parts marked as open, and say which country you need to know.
+
 Tell the user in one or two plain sentences what you are relying on, once, before the first document:
 
 - verified file: nothing needs saying beyond the rule that changes their document;
 - live lookup: "I looked up the rules for <country> just now; these come from <source, with link>,
-  read today, and Formify has not reviewed them";
+  read on <the date, written out>, and Formify has not reviewed them";
 - baseline only: "I am applying the rules common to all EU countries; I could not check
   <country>'s own rules here."
 
-A rule found by lookup is used like any other but keeps its link in your summary. Never present a
+A rule found by lookup is used like any other but keeps its link and the date you read it, written
+out as a date and never only as "today", in your summary. Never present a
 looked-up rule as verified, and never fill a gap from memory: a question the sources did not answer
 is reported as not found. The EU text fixes no list of data fields; where the country's list is not
 found, ask the host which fields their authority told them to collect and print only those.

@@ -110,7 +110,7 @@ read without one at `http://publications.europa.eu/resource/celex/<CELEX number>
 One or two sentences, once, before the first document:
 
 > I looked up <country>'s rules just now. The payment period and the registration rules come from
-> <law, article> on <portal> (link), read today. Formify has not reviewed these, so treat them as a
+> <law, article> on <portal> (link), read on the date you state. Formify has not reviewed these, so treat them as a
 > careful first reading. I could not find <open question>.
 
 Then use the rules in the document without repeating the caveat on every line.
