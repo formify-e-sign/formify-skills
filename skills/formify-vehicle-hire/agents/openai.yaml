@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Vehicle Hire"
+  short_description: "Rental agreements, pick-up and return records for vehicle hire firms, in any EU country"
+  default_prompt: "Use $formify-vehicle-hire to ask which country the vehicles are hired out in, then prepare the rental agreement, the pick-up record or the return record and send it for signature through Formify."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify e-signature and identity verification"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

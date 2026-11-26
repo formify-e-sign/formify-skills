@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Identity Verification"
+  short_description: "Verify a signer with BankID or an ID scan"
+  default_prompt: "Use $formify-verify-identity to require identity verification before this document is signed."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify identity and signing capabilities"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Guest Register"
+  short_description: "Guest registration forms, house rules and manager mandates for hosts, in any EU country"
+  default_prompt: "Use $formify-guest-register to ask which country the property is in, then prepare the guest registration form and send it for signature through Formify."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify e-signature and identity verification"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

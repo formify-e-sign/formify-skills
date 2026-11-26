@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Subcontracting"
+  short_description: "Subcontracts, variation orders and compliance checklists between contractor and subcontractor, in any EU country"
+  default_prompt: "Use $formify-subcontracting to ask which country the site is in, then prepare the subcontract or the compliance checklist and send it for signature through Formify."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify e-signature and identity verification"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

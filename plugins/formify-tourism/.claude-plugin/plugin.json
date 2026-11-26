@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "formify-tourism",
+  "displayName": "Formify for Tourism",
+  "version": "1.0.0",
+  "description": "Formify for Tourism and Rentals (EU) — Formify Core plus guest registration and vehicle hire: guest registration forms, house rules, property-manager mandates, rental agreements, handover and return records. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
+  "author": {
+    "name": "Formify",
+    "url": "https://formify.eu"
+  },
+  "homepage": "https://formify.eu",
+  "repository": "https://github.com/formify-e-sign/formify-skills",
+  "license": "MIT",
+  "keywords": [
+    "esignature",
+    "guest-registration",
+    "check-in",
+    "short-term-rental",
+    "vacation-rental",
+    "hotel",
+    "hostel",
+    "campsite",
+    "car-rental",
+    "vehicle-hire",
+    "rental-agreement",
+    "handover-record",
+    "tourism",
+    "hospitality",
+    "schengen",
+    "gdpr",
+    "eidas",
+    "identity-verification",
+    "kyc",
+    "eu",
+    "multilingual",
+    "contracts",
+    "pdf-forms",
+    "property-management",
+    "formify"
+  ],
+  "skills": [
+    "./skills/formify-guest-register",
+    "./skills/formify-vehicle-hire",
+    "./skills/formify-pdf-forms",
+    "./skills/formify-send-contract",
+    "./skills/formify-verify-identity",
+    "./skills/formify-track-signatures",
+    "./skills/formify-share-link"
+  ],
+  "mcpServers": "./.mcp.json"
+}

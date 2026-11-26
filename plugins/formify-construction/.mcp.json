@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "formify": {
+      "type": "http",
+      "url": "https://mcp.formify.eu/mcp"
+    }
+  }
+}

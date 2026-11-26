@@ -1,0 +1,66 @@
+{
+  "name": "formify-tourism",
+  "version": "1.0.0",
+  "description": "Formify for Tourism and Rentals (EU) — Formify Core plus guest registration and vehicle hire: guest registration forms, house rules, property-manager mandates, rental agreements, handover and return records. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
+  "author": {
+    "name": "Formify",
+    "url": "https://formify.eu"
+  },
+  "homepage": "https://formify.eu",
+  "repository": "https://github.com/formify-e-sign/formify-skills",
+  "license": "MIT",
+  "keywords": [
+    "esignature",
+    "guest-registration",
+    "check-in",
+    "short-term-rental",
+    "vacation-rental",
+    "hotel",
+    "hostel",
+    "campsite",
+    "car-rental",
+    "vehicle-hire",
+    "rental-agreement",
+    "handover-record",
+    "tourism",
+    "hospitality",
+    "schengen",
+    "gdpr",
+    "eidas",
+    "identity-verification",
+    "kyc",
+    "eu",
+    "multilingual",
+    "contracts",
+    "pdf-forms",
+    "property-management",
+    "formify"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Formify for Tourism",
+    "shortDescription": "Guest check-in and car rental",
+    "longDescription": "Formify for Tourism and Rentals includes everything in Formify Core, plus the documents hosts, small hotels, campsites and rental firms sign every day: guest registration forms, house rules, property-manager mandates, vehicle rental agreements, handover and return records. It asks which EU country applies, follows that country's rules and prepares the document in the local language and the guest's language, ready to sign. Install this alone — do not also install Formify Core, or you will get duplicate skills and two Formify connections.",
+    "developerName": "Formify",
+    "category": "Productivity",
+    "iconSmall": "./assets/icon-128.png",
+    "iconLarge": "./assets/icon-512.png",
+    "composerIcon": "./assets/icon-128.png",
+    "logo": "./assets/icon-512.png",
+    "websiteURL": "https://formify.eu",
+    "supportURL": "https://app.formify.eu/",
+    "privacyPolicyURL": "https://formify.eu/privacy/policy",
+    "termsOfServiceURL": "https://formify.eu/privacy/terms",
+    "brandColor": "#3775BB",
+    "defaultPrompt": [
+      "Create a guest registration form for my apartment and send it for signature",
+      "Prepare a car rental agreement with a handover record for a customer",
+      "Which guest data must I record in my country, and prepare the form"
+    ],
+    "capabilities": [
+      "Read",
+      "Write"
+    ]
+  }
+}

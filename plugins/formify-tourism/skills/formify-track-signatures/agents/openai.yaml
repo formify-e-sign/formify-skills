@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Signature Tracking"
+  short_description: "Track, remind, correct and cancel sent documents"
+  default_prompt: "Use $formify-track-signatures to check who has signed and remind the ones who have not."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify document status, reminders and recipient management"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "formify-construction",
+  "displayName": "Formify for Construction",
+  "version": "1.0.0",
+  "description": "Formify for Construction and Renovation (EU) — Formify Core plus the documents a contractor signs: quotes, works contracts with the consumer withdrawal form, variation orders, handover records, subcontracts and payment confirmations. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
+  "author": {
+    "name": "Formify",
+    "url": "https://formify.eu"
+  },
+  "homepage": "https://formify.eu",
+  "repository": "https://github.com/formify-e-sign/formify-skills",
+  "license": "MIT",
+  "keywords": [
+    "esignature",
+    "renovation",
+    "construction",
+    "contractor",
+    "subcontractor",
+    "subcontracting",
+    "works-contract",
+    "building-contract",
+    "variation-order",
+    "change-order",
+    "withdrawal-form",
+    "consumer-contract",
+    "off-premises-contract",
+    "quote",
+    "handover",
+    "warranty",
+    "payment-terms",
+    "home-improvement",
+    "trades",
+    "eu",
+    "gdpr",
+    "multilingual",
+    "contracts",
+    "pdf-forms",
+    "formify"
+  ],
+  "skills": [
+    "./skills/formify-construction",
+    "./skills/formify-subcontracting",
+    "./skills/formify-pdf-forms",
+    "./skills/formify-send-contract",
+    "./skills/formify-verify-identity",
+    "./skills/formify-track-signatures",
+    "./skills/formify-share-link"
+  ],
+  "mcpServers": "./.mcp.json"
+}

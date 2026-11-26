@@ -1,0 +1,15 @@
+interface:
+  display_name: "Formify Construction"
+  short_description: "Quotes, works contracts and handover records for private clients, in any EU country"
+  default_prompt: "Use $formify-construction to ask which country the works are in, then prepare the quote or works contract with the withdrawal form and send it for signature through Formify."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "formify"
+      description: "Formify e-signature and identity verification"
+      transport: "streamable_http"
+      url: "https://mcp.formify.eu/mcp"
+
+policy:
+  allow_implicit_invocation: true
