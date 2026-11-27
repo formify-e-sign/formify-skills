@@ -18,6 +18,22 @@
         "formify-verify-identity",
         "formify-track-signatures"
       ]
+    },
+    {
+      "title": "Tourism and hospitality",
+      "description": "Ready-made documents for hosts, hotels, campsites and rental firms in any EU country.",
+      "skills": [
+        "formify-guest-register",
+        "formify-vehicle-hire"
+      ]
+    },
+    {
+      "title": "Construction",
+      "description": "Contracts for contractors and the businesses they hire, in any EU country.",
+      "skills": [
+        "formify-construction",
+        "formify-subcontracting"
+      ]
     }
   ]
 }
