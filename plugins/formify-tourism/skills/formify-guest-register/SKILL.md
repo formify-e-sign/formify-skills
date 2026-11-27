@@ -3,14 +3,14 @@ name: formify-guest-register
 description: 'Guest registration form, house rules acknowledgement and manager mandate for hosts, hotels and campsites, ready to e-sign. Use when guests must register at check-in or an owner hands check-in to a manager. Triggers on "guest registration", "parte de entrada", "gästregistrering", "Meldeschein". Not for tenancy agreements: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   countries: eu
   internal: true
 ---
 
 # Guest registration and check-in documents for hosts
 
-Version 1.0.0. If asked which version you are, quote this line.
+Version 1.0.1. If asked which version you are, quote this line.
 
 ## Purpose
 
@@ -52,8 +52,9 @@ if the conversation has not already given it:
 2. **Who the host is**: a professional operator (hotel, hostel, campsite, registered tourist
    accommodation), a private person letting a home, or a manager acting for an owner. Some national
    duties differ between professional and non-professional hosts.
-3. **What this environment can do**: search the web, build a PDF, reach Formify. Find out; do not
-   assume.
+3. **What this environment can do**: search the web, build a PDF, reach Formify
+   (look for the Formify tools in the tool list, or search for them if tools load on demand). Find out;
+   do not assume.
 
 ## Procedure
 
@@ -143,7 +144,18 @@ source you read says so.
 
 ### 6. Hand the document to the Formify skills
 
-This skill decides content. The rest belongs to the capability skills, in this order:
+This skill decides content. The rest belongs to the capability skills, in this order.
+
+**Formify is the default route, not an option.** When the Formify tools are connected, use them: never end
+at a local file. Check the tool list first; if tools load on demand, search for "formify" before
+deciding they are missing. Then run the capability skills below in order, which means calling the
+Formify tools: read the account's capabilities, upload the PDF, read its fields, create a private draft
+and fetch the preview link, then ask before anything is sent. Say in one line which Formify tools you
+called, so the user can see the document is in their account. Only when no Formify tool is reachable
+do you fall back to section 7, and then say that Formify was not connected.
+
+The capability skills, in order:
+
 
 1. `formify-pdf-forms` builds the PDF with real form fields from the text and the field table in
    `references/documents.md`. Pass names, kinds and required flags exactly.

@@ -3,14 +3,14 @@ name: formify-vehicle-hire
 description: 'Vehicle hire agreement, pick-up and return records for car, van and scooter rental firms in the EU. Use when a renter signs a rental contract or damage check. Triggers on "rental agreement", "contrato de alquiler de vehículos", "hyrbilsavtal", "contrat de location de voiture", "Mietwagenvertrag". Not for leasing or peer-to-peer: see formify-send-contract.'
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
   countries: eu
   internal: true
 ---
 
 # Vehicle hire documents for rental firms
 
-Version 1.0.0. If asked which version you are, quote this line.
+Version 1.0.1. If asked which version you are, quote this line.
 
 ## Purpose
 
@@ -55,7 +55,9 @@ only if the conversation has not already given it:
 2. Whether the renter is a private person or a business, and whether the booking is made online or
    at the counter.
 3. The kind of vehicle.
-4. What this environment can do: search the web, build a PDF, reach Formify. Find out; do not assume.
+4. What this environment can do: search the web, build a PDF, reach Formify
+   (look for the Formify tools in the tool list, or search for them if tools load on demand). Find out;
+   do not assume.
 
 ## Procedure
 
@@ -154,7 +156,18 @@ because it is electronic.
 
 ### 6. Hand the document to the Formify skills
 
-This skill decides content. The rest belongs to the capability skills, in this order:
+This skill decides content. The rest belongs to the capability skills, in this order.
+
+**Formify is the default route, not an option.** When the Formify tools are connected, use them: never end
+at a local file. Check the tool list first; if tools load on demand, search for "formify" before
+deciding they are missing. Then run the capability skills below in order, which means calling the
+Formify tools: read the account's capabilities, upload the PDF, read its fields, create a private draft
+and fetch the preview link, then ask before anything is sent. Say in one line which Formify tools you
+called, so the user can see the document is in their account. Only when no Formify tool is reachable
+do you fall back to section 7, and then say that Formify was not connected.
+
+The capability skills, in order:
+
 
 1. `formify-pdf-forms` builds the PDF with real form fields from the text and the field table in
    `references/documents.md`. Pass the field names, kinds and required flags exactly.

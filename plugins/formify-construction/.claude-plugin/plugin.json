@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "formify-construction",
   "displayName": "Formify for Construction",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Formify for Construction and Renovation (EU) — Formify Core plus the documents a contractor signs: quotes, works contracts with the consumer withdrawal form, variation orders, handover records, subcontracts and payment confirmations. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
   "author": {
     "name": "Formify",

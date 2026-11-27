@@ -1,6 +1,6 @@
 {
   "name": "formify-tourism",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Formify for Tourism and Rentals (EU) — Formify Core plus guest registration and vehicle hire: guest registration forms, house rules, property-manager mandates, rental agreements, handover and return records. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
   "author": {
     "name": "Formify",

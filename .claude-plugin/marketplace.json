@@ -60,7 +60,7 @@
       "name": "formify-tourism",
       "source": "./plugins/formify-tourism",
       "description": "Formify for Tourism and Rentals (EU) — Formify Core plus guest registration and vehicle hire: guest registration forms, house rules, property-manager mandates, rental agreements, handover and return records. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Formify",
         "url": "https://formify.eu"
@@ -100,7 +100,7 @@
       "name": "formify-construction",
       "source": "./plugins/formify-construction",
       "description": "Formify for Construction and Renovation (EU) — Formify Core plus the documents a contractor signs: quotes, works contracts with the consumer withdrawal form, variation orders, handover records, subcontracts and payment confirmations. Asks which EU country applies and follows its rules. Includes the full Core skill set — do not install Formify Core as well.",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "author": {
         "name": "Formify",
         "url": "https://formify.eu"
