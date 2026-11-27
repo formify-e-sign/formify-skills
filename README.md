@@ -174,7 +174,13 @@ at a time, by hand, and the connector separately.
    | `formify-verify-identity.zip` | BankID, ID scan, face liveness, company lookup |
    | `formify-track-signatures.zip` | chasing, correcting and cancelling what you sent |
    | `formify-share-link.zip` | one public link anyone can open and sign |
+   | `formify-es-real-estate.zip` | Spanish estate-agency documents (optional) |
+   | `formify-guest-register.zip` | guest registration for hosts and hotels, any EU country (optional) |
+   | `formify-vehicle-hire.zip` | vehicle and equipment rental contracts, any EU country (optional) |
+   | `formify-construction.zip` | renovation and works contracts, any EU country (optional) |
+   | `formify-subcontracting.zip` | subcontracts between contractors and trades, any EU country (optional) |
 
+   The five sector skills are optional and each assumes the Core skills are installed too.
    Do not unzip them — they are already in the shape Claude expects.
 3. Open **Customize → Skills**, then **Create skill → Upload a skill**, and choose one ZIP.
    Repeat for the rest.
@@ -660,11 +666,17 @@ skills/                        the skills — the one canonical source
   formify-track-signatures/
   formify-share-link/
   formify-es-real-estate/      sector pack (Formify for Real Estate Agencies)
-plugins/                       two installable plugins pointing at skills/
+  formify-guest-register/      sector pack (Formify for Tourism, any EU country)
+  formify-vehicle-hire/        sector pack (Formify for Tourism, any EU country)
+  formify-construction/        sector pack (Formify for Construction, any EU country)
+  formify-subcontracting/      sector pack (Formify for Construction, any EU country)
+plugins/                       four installable plugins; the sector ones bundle copies of Core
   formify/                     Formify Core — Claude, Codex, and Grok Bot / Cursor
     plugin.json  mcp.json      Agent Plugins manifest and the Formify MCP server
     .cursor-plugin/plugin.json Grok Bot and Cursor: five Core skills plus MCP
   formify-es-real-estate/      Formify for Real Estate Agencies (Claude and Codex)
+  formify-tourism/             Formify for Tourism (Claude and Codex)
+  formify-construction/        Formify for Construction (Claude and Codex)
 demo/                          the install recordings used on this page
 plugin.json  mcp.json          Agent Plugins 1.0.0
 .mcp.json                      the MCP server, referenced by the manifests below
@@ -675,8 +687,9 @@ package.json  skills.sh.json   npm, npx, and the skills.sh gallery
 .github/workflows/             manifest checks on every push, release on every tag
 ```
 
-Every manifest describes the same `skills/` directory. Nothing is copied, so no adapter can
-drift from the source. CI parses every manifest on every push, and a release refuses to
+Every manifest describes the same `skills/` directory. The Core manifests copy nothing; the
+sector plugins carry generated copies of the five Core skills so each works on its own, and
+the maintainers' sync check fails when a copy drifts from the source. CI parses every manifest on every push, and a release refuses to
 publish unless the tag matches the version in every Core manifest.
 
 Every statement these skills make about the Formify API was checked against the server
