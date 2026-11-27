@@ -1,6 +1,6 @@
 {
   "name": "formify-es-real-estate",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Formify for Real Estate Agencies (Spain) — Formify Core plus the Spanish estate-agency niche: nota de encargo, buyer/seller KYC, oferta y reserva, contrato de arras, inter-agency collaboration and key handover. Bilingual, region-correct, ready to sign. Includes the full Core skill set — do not install Formify Core as well.",
   "author": {
     "name": "Formify",
@@ -24,8 +24,8 @@
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Formify for Real Estate Agencies",
-    "shortDescription": "Formify Core plus Spanish estate-agency documents",
+    "displayName": "Formify for Estate Agencies",
+    "shortDescription": "Spanish real-estate documents",
     "longDescription": "Formify for Real Estate Agencies (Spain) includes everything in Formify Core, plus the Spanish estate-agency niche: nota de encargo, buyer and seller KYC, oferta y reserva, contrato de arras, inter-agency collaboration and key handover. Documents are bilingual and region-correct, ready to sign. Install this alone — do not also install Formify Core, or you will get duplicate skills and two Formify connections.",
     "developerName": "Formify",
     "category": "Productivity",
@@ -41,8 +41,7 @@
     "defaultPrompt": [
       "Prepárame una nota de encargo",
       "Send buyer KYC for this property",
-      "Create a contrato de arras",
-      "Who still needs to sign the reserva?"
+      "Create a contrato de arras"
     ],
     "capabilities": [
       "Read",

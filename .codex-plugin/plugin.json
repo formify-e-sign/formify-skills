@@ -21,7 +21,7 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Formify Core",
-    "shortDescription": "AI-assisted e-signing for any business",
+    "shortDescription": "E-signing for any business",
     "longDescription": "Formify Core turns an assistant into someone who can prepare a contract, place the signature fields correctly, and get it signed — either by inviting the people you name, or by publishing one reusable link that anyone can open and sign, with each signer getting their own document. It can verify the person on the other end with BankID, an ID document scan, a live face check or a company lookup. Building the document is free and works without an account; sending, publishing and signing use your Formify account. Not industry-specific. If you install Formify for Real Estate Agencies, uninstall this plugin — that pack already includes Core, and installing both duplicates skills and the Formify connection.",
     "developerName": "Formify",
     "category": "Productivity",
@@ -37,7 +37,6 @@
     "defaultPrompt": [
       "Turn this PDF into a fillable form",
       "Send this contract for signature",
-      "Publish this as a link anyone can sign",
       "Who still needs to sign?"
     ],
     "capabilities": [
