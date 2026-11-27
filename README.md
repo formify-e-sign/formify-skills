@@ -56,11 +56,13 @@ Every recording on this page is the real setup with personal details blurred. Th
 ## Install
 
 Most people use Formify inside Claude Desktop or the Codex desktop app. Both install from
-the same marketplace: **one link, two plugins**. Install **Formify Core** for the five
-capability skills (forms, send, verify, track, share-link). Spanish estate agents install
-**Formify for Real Estate Agencies** instead — it adds `formify-es-real-estate` and still
-includes all five Core skills, so it works on its own. Do **not** install both: Real Estate
-already bundles Core.
+the same marketplace: **one link, four plugins**. Install **Formify Core** for the five
+capability skills (forms, send, verify, track, share-link). Businesses in a sector install
+the matching plugin **instead**: Spanish estate agents take **Formify for Real Estate
+Agencies**, hosts and rental firms in any EU country take **Formify for Tourism**, and
+builders and trades in any EU country take **Formify for Construction**. Each sector plugin
+still includes all five Core skills, so it works on its own. Do **not** install more than
+one: every sector plugin already bundles Core.
 
 | You work in… | Go to | Terminal? |
 |---|---|---|
@@ -93,12 +95,14 @@ on screen.
 
 5. Claude finds the repository as you type — accept the suggestion.
 6. Leave **Sync automatically** on, so our updates reach you, and select **Sync**.
-7. Open **Discover**. You should see two plugins from **formify-skills**:
+7. Open **Discover**. You should see the plugins from **formify-skills**:
 
    | Plugin | Tags (example) | Skills |
    |---|---|---|
    | **Formify Core** | New · Legal · … | 5 capability skills |
    | **Formify for Real Estate Agencies** | New · Sales · … | 6 (Core + Spanish RE pack) |
+   | **Formify for Tourism** | New · Productivity · … | 7 (Core + guest register, vehicle hire) |
+   | **Formify for Construction** | New · Productivity · … | 7 (Core + construction, subcontracting) |
 
    Select **Add** on the one that matches your work — not both.
 
@@ -205,14 +209,16 @@ covers both.
 
 #### Step 2 — install a plugin
 
-Open **Discover**. The **formify-skills** marketplace lists two plugins:
+Open **Discover**. The **formify-skills** marketplace lists four plugins:
 
 | Plugin | What you get |
 |---|---|
 | **Formify Core** | E-signature for any business — five skills (`formify-pdf-forms`, `formify-send-contract`, `formify-verify-identity`, `formify-track-signatures`, `formify-share-link`) |
 | **Formify for Real Estate Agencies** | Core plus the Spanish estate-agency document pack — six skills (adds `formify-es-real-estate`) |
+| **Formify for Tourism** | Core plus guest registration and vehicle hire for any EU country — seven skills (adds `formify-guest-register`, `formify-vehicle-hire`) |
+| **Formify for Construction** | Core plus renovation contracts and subcontracts for any EU country — seven skills (adds `formify-construction`, `formify-subcontracting`) |
 
-Pick **Add** on one row only. Real Estate already includes Core — installing both duplicates
+Pick **Add** on one row only. Each sector plugin already includes Core — installing both duplicates
 skills and the Formify connection.
 
 Use **Upgrade** on that row whenever you want the newest version. That brings the skills
@@ -241,6 +247,18 @@ Spanish estate agents who want the sector pack:
 /plugin install formify-es-real-estate@formify
 ```
 
+Hosts and rental firms (any EU country), or builders and trades (any EU country):
+
+```
+/plugin install formify-tourism@formify
+```
+
+```
+/plugin install formify-construction@formify
+```
+
+Install one plugin only. The sector skills ask which country applies before they write anything.
+
 Unlike the Desktop app's marketplace dialog, this takes any public repository.
 
 **Codex CLI**
@@ -252,7 +270,11 @@ codex plugin add formify@formify
 
 ```bash
 codex plugin add formify-es-real-estate@formify
+codex plugin add formify-tourism@formify
+codex plugin add formify-construction@formify
 ```
+
+One plugin per install: each sector plugin bundles Core.
 
 `codex plugin list` shows the result, and `codex plugin marketplace upgrade` pulls a newer
 version. Because the Codex CLI and the Codex desktop app share one configuration, installing
@@ -363,17 +385,20 @@ npx skills add formify-e-sign/formify-skills
 
 Installs the five capability skills into the agent's skill directory (often
 `.agents/skills/` or `.cursor/skills/`, depending on the harness). The Spanish real-estate
-skill is **opt-in**: it carries `metadata.internal: true`, so a bare `npx skills add` never
+skill and the four EU sector skills (`formify-construction`, `formify-subcontracting`,
+`formify-guest-register`, `formify-vehicle-hire`) are **opt-in**: each carries `metadata.internal: true`, so a bare `npx skills add` never
 pulls it for every user.
 
 ```bash
 npx skills add formify-e-sign/formify-skills --list          # five capability skills listed
 npx skills add formify-e-sign/formify-skills --skill formify-pdf-forms
 npx skills add formify-e-sign/formify-skills --skill formify-es-real-estate   # Spanish estate pack only
+npx skills add formify-e-sign/formify-skills --skill formify-construction     # also: formify-subcontracting
+npx skills add formify-e-sign/formify-skills --skill formify-guest-register   # also: formify-vehicle-hire
 npx skills add formify-e-sign/formify-skills -g              # global, across projects
 ```
 
-**What runs on your machine.** The two plugins differ here, and it is worth knowing which one
+**What runs on your machine.** The plugins differ here, and it is worth knowing which one
 you install:
 
 - **Formify Core** (the five capability skills) contains **no executable code** — Markdown,
@@ -388,6 +413,9 @@ you install:
   are used when present; without them, `stdlib_pdf.py` produces the PDF with the Python standard
   library alone. Where no code can run at all, the skill hands over the document text and a
   field specification instead. Read the scripts before installing if your policy requires it.
+- **Formify for Tourism** and **Formify for Construction** contain **no executable code**,
+  like Core: Markdown, YAML and JSON only. The sector skills reach the official legal sources
+  of the country you name through the agent's own web access, when it has one.
 
 #### In a repository, with no install at all
 
